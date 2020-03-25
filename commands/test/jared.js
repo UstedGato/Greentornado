@@ -3,7 +3,7 @@ const { Command } = require('discord.js-commando');
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'jared ',
+            name: 'jared',
             group: 'test',
             memberName: 'jared',
             description: 'Replies with a Message.',
