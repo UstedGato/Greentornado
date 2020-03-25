@@ -6,7 +6,7 @@ module.exports = class ReplyCommand extends Command {
             name: 'repeat',
             group: 'test',
             memberName: 'repeat',
-            description: 'Repeats the same command over and over.',
+            description: 'Test it to find out.',
             examples: ['repeat']
         });
     }
