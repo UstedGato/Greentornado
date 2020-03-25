@@ -6,7 +6,7 @@ module.exports = class ReplyCommand extends Command {
             name: 'coin',
             group: 'coins',
             memberName: 'coin',
-            description: 'Crashes the bot.',
+            description: 'Get virtual coins',
             examples: ['repeat']
         });
     }
