@@ -12,7 +12,7 @@ module.exports = class ReplyCommand extends Command {
     }
 
     run(msg) {
-        arrivederci='reeeee'
+        var arrivederci='reeeee';
         msg.say('Goodbye');
         msg.say(arrivederci);
         return msg.say('no one loves you');
