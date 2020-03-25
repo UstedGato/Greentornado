@@ -13,8 +13,8 @@ module.exports = class ReplyCommand extends Command {
     }
 
     run(msg) {
-        var id = msg.author;
-        return msg.reply(id);
+        var userid = msg.author.id;
+        return msg.reply(userid);
         
         
     }
