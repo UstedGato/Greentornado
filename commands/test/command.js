@@ -5,7 +5,7 @@ module.exports = class ReplyCommand extends Command {
         super(client, {
             name: 'ree',
             group: 'test',
-            memberName: 'reply',
+            memberName: 'rep',
             description: 'Replies with a Message.',
             examples: ['reply']
         });

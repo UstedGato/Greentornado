@@ -12,6 +12,6 @@ module.exports = class ReplyCommand extends Command {
     }
 
     run(msg) {
-        return msg.say('g! repeat');
+        return msg.say('!g repeat');
     }
 };
