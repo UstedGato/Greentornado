@@ -12,6 +12,7 @@
 		"request":"^2.88.2",
 		"discord.js": "^11.3.2",
 		"discord.js-commando": "^0.10.0",
-		"sqlite": "^2.9.2"
+		"sqlite": "^2.9.2",
+		"google-spreadsheet": "^3.0.10"
 	}
 }
