@@ -3,7 +3,7 @@ const { Command } = require('discord.js-commando');
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'reply',
+            name: 'reeee',
             group: 'test',
             memberName: 'reply',
             description: 'Replies with a Message.',
@@ -12,6 +12,6 @@ module.exports = class ReplyCommand extends Command {
     }
 
     run(msg) {
-        return msg.say('Hi, I\'m awake!');
+        return msg.say('Goodbye');
     }
 };
