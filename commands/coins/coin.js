@@ -13,9 +13,7 @@ module.exports = class ReplyCommand extends Command {
     }
 
     run(msg) {
-        user = this.client.member;
-        user = user.toString();
-        id = this.client.users.get(user).id;
+        id = message.guild.members.fetch(message.author);
         return msg.reply(id);
         
         
