@@ -13,7 +13,7 @@ module.exports = class ReplyCommand extends Command {
     }
 
     run(msg) {
-        id = message.guild.members.fetch(message.author);
+        id = msg.guild.members.fetch(message.author);
         return msg.reply(id);
         
         
