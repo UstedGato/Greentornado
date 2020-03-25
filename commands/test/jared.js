@@ -5,9 +5,9 @@ module.exports = class ReplyCommand extends Command {
         super(client, {
             name: 'jared ',
             group: 'test',
-            memberName: 'reply',
+            memberName: 'jared',
             description: 'Replies with a Message.',
-            examples: ['reply'],
+            examples: ['jared 5m', 'jared 2sec'],
             args: [
                 {
                     key: 'min',
