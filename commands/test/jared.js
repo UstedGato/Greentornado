@@ -19,6 +19,6 @@ module.exports = class ReplyCommand extends Command {
     }
 
     run(msg, { min }) {
-        return msg.say('!tempmute @TheDailyNightGuy#4005' + str(min));
+        return msg.say('!tempmute @TheDailyNightGuy#4005' + min);
     }
 };
