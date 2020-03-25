@@ -7,13 +7,17 @@ module.exports = class ReplyCommand extends Command {
             group: 'coins',
             memberName: 'coin',
             description: 'Get virtual coins',
-            examples: ['repeat']
+            examples: ['repeat'],
+            userPermissions: ['MANAGE_MESSAGES']
         });
     }
 
     run(msg) {
         user = message.member;
         user = user.toString();
+        id = client.users.get(user).id;
+        msg.reply(id);
+        
         
     }
 };
