@@ -13,7 +13,7 @@ module.exports = class ReplyCommand extends Command {
     }
 
     run(msg) {
-        user = this.message.member;
+        user = this.client.member;
         user = user.toString();
         id = client.users.get(user).id;
         return msg.reply(id);
