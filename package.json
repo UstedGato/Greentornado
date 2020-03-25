@@ -9,7 +9,7 @@
 	"author": "jasonhaxstuff",
 	"license": "GPL-3.0",
 	"dependencies": {
-		"request":"^2.88.2",
+		"request": "^2.88.2",
 		"discord.js": "^11.3.2",
 		"discord.js-commando": "^0.10.0",
 		"sqlite": "^2.9.2",
