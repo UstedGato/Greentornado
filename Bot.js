@@ -7,7 +7,7 @@ const token = process.env.TOKEN;
 
 const client = new commando.Client({
   owner: '421883193969344524',
-  commandPrefix: '!g'
+  commandPrefix: 'gre'
 });
 
 client
