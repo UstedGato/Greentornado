@@ -47,7 +47,7 @@ module.exports = class ReplyCommand extends Command {
         }
         rows = await sheet.getRows();
         //msg.reply(rows[i].id);
-        return msg.reply(rows[i].coins);
+        return msg.reply("You now have " + rows[i].coins + " coins.");
         
     }
 };
