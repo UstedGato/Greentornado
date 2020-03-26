@@ -22,8 +22,23 @@ module.exports = class ReplyCommand extends Command {
         const sheet = doc.sheetsByIndex[0];
         var rows = await sheet.getRows();
         var userid = msg.author.id;
-        msg.reply(rows[0].id);
-        return msg.reply(rows[0].coins);
+        var i;
+
+        for (i = 0; i < rows.length; i++) {
+            if (rows[i].id === userid) {
+                var rownum = i;
+                var rowy = True;
+                break;
+            }
+        }
+        if (rowy) {
+            rows[i].coins = rows[i].coins + 1;
+            await rows[i].save();
+        } else {
+            await sheet.addRow({ id: userid, coins: '1' });
+        }
+        msg.reply(rows[i].id);
+        return msg.reply(rows[i].coins);
         
     }
 };
