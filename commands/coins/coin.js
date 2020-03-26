@@ -20,7 +20,6 @@ module.exports = class ReplyCommand extends Command {
           });
         await doc.loadInfo();
         //const sheet = doc.sheetsByIndex[0];
-        const sheet = await doc.loadHeaderRow();
         var rows = await doc.getRows();
         var userid = msg.author.id;
         return msg.reply(rows);
