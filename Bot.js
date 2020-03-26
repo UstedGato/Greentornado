@@ -57,7 +57,7 @@ client.registry
   .registerGroup('math', 'Math')
   .registerGroup('test', 'Test')
   .registerGroup('coins', 'Coins')
-  .registerGroup('how_to_win_a_arguement', 'How to win an arguement')
+  .registerGroup('how_to_win_an_arguement', 'How to win an arguement')
   .registerDefaults()
   .registerTypesIn(path.join(__dirname, 'types'))
   .registerCommandsIn(path.join(__dirname, 'commands'));
