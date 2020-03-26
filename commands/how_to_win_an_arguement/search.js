@@ -6,7 +6,7 @@ module.exports = class DankCommand extends commando.Command {
 			name: 'search',
 			group: 'how_to_win_an_arguement',
 			memberName: 'search',
-			description: 'Checks whether the argument provided is dank.',
+			description: 'Checks whether you are right.',
 
 			args: [
 				{
