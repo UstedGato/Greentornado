@@ -15,7 +15,7 @@ module.exports = class ReplyCommand extends Command {
 					label: 'user',
 					prompt: 'Mention a user... NOW!',
                     type: 'string',
-                    default: ''
+                    //default: ''
 				}
 			]
         });

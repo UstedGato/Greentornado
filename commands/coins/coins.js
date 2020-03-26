@@ -32,7 +32,7 @@ module.exports = class ReplyCommand extends Command {
         var rows = await sheet.getRows();
         var msguserid = msg.author.id;
         var i;
-        if (user != "") {
+        if (user === "") {
             for (i = 0; i < rows.length; i++) {
                 if (rows[i].id === msguserid) {
                     //var rownum = i;
