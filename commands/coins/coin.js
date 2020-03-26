@@ -32,7 +32,7 @@ module.exports = class ReplyCommand extends Command {
             }
         }
         if (rowy === 1) {
-            rows[i].coins = rows[i].coins + 1;
+            rows[i].coins = parseInt(rows[i].coins) + 1;
             await rows[i].save();
         } else {
             await sheet.addRow({ id: userid, coins: 1 });
