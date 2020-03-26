@@ -8,7 +8,15 @@ module.exports = class ReplyCommand extends Command {
             memberName: 'coin',
             description: 'Get virtual coins',
             examples: ['repeat'],
-            userPermissions: ['MANAGE_MESSAGES']
+            userPermissions: ['MANAGE_MESSAGES'],
+            args: [
+				{
+					key: 'user',
+					label: 'user',
+					prompt: 'Mention a user... NOW!',
+					type: 'string'
+				}
+			]
         });
     }
 
@@ -21,9 +29,9 @@ module.exports = class ReplyCommand extends Command {
         await doc.loadInfo();
         const sheet = doc.sheetsByIndex[0];
         var rows = await sheet.getRows();
-        var userid = msg.author.id;
+        var userid = user.replace(/[\\<>@#&!]/g, "");
         var i;
-
+        
         for (i = 0; i < rows.length; i++) {
             if (rows[i].id === userid) {
                 //var rownum = i;
