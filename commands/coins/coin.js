@@ -22,8 +22,8 @@ module.exports = class ReplyCommand extends Command {
         const sheet = doc.sheetsByIndex[0];
         var rows = await sheet.getRows();
         var userid = msg.author.id;
-        return msg.reply(rows[1]);
-        
+        msg.reply(rows[0].id);
+        return msg.reply(rows[0].coins);
         
     }
 };
