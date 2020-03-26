@@ -46,7 +46,7 @@ module.exports = class ReplyCommand extends Command {
             await sheet.addRow({ id: userid, coins: 1 });
         }
         rows = await sheet.getRows();
-        msg.reply(rows[i].id);
+        //msg.reply(rows[i].id);
         return msg.reply(rows[i].coins);
         
     }
