@@ -19,8 +19,8 @@ module.exports = class ReplyCommand extends Command {
             private_key: process.env.GOOGLE_PRIVATE_KEY,
           });
         await doc.loadInfo();
-        //const sheet = doc.sheetsByIndex[0];
-        var rows = await doc.getRows();
+        const sheet = doc.sheetsByIndex[0];
+        var rows = await sheet.getRows();
         var userid = msg.author.id;
         return msg.reply(rows);
         
