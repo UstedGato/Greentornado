@@ -27,11 +27,11 @@ module.exports = class ReplyCommand extends Command {
         for (i = 0; i < rows.length; i++) {
             if (rows[i].id === userid) {
                 //var rownum = i;
-                var rowy = True;
+                var rowy = 1;
                 break;
             }
         }
-        if (rowy) {
+        if (rowy === 1) {
             rows[i].coins = rows[i].coins + 1;
             await rows[i].save();
         } else {
