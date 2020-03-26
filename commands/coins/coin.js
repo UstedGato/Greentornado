@@ -20,10 +20,10 @@ module.exports = class ReplyCommand extends Command {
           });
         await doc.loadInfo();
         //const sheet = doc.sheetsByIndex[0];
-        const sheet = await doc.addSheet({ headerValues: ['id', 'coins'] });
-
+        const sheet = await doc.loadHeaderRow();
+        var rows = await doc.getRows();
         var userid = msg.author.id;
-        return msg.reply(userid);
+        return msg.reply(rows);
         
         
     }
