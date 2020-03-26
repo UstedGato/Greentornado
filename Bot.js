@@ -3,7 +3,6 @@ const commando = require('discord.js-commando');
 const path = require('path');
 const oneLine = require('common-tags').oneLine;
 const sqlite = require('sqlite');
-const token = process.env.TOKEN;
 
 const client = new commando.Client({
   owner: '421883193969344524',

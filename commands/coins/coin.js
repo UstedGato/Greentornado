@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando');
-
+const { GoogleSpreadsheet } = require('google-spreadsheet');
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
@@ -13,6 +13,15 @@ module.exports = class ReplyCommand extends Command {
     }
 
     run(msg) {
+        await doc.useServiceAccountAuth({
+            client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+            private_key: process.env.GOOGLE_PRIVATE_KEY,
+          });
+        const doc = new GoogleSpreadsheet(process.env.SHEET);
+        await doc.loadInfo();
+        //const sheet = doc.sheetsByIndex[0];
+        const sheet = await doc.addSheet({ headerValues: ['id', 'coins'] });
+
         var userid = msg.author.id;
         return msg.reply(userid);
         
