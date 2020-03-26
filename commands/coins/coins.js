@@ -12,7 +12,8 @@ module.exports = class ReplyCommand extends Command {
             args: [
 				{
 					key: 'user',
-					label: 'user',
+                    label: 'user',
+                    prompt: '',
 					type: 'string'
 				}
 			]
