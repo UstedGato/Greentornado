@@ -13,7 +13,7 @@ module.exports = class ReplyCommand extends Command {
 				{
 					key: 'user',
                     label: 'user',
-                    prompt: '',
+                    prompt: 'ghjfghg',
 					type: 'string'
 				}
 			]
@@ -30,7 +30,7 @@ module.exports = class ReplyCommand extends Command {
         const sheet = doc.sheetsByIndex[0];
         var rows = await sheet.getRows();
         var msguserid = msg.author.id;
-        
+        var i;
         if (user != "") {
             for (i = 0; i < rows.length; i++) {
                 if (rows[i].id === msguserid) {
