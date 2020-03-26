@@ -26,7 +26,7 @@ module.exports = class ReplyCommand extends Command {
 
         for (i = 0; i < rows.length; i++) {
             if (rows[i].id === userid) {
-                var rownum = i;
+                //var rownum = i;
                 var rowy = True;
                 break;
             }
