@@ -10,16 +10,23 @@ module.exports = class DankCommand extends commando.Command {
 
 			args: [
 				{
-					key: 'dank',
+					key: 'search',
 					label: 'dank',
 					prompt: 'Say dank.',
-					type: 'dank'
+					type: 'string'
+				},
+				{
+					key: 'searcch',
+					label: 'dank',
+					prompt: 'Say dank.',
+					type: 'string'
 				}
 			]
 		});
 	}
 
-	run(msg, { dank }) {
-		return msg.reply(dank);
+	run(msg, { search, searcch }) {
+		msg.reply(search);
+		return msg.reply(searcch);
 	}
 };
