@@ -3,9 +3,9 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'amount',
+            name: 'coins',
             group: 'coins',
-            memberName: 'amount',
+            memberName: 'coins',
             description: 'Check your coins.',
             examples: ['repeat'],
             
@@ -14,7 +14,8 @@ module.exports = class ReplyCommand extends Command {
 					key: 'user',
                     label: 'user',
                     prompt: 'ghjfghg',
-					type: 'string'
+                    type: 'string',
+                    default: ''
 				}
 			]
         });

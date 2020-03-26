@@ -14,7 +14,8 @@ module.exports = class ReplyCommand extends Command {
 					key: 'user',
 					label: 'user',
 					prompt: 'Mention a user... NOW!',
-					type: 'string'
+                    type: 'string',
+                    default: ''
 				}
 			]
         });
