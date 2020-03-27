@@ -13,9 +13,9 @@ module.exports = class ReplyCommand extends Command {
 				{
 					key: 'user',
 					label: 'user',
-					prompt: 'Mention a user... NOW!',
+					prompt: 'No user was specified, defaulting to self',
                     type: 'string',
-                    //default: ''
+                    default: ''
 				}
 			]
         });
@@ -31,8 +31,12 @@ module.exports = class ReplyCommand extends Command {
         const sheet = doc.sheetsByIndex[0];
         var rows = await sheet.getRows();
         var userid = user.replace(/[\\<>@#&!]/g, "");
+        userid = string.substring("@"," ");
+        userid = myString.replace(/\D/g,'');
         var i;
-        
+        if (userid === "") {
+            userid = msg.author.id;
+        }
         for (i = 0; i < rows.length; i++) {
             if (rows[i].id === userid) {
                 //var rownum = i;

@@ -49,7 +49,7 @@ module.exports = class ReplyCommand extends Command {
             for (i = 0; i < rows.length; i++) {
                 if (rows[i].id === user) {
                     //var rownum = i;
-                    var rowy = 1;
+                    vrowy = 1;
                     break;
                 }
             }
