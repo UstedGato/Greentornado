@@ -23,7 +23,7 @@ module.exports = class SplitCommand extends commando.Command {
 
   async run(msg, args) {
     let content = '';
-    for (let i = 0; i < args.length; i++);
+    for (i = 0; i < args.length; i++);
     return [msg.reply("hi", { split: true })];
   }
 };
