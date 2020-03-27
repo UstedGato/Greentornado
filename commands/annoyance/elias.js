@@ -20,7 +20,7 @@ module.exports = class ReplyCommand extends Command {
         });
     }
 
-    run(msg) {
+    run(msg, { length }) {
         var i;
         for (i = 0; i < length; i++) {
             msg.say("@SilvershotsHQ#9454");
