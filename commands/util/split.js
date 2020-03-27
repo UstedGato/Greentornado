@@ -15,7 +15,7 @@ module.exports = class SplitCommand extends commando.Command {
           key: 'length',
           prompt: 'How many characters long would you like the message to be?',
           type: 'integer',
-          validate: val => parseInt(val) >= 1
+          //validate: val => parseInt(val) >= 1
         }
       ]
     });
@@ -23,7 +23,7 @@ module.exports = class SplitCommand extends commando.Command {
 
   async run(msg, args) {
     let content = '';
-    for (let i = 0; i < args.length; i++) content += `${i % 500 === 0 ? '\n' : ''}a`;
-    return [await msg.reply(content, { split: true })];
+    for (let i = 0; i < args.length; i++);
+    return [msg.reply("hi", { split: true })];
   }
 };
