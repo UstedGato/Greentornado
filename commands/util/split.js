@@ -21,11 +21,11 @@ module.exports = class SplitCommand extends commando.Command {
     });
   }
 
-  async run(msg, { length }) {
+  run(msg, { length }) {
     let content = '';
     var i;
-    for (i = 0; i < length; i++);{
-    await msg.reply("hi");
+    for (i = 1; i < length; i++);{
+    msg.reply("hi");
   }
   return msg.reply('hi');
 }

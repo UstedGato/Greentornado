@@ -13,7 +13,7 @@ module.exports = class ReplyCommand extends Command {
 					key: 'length',
                     label: 'length',
                     prompt: 'ghjfghg',
-                    type: 'string',
+                    type: 'integer',
                     //default: ''
 				}
 			]
