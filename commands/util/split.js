@@ -1,5 +1,11 @@
 const commando = require('discord.js-commando');
-
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
 module.exports = class SplitCommand extends commando.Command {
   constructor(client) {
     super(client, {
@@ -26,7 +32,7 @@ module.exports = class SplitCommand extends commando.Command {
     var i;
     for (i = 1; i < length; i++);{
     msg.reply("hi");
-    delay(1);
+    sleep(1000);
   }
   return msg.reply('hi');
 }
