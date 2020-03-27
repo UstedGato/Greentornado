@@ -25,7 +25,7 @@ module.exports = class SplitCommand extends commando.Command {
     let content = '';
     var i;
     for (i = 0; i < length; i++);{
-    msg.reply("hi");
+    await msg.reply("hi");
   }
   return msg.reply('hi');
 }
