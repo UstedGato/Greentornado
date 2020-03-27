@@ -33,9 +33,9 @@ module.exports = class ReplyCommand extends Command {
         var msguserid = msg.author.id;
         var i;
         //var userid = user.substring("<",">");
-        var userid = userid.replace(/[\\<>@#&!]/g, "");
-        userid = userid.replace(/\D/g,'');
-        if (userid === "") {
+        user = user.replace(/[\\<>@#&!]/g, "");
+        user = user.replace(/\D/g,'');
+        if (user === "") {
             for (i = 0; i < rows.length; i++) {
                 if (rows[i].id === msguserid) {
                     //var rownum = i;

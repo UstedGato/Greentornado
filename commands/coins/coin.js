@@ -33,13 +33,13 @@ module.exports = class ReplyCommand extends Command {
         console.log(user);
         //var userid = user.substring("<",">");
         //console.log(userid);
-        var userid = userid.replace(/[\\<>@#&!]/g, "");
+        user = userid.replace(/[\\<>@#&!]/g, "");
         console.log(userid);
-        userid = userid.replace(/\D/g,'');
+        user = userid.replace(/\D/g,'');
         console.log(userid);
         var i;
-        if (userid === "") {
-            userid = msg.author.id;
+        if (user === "") {
+            user = msg.author.id;
         }
         for (i = 0; i < rows.length; i++) {
             if (rows[i].id === userid) {
