@@ -31,18 +31,18 @@ module.exports = class ReplyCommand extends Command {
         const sheet = doc.sheetsByIndex[0];
         var rows = await sheet.getRows();
         console.log(user);
-        //var userid = user.substring("<",">");
-        //console.log(userid);
-        user = userid.replace(/[\\<>@#&!]/g, "");
-        console.log(userid);
-        user = userid.replace(/\D/g,'');
-        console.log(userid);
+        //var user = user.substring("<",">");
+        //console.log(user);
+        user = user.replace(/[\\<>@#&!]/g, "");
+        console.log(user);
+        user = user.replace(/\D/g,'');
+        console.log(user);
         var i;
         if (user === "") {
             user = msg.author.id;
         }
         for (i = 0; i < rows.length; i++) {
-            if (rows[i].id === userid) {
+            if (rows[i].id === user) {
                 //var rownum = i;
                 var rowy = 1;
                 break;
@@ -52,7 +52,7 @@ module.exports = class ReplyCommand extends Command {
             rows[i].coins = parseInt(rows[i].coins) + 1;
             await rows[i].save();
         } else {
-            await sheet.addRow({ id: userid, coins: 1 });
+            await sheet.addRow({ id: user, coins: 1 });
         }
         rows = await sheet.getRows();
         //msg.reply(rows[i].id);
