@@ -33,6 +33,7 @@ module.exports = class ReplyCommand extends Command {
         console.log(user);
         //var user = user.substring("<",">");
         //console.log(user);
+        var mention = user;
         user = user.replace(/[\\<>@#&!]/g, "");
         console.log(user);
         user = user.replace(/\D/g,'');
@@ -40,6 +41,7 @@ module.exports = class ReplyCommand extends Command {
         var i;
         if (user === "") {
             user = msg.author.id;
+            nouser = yes;
         }
         for (i = 0; i < rows.length; i++) {
             if (rows[i].id === user) {
@@ -56,7 +58,9 @@ module.exports = class ReplyCommand extends Command {
         }
         rows = await sheet.getRows();
         //msg.reply(rows[i].id);
-        return msg.reply("You now have " + rows[i].coins + " coin(s).");
+        return msg.reply(mention + "You now have " + rows[i].coins + " coin(s).");
+
+
         
     }
 };
