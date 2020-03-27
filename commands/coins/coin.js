@@ -31,7 +31,7 @@ module.exports = class ReplyCommand extends Command {
         const sheet = doc.sheetsByIndex[0];
         var rows = await sheet.getRows();
         console.log(user);
-        var userid = user.substring("@"," ");
+        var userid = user.substring("<",">");
         userid = userid.replace(/[\\<>@#&!]/g, "");
         userid = userid.replace(/\D/g,'');
         var i;
