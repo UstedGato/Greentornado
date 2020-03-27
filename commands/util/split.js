@@ -26,7 +26,7 @@ module.exports = class SplitCommand extends commando.Command {
     var i;
     for (i = 1; i < length; i++);{
     msg.reply("hi");
-    DelayNode(1);
+    delay(1);
   }
   return msg.reply('hi');
 }
