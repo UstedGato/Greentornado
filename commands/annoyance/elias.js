@@ -22,10 +22,11 @@ module.exports = class ReplyCommand extends Command {
 
     run(msg, { length }) {
         var i;
+        var id = <userid></userid>
         for (i = 0; i < length; i++) {
-            msg.say("@SilvershotsHQ#9454");
-            //msg.say("@SilvershotsHQ#9454");
+            msg.say("@Dr. Cat™©");
+            //msg.say("@Dr. Cat™©");
         }
-        return msg.say('SilvershotsHQ#9454');
+        return msg.say('Dr. Cat™©');
     }
 };
