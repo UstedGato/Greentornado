@@ -24,9 +24,9 @@ module.exports = class ReplyCommand extends Command {
         var i;
         var id = msg.author.id;
         for (i = 0; i < length; i++) {
-            msg.say(id);
+            msg.say(`<@!${id.toString()}>`);
             //msg.say("@SilvershotsHQ#9454");
         }
-        return msg.say(id);
+        return msg.say(`<@!${id.toString()}>`);
     }
 };
