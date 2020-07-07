@@ -7,7 +7,7 @@ COPY package-lock.json .
 
 RUN apt-get update
 
-RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && debconf-set-selections ./preseed.txt && apt-get -y install apt-utils nginx nodejs npm python3
+RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && debconf-set-selections /app/preseed.txt && apt-get -y install apt-utils nginx nodejs npm python3
 
 RUN npm install --production
 
