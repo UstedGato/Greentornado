@@ -36,13 +36,14 @@ module.exports = class ReplyCommand extends Command {
         user = user.replace(/[\\<>@#&!]/g, "");
         user = user.replace(/\D/g,'');
         if (user === "") {
+            var rowy = 1;
             for (i = 0; i < rows.length; i++) {
                 if (rows[i].id === msguserid) {
                     //var rownum = i;
-                    var rowy = 1;
+                    rowy = 1;
                     break;
                 }
-            }
+            } 
             if (rowy === 1) {
                 return msg.reply("You have " + rows[i].coins + " coins.");
             } else {
