@@ -7,15 +7,7 @@ COPY package-lock.json .
 
 RUN apt-get update
 
-RUN apt-get -y install nginx
-
-RUN apt-get -y install apt-utils
-
-RUN apt-get -y install nodejs
-
-RUN apt-get -y install npm
-
-RUN apt-get -y install python3
+RUN apt-get -y install apt-utils nginx nodejs npm python3
 
 RUN npm install --production
 
