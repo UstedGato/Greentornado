@@ -41,7 +41,7 @@ module.exports = class ReplyCommand extends Command {
         var i;
         if (user === "") {
             user = msg.author.id;
-            nouser = yes;
+            nouser = true;
         }
         var rowy = 0;
         for (i = 0; i < rows.length; i++) {
@@ -59,8 +59,12 @@ module.exports = class ReplyCommand extends Command {
         }
         rows = await sheet.getRows();
         //msg.reply(rows[i].id);
-        return msg.reply(mention + "You now have " + rows[i].coins + " coin(s).");
-
+        if (nouser === true) {
+            return msg.reply("you now now have " + rows[i].coins + " coin(s).");
+        }
+        else {
+            return msg.reply(mention + " now has " + rows[i].coins + " coin(s).");
+        }
 
         
     }
