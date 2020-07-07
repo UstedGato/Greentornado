@@ -43,10 +43,11 @@ module.exports = class ReplyCommand extends Command {
             user = msg.author.id;
             nouser = yes;
         }
+        var rowy = 0;
         for (i = 0; i < rows.length; i++) {
             if (rows[i].id === user) {
                 //var rownum = i;
-                var rowy = 1;
+                rowy = 1;
                 break;
             }
         }
