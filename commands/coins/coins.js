@@ -23,7 +23,7 @@ module.exports = class ReplyCommand extends Command {
 
     async run(msg, { user }){
         const doc = new GoogleSpreadsheet(process.env.SHEET);
-        console.log(process.env.GOOGLE_PRIVATE_KEY);
+        console.log(process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n'));
         await doc.useServiceAccountAuth({
             client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
             private_key: process.env.GOOGLE_PRIVATE_KEY,
