@@ -39,6 +39,7 @@ module.exports = class ReplyCommand extends Command {
         user = user.replace(/\D/g,'');
         console.log(user);
         var i;
+        nouser = false;
         if (user === "") {
             user = msg.author.id;
             nouser = true;
