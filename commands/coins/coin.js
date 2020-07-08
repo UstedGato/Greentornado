@@ -34,16 +34,23 @@ module.exports = class ReplyCommand extends Command {
         //var user = user.substring("<",">");
         //console.log(user);
         var mention = user;
-        user = user.replace(/[\\<>@#&!]/g, "");
-        console.log(user);
-        user = user.replace(/\D/g,'');
-        console.log(user);
-        var i;
         var nouser = false;
         if (user === "") {
             user = msg.author.id;
             nouser = true;
         }
+        else {
+            if (!user.match(/[\\<>@#&!]/g)) {
+                return msg.reply("Error: Invalid user");
+            }
+            else {
+                user = user.replace(/[\\<>@#&!]/g, "");
+                console.log(user);
+                user = user.replace(/\D/g,'');
+            }
+        }
+        console.log(user);
+        var i;
         var rowy = 0;
         for (i = 0; i < rows.length; i++) {
             if (rows[i].id === user) {
