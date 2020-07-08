@@ -35,8 +35,8 @@ module.exports = class ReplyCommand extends Command {
         //var user = user.substring("<",">");
         user = user.replace(/[\\<>@#&!]/g, "");
         user = user.replace(/\D/g,'');
+        var rowy = 0;
         if (user === "") {
-            var rowy = 1;
             for (i = 0; i < rows.length; i++) {
                 if (rows[i].id === msguserid) {
                     //var rownum = i;
@@ -53,7 +53,7 @@ module.exports = class ReplyCommand extends Command {
             for (i = 0; i < rows.length; i++) {
                 if (rows[i].id === user) {
                     //var rownum = i;
-                    vrowy = 1;
+                    rowy = 1;
                     break;
                 }
             }
