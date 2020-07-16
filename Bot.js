@@ -59,6 +59,7 @@ client.registry
   .registerGroup('coins', 'Coins')
   .registerGroup('annoyance', 'Annoyance')
   .registerGroup('how_to_win_an_arguement', 'How to win an arguement')
+  .registerGroup('github', 'GitHub')
   .registerDefaults()
   .registerTypesIn(path.join(__dirname, 'types'))
   .registerCommandsIn(path.join(__dirname, 'commands'));
