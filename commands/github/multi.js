@@ -1,7 +1,10 @@
 const { Command } = require('discord.js-commando');
-const embed = new Discord.MessageEmbed()
-	.setTitle('Some Title')
-	.setColor('#0099ff');
+const Embed = require("./../../utils/embed");
+const embed1 = 
+      {
+        "title": "Woah",
+        "description": "You can also have multiple embeds!"
+      }
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
@@ -12,15 +15,8 @@ module.exports = class ReplyCommand extends Command {
             examples: ['repeat'],
         });
     }
-
     async run(msg, { user }){
-        msg.channel.createWebhook('GreenTornado', {
-            avatar: 'https://cdn.discordapp.com/avatars/692143848176222360/a94c732b92ef1dcc206216a1d08cae7b.png?size=2048',
-        }).then(webhook => console.log(`Created webhook ${webhook}`));
-        console.log(webhook)
-        await webhook.send('Webhook test', {
-            embeds: [embed],
-        });
-        webhook.delete("AutoHook");
+        Embed.sendhook(msg, [embed1]);
+
     }
 };
