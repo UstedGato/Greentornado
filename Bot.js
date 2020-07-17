@@ -58,7 +58,7 @@ client.registry
   .registerGroup('test', 'Test')
   .registerGroup('coins', 'Coins')
   .registerGroup('annoyance', 'Annoyance')
-  .registerGroup('how_to_win_an_arguement', 'dev')
+  .registerGroup('how_to_win_an_arguement', 'how to win an argument')
   .registerGroup('github', 'GitHub')
   .registerDefaults()
   .registerTypesIn(path.join(__dirname, 'types'))
