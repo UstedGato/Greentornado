@@ -64,4 +64,4 @@ client.registry
   .registerTypesIn(path.join(__dirname, 'types'))
   .registerCommandsIn(path.join(__dirname, 'commands'));
 
-client.login("***REMOVED***");
+client.login(process.env.TOKEN);
