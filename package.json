@@ -9,10 +9,10 @@
 	"author": "jasonhaxstuff",
 	"license": "GPL-3.0",
 	"dependencies": {
+		"discord.js": "^12.0.0",
+		"discord.js-commando": "discordjs/Commando#master",
+		"google-spreadsheet": "^3.0.10",
 		"request": "^2.88.2",
-		"discord.js": "^11.3.2",
-		"discord.js-commando": "^0.10.0",
-		"sqlite": "^2.9.2",
-		"google-spreadsheet": "^3.0.10"
+		"sqlite": "^3.0.0"
 	}
 }
