@@ -5,7 +5,7 @@ const oneLine = require('common-tags').oneLine;
 const sqlite = require('sqlite');
 
 const client = new commando.Client({
-  owner: '421883193969344524',
+  owner: ['421883193969344524', '373833473091436546'],
   commandPrefix: 'g!'
 });
 
