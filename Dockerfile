@@ -5,8 +5,7 @@ WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
 
-RUN apk update \
-    && apk add --no-cache --virtual .gyp \
+RUN  apk add --no-cache --virtual .gyp \
         python \
         make \
         g++ \
