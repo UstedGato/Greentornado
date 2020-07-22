@@ -5,16 +5,15 @@ WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
 
-RUN apk update
-RUN apk add --no-cache --virtual .gyp \
+RUN apk update \
+    && apk add --no-cache --virtual .gyp \
         python \
         make \
         g++ \
         git \
     && npm install \
-    && apk del .gyp
-
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+    && apk del .gyp\
+    && echo "daemon off;" >> /etc/nginx/nginx.conf
 
 COPY . .
 
