@@ -19,5 +19,5 @@ COPY . .
 ENV PORT=80
 EXPOSE 80
 
-CMD nginx & npm run bot
+CMD nginx & node Bot.js
 
