@@ -1,12 +1,12 @@
 {
-	"name": "discord.js-boilerplate",
+	"name": "GreenTornado",
 	"version": "1.0.0",
-	"description": "A boilerplate for Discord.js-commando.",
+	"description": "A Discord Bot.",
 	"main": "bot.js",
 	"scripts": {
-		"test": "node bot"
+		"bot": "node bot"
 	},
-	"author": "jasonhaxstuff",
+	"author": "SilvershotsHQ",
 	"license": "GPL-3.0",
 	"dependencies": {
 		"discord.js": "^12.0.0",
