@@ -20,7 +20,7 @@ RUN  apk add --no-cache --virtual .gyp \
         pangomm-dev \
         libjpeg-turbo-dev \
         freetype-dev \
-    && npm install \
+    && npm install --build-from-source\
     && apk del .gyp
 
 COPY . .
