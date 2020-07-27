@@ -3,7 +3,7 @@ const commando = require('discord.js-commando');
 const path = require('path');
 const oneLine = require('common-tags').oneLine;
 const sqlite = require('sqlite');
-
+const welcomer = require('./actions/welcomeUser')
 const client = new commando.Client({
   owner: '421883193969344524',
   commandPrefix: 'g!'
@@ -47,6 +47,9 @@ client
 			${enabled ? 'enabled' : 'disabled'}
 			${guild ? `in guild ${guild.name} (${guild.id})` : 'globally'}.
 		`);
+  })
+  .on('guildMemberAdd', member => {
+    welcomer.welcomeAUser(member);
   });
 
 client.setProvider(
