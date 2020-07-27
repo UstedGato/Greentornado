@@ -7,7 +7,7 @@ const api = new Nodesu.Client(process.env.osu, {
 module.exports = class AddNumbersCommand extends commando.Command {
   constructor(client) {
     super(client, {
-      name: 'user',
+      name: 'osuuser',
       group: 'osu',
       memberName: 'user',
       description: 'Gets osu! user info.',
@@ -15,8 +15,8 @@ module.exports = class AddNumbersCommand extends commando.Command {
 
       args: [
         {
-          key: 'user',
-          label: 'user',
+          key: 'username',
+          label: 'username',
           prompt: 'What user?',
           type: 'string'
         }
@@ -24,7 +24,7 @@ module.exports = class AddNumbersCommand extends commando.Command {
     });
   }
 
-  async run(msg, { user }) {
+  async run(msg, { username }) {
     // ... see docs/Modules:Components - typical usage = api.<component>.<function>();
     // most functions return Promise objects.
      
