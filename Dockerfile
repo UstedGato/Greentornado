@@ -17,8 +17,7 @@ RUN  apk add --no-cache --virtual .gyp \
         jpeg-dev \
         giflib-dev \
     && npm install \
-    && apk del .gyp\
-    && echo "daemon off;" >> /etc/nginx/nginx.conf
+    && apk del .gyp
 
 COPY . .
 
