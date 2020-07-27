@@ -13,10 +13,6 @@ exports.welcomeAUser = async function (member) {
   const background = await Canvas.loadImage('./wallpaper.png');
   // This uses the canvas dimensions to stretch the image onto the entire canvas
   ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-  // Select the color of the stroke
-  ctx.strokeStyle = '#09d940';
-  // Draw a rectangle with the dimensions of the entire canvas
-  ctx.strokeRect(0, 0, canvas.width, canvas.height);
       
   
   // Select the font size and type from one of the natively available fonts
