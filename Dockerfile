@@ -26,6 +26,7 @@ RUN  apk add --no-cache --virtual .gyp \
         giflib \
         libjpeg \
         freetype \ 
+        fontconfig \
     && npm install \
     && apk del .gyp
 
