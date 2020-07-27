@@ -14,6 +14,7 @@
 		"discord.js-commando": "discordjs/Commando#master",
 		"express": "^4.17.1",
 		"google-spreadsheet": "^3.0.10",
+		"nodesu": "^0.7.2",
 		"request": "^2.88.2",
 		"sqlite": "^4.0.0"
 	}
