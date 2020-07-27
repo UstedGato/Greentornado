@@ -11,6 +11,11 @@ RUN  apk add --no-cache --virtual .gyp \
         g++ \
         git \
         pkgconfig \
+        libpixman-1-dev \
+        libcairo2-dev \
+        libpango1.0-dev \
+        libjpeg8-dev \
+        libgif-dev \
     && npm install \
     && apk del .gyp\
     && echo "daemon off;" >> /etc/nginx/nginx.conf
