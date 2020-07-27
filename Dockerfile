@@ -20,14 +20,17 @@ RUN  apk add --no-cache --virtual .gyp \
         pangomm-dev \
         libjpeg-turbo-dev \
         freetype-dev \
-    && apk --no-cache add pixman \
+    && apk --no-cache add \
+        pixman \
         cairo \
         pango \
         giflib \
         libjpeg \
         freetype \ 
         fontconfig \
-        font-noto \
+    && apk --no-cache add \
+       ttf-roboto \
+       --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
     && npm install \
     && apk del .gyp
 
