@@ -1,15 +1,18 @@
-FROM ubuntu:20.04
+FROM aadev00/nginx-nodejs
 
 WORKDIR /app
 
 COPY package.json .
 COPY package-lock.json .
-COPY preseed.txt .
 
-RUN apt-get update
-RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && debconf-set-selections ./preseed.txt && apt-get -y install apt-utils nginx nodejs npm python3
-RUN npm install --production
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+RUN  apk add --no-cache --virtual .gyp \
+        python \
+        make \
+        g++ \
+        git \
+    && npm install \
+    && apk del .gyp\
+    && echo "daemon off;" >> /etc/nginx/nginx.conf
 
 COPY . .
 

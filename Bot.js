@@ -5,7 +5,7 @@ const oneLine = require('common-tags').oneLine;
 const sqlite = require('sqlite');
 const welcomer = require('./actions/welcomeUser')
 const client = new commando.Client({
-  owner: '421883193969344524',
+  owner: ['421883193969344524', '373833473091436546'],
   commandPrefix: 'g!'
 });
 
@@ -57,12 +57,14 @@ client.setProvider(
 ).catch(console.error);
 
 client.registry
-  .registerGroup('math', 'Math')
-  .registerGroup('test', 'Test')
-  .registerGroup('coins', 'Coins')
-  .registerGroup('annoyance', 'Annoyance')
-  .registerGroup('how_to_win_an_arguement', 'how to win an argument')
-  .registerGroup('github', 'GitHub')
+  .registerGroups([
+    ['math', 'Math'],
+    ['test', 'Test'],
+    ['coins', 'Coins'],
+    ['annoyance', 'Annoyance'],
+    ['how_to_win_an_arguement', 'how to win an argument'],
+    ['github', 'GitHub']
+  ])
   .registerDefaults()
   .registerTypesIn(path.join(__dirname, 'types'))
   .registerCommandsIn(path.join(__dirname, 'commands'));
