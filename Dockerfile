@@ -25,6 +25,7 @@ RUN  apk add --no-cache --virtual .gyp \
         pango \
         giflib \
         libjpeg \
+        freetype \ 
     && npm install \
     && apk del .gyp
 
