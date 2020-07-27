@@ -55,6 +55,11 @@ client
   })
   .on('guildMemberAdd', member => {
     welcomer.welcomeAUser(member);
+  })
+  .on('message', message => {
+    if (message.content === '!join') {
+      client.emit('guildMemberAdd', message.member);
+    }
   });
 
 client.setProvider(
