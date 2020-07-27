@@ -1,9 +1,5 @@
 const { MessageAttachment } = require("discord.js");
-exports.welcomeAUser = async function (member) {
-  // Send the message to a designated channel on a server:
-  const channel = member.guild.channels.cache.find(ch => ch.name === 'bot-spam');
-  // Do nothing if the channel wasn't found on this server
-  if (!channel) return;
+exports.welcomeAUser = async function (member, channel) {
   // Send the message, mentioning the member
   const Canvas = require('canvas');
   const canvas = Canvas.createCanvas(700, 250);
