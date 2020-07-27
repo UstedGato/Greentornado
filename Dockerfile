@@ -10,12 +10,16 @@ RUN  apk add --no-cache --virtual .gyp \
         make \
         g++ \
         git \
-        pkgconfig \
-        pixman-dev \
+        build-base \
         cairo-dev \
-        pango-dev \
         jpeg-dev \
+        pango-dev \
+        musl-dev \
         giflib-dev \
+        pixman-dev \
+        pangomm-dev \
+        libjpeg-turbo-dev \
+        freetype-dev \
     && npm install \
     && apk del .gyp
 
