@@ -27,7 +27,7 @@ RUN  apk add --no-cache --virtual .gyp \
         libjpeg \
         freetype \ 
         fontconfig \
-        ttf-roboto \
+        font-noto \
     && npm install \
     && apk del .gyp
 
