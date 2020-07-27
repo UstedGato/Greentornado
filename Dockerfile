@@ -1,4 +1,4 @@
-FROM aadev00/nginx-nodejs
+FROM node:alpine
 
 WORKDIR /app
 
@@ -19,5 +19,5 @@ COPY . .
 ENV PORT=80
 EXPOSE 80
 
-CMD nginx & node Bot.js
+CMD node Bot.js
 

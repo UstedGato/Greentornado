@@ -1,4 +1,9 @@
-
+var express = require('express');
+var app = express();app.get('/', function (req, res) {
+  res.send('Hello World!');
+});app.listen(80, function () {
+  console.log('App listening on port 80');
+});
 const commando = require('discord.js-commando');
 const path = require('path');
 const oneLine = require('common-tags').oneLine;
@@ -50,11 +55,6 @@ client
   })
   .on('guildMemberAdd', member => {
     welcomer.welcomeAUser(member);
-  })
-  .on('message', message => {
-    if (message.content === '!join') {
-      client.emit('guildMemberAdd', message.member);
-    }
   });
 
 client.setProvider(
