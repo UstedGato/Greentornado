@@ -10,7 +10,7 @@ RUN  apk add --no-cache --virtual .gyp \
         make \
         g++ \
         git \
-        pkg-config \
+        pkgconfig \
     && npm install \
     && apk del .gyp\
     && echo "daemon off;" >> /etc/nginx/nginx.conf
