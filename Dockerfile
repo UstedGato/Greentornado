@@ -20,7 +20,12 @@ RUN  apk add --no-cache --virtual .gyp \
         pangomm-dev \
         libjpeg-turbo-dev \
         freetype-dev \
-    && npm install --build-from-source\
+    && apk --no-cache add pixman \
+        cairo \
+        pango \
+        giflib \
+        libjpeg \
+    && npm install \
     && apk del .gyp
 
 COPY . .
