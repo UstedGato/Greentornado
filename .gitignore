@@ -1,3 +1,4 @@
 /node_modules
 /googlekey.txt
 /database.sqlite3
+/osuauth.py
