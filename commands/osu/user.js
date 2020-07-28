@@ -31,12 +31,12 @@ module.exports = class AddNumbersCommand extends commando.Command {
     // most functions return Promise objects.
      
     // eg: get beatmap data
-    const userdata = await api.user.get(username);
+    const user = await api.user.get(username);
     const canvas = Canvas.createCanvas(960, 540);
     const ctx = canvas.getContext('2d');
     
     // Since the image takes time to load, you should await it
-    const background = await Canvas.loadImage('./../../osu.png');
+    const background = await Canvas.loadImage('./osu.png');
     // This uses the canvas dimensions to stretch the image onto the entire canvas
     ctx.drawImage(background, 0, 0, background.width, background.height);
     ctx.strokeStyle = "rgb(255, 0, 0)";
@@ -56,7 +56,7 @@ module.exports = class AddNumbersCommand extends commando.Command {
     ctx.fillText(`pp: ${Math.round(user.ppRaw)}`, canvas.width / 1.1, canvas.height / 4);
     ctx.textAlign = "center"; 
     ctx.fillText(`${Math.round(user.level)}`, canvas.width / 1.155, canvas.height / 2.222);
-    const lvl = await Canvas.loadImage("./../../Artboard 1.png")
+    const lvl = await Canvas.loadImage("./Artboard 1.png")
     ctx.drawImage(lvl, canvas.width / 1.22, canvas.height / 3, lvl.width, lvl.height);
     // // Pick up the pen
     // ctx.beginPath();
