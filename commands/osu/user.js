@@ -2,7 +2,7 @@ const commando = require('discord.js-commando');
 const { MessageAttachment } = require("discord.js");
 const Nodesu = require('nodesu');
 const Canvas = require('canvas');
-const api = new Nodesu.Client(process.env.osu, {
+const api = new Nodesu.Client(process.env.OSUTOKEN, {
     parseData: true
  });
 
