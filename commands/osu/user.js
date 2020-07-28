@@ -34,7 +34,7 @@ module.exports = class AddNumbersCommand extends commando.Command {
     const user = await api.user.get(username);
     const canvas = Canvas.createCanvas(960, 540);
     const ctx = canvas.getContext('2d');
-    
+     
     // Since the image takes time to load, you should await it
     const background = await Canvas.loadImage('./osu.png');
     // This uses the canvas dimensions to stretch the image onto the entire canvas
