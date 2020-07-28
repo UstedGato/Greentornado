@@ -74,3 +74,4 @@ module.exports = class AddNumbersCommand extends commando.Command {
     return msg.reply({ files: [ attachment ]});
   }
 };
+
