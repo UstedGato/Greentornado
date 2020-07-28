@@ -29,7 +29,7 @@ module.exports = class AddNumbersCommand extends commando.Command {
     // most functions return Promise objects.
      
     // eg: get beatmap data
-    const userdata = await api.user.get(user);
+    const userdata = await api.user.get(username);
     return msg.reply(`${userdata}`);
   }
 };

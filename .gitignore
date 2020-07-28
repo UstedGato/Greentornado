@@ -1,4 +1,5 @@
 /node_modules
 /googlekey.txt
 /database.sqlite3
-/osuauth.js
+/osuimg.js
+/test.png
