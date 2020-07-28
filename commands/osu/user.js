@@ -41,7 +41,7 @@ module.exports = class AddNumbersCommand extends commando.Command {
     ctx.drawImage(background, 0, 0, background.width, background.height);
     ctx.strokeStyle = "rgb(255, 0, 0)";
     ctx.fillStyle = "rgba(255, 255, 0, .5)";
-    
+  
     // Select the font size and type from one of the natively available fonts
     ctx.font = '40px sans-serif';
     // Select the style that will be used to fill the text in
