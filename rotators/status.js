@@ -1,6 +1,6 @@
 const statusesmodule = require('./statuses');
 const statuses = statusesmodule.getStatuses();
-var activities = ['online', 'idle', 'dnd']
+const activities = ['online', 'idle', 'dnd']
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
