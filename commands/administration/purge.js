@@ -32,6 +32,7 @@ module.exports = class ReplyCommand extends Command {
         var messages = await msg.channel.messages.fetch({limit: 100})
         var msgs = messages;
         if (user) {
+            var userid = user.replace("<@!","").replace(">", "").replace(/\D/g,'');
             var msgs = msgs.filter(message => message.author.id.toString() === userid);
         }
         var array = msgs.array();
