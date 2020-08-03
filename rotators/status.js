@@ -1,10 +1,6 @@
-
-var statuses = [
-    { activity: { name: 'the beans' , type: "WATCHING"}},
-    { activity: { name: 'kirby with a gun', type: "PLAYING"}},
-    { activity: { name: 'shrek 2', type: "STREAMING"}},
-    { activity: { name: 'megalovania', type: "LISTENING"}}
-]
+const statusesmodule = require('./statuses');
+const statuses = statusesmodule.getStatuses();
+console.log(statuses)
 var activities = ['online', 'idle', 'dnd']
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
