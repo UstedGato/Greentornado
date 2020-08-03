@@ -9,6 +9,7 @@ const path = require('path');
 const oneLine = require('common-tags').oneLine;
 const sqlite = require('sqlite');
 const welcomer = require('./actions/welcomeUser')
+const statusRotator = require('./rotators/status')
 const client = new commando.Client({
   owner: ['421883193969344524', '373833473091436546'],
   commandPrefix: 'g!'
@@ -20,6 +21,7 @@ client
   .on('debug', console.log)
   .on('ready', () => {
     console.log(`Client ready; logged in as ${client.user.username}#${client.user.discriminator} (${client.user.id})`);
+    statusRotator.startRotation(client);
   })
   .on('disconnect', () => { console.warn('Disconnected!'); })
   .on('reconnecting', () => { console.warn('Reconnecting...'); })
@@ -85,3 +87,5 @@ client.registry
   .registerCommandsIn(path.join(__dirname, 'commands'));
 
 client.login(process.env.TOKEN);
+
+
