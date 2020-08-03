@@ -5,7 +5,9 @@ var statuses = [
     { activity: { name: 'megalovania', type: "LISTENING"}},
     { activity: { name: 'family guy online', type: "PLAYING"}},
     { activity: { name: 'the screams of the underworld', type: "LISTENING"}},
-    { activity: { name: 'minecraft mod reviews', type: "STREAMING"}}
+    { activity: { name: 'minecraft mod reviews', type: "STREAMING"}},
+    { activity: { name: 'the corn cube', type: "WATCHING"}},
+    { activity: { name: 'grus moon tycoon', type: "PLAYING"}}
 ]
 
 
