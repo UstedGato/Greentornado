@@ -1,9 +1,9 @@
 
 var statuses = [
-    { activity: { name: 'the beans' , type: "WATCHING"}, status:'dnd'},
-    { activity: { name: 'kirby with a gun', type: "PLAYING", status:'dnd'}},
-    { activity: { name: 'shrek 2', type: "STREAMING"}, status:'dnd'},
-    { activity: { name: 'megalovania', type: "LISTENING"}, status:'dnd'}
+    { activity: { name: 'the beans' , type: "WATCHING"}},
+    { activity: { name: 'kirby with a gun', type: "PLAYING"}},
+    { activity: { name: 'shrek 2', type: "STREAMING"}},
+    { activity: { name: 'megalovania', type: "LISTENING"}}
 ]
 var activities = ['online', 'idle', 'dnd']
 function getRandomInt(max) {
@@ -25,8 +25,6 @@ async function rotate(client) {
     lastac = randomac
     var presence = statuses[random]
     presence["status"] = activities[randomac]
-    console.log(activities[randomac])
-    console.log(presence)
     client.user.setPresence(presence);
 }
 exports.startRotation = async function (client) {

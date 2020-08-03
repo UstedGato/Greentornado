@@ -1,9 +1,9 @@
-var express = require('express');
-var app = express();app.get('/', function (req, res) {
-  res.send('Hello World!');
-});app.listen(80, function () {
-  console.log('App listening on port 80');
-});
+// var express = require('express');
+// var app = express();app.get('/', function (req, res) {
+//   res.send('Hello World!');
+// });app.listen(80, function () {
+//   console.log('App listening on port 80');
+// });
 const commando = require('discord.js-commando');
 const path = require('path');
 const oneLine = require('common-tags').oneLine;
@@ -74,6 +74,7 @@ client.setProvider(
 
 client.registry
   .registerGroups([
+    ['administration', 'Administration'],
     ['math', 'Math'],
     ['test', 'Test'],
     ['coins', 'Coins'],
