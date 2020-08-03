@@ -19,7 +19,7 @@ async function rotate(client) {
     client.user.setPresence(statuses[random]);
 }
 exports.startRotation = async function (client) {
-    setInterval(rotate, 10000, client);
+    setInterval(rotate, 30000, client);
     rotate(client)
     console.log("Started status rotator")
 }
