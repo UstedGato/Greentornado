@@ -22,7 +22,7 @@ module.exports = class ReplyCommand extends Command {
     }
 
     async run(msg, { user }) {
-        if (!msg.member.guild.me.hasPermission("ADMINISTRATOR")) return msg.reply("You need to be an admin to use this command.");
+        if (!msg.member.hasPermission("ADMINISTRATOR")) return msg.reply("You need to be an admin to use this command.");
         const doc = new GoogleSpreadsheet(process.env.SHEET);
         await doc.useServiceAccountAuth({
             client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
