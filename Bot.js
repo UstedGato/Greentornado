@@ -64,6 +64,7 @@ client
   })
   .on('message', message => {
     if (message.content === '!join') {
+      if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You need to be an admin to use this command.");
       client.emit('guildMemberAdd', message.member);
     }
   });
@@ -76,10 +77,10 @@ client.registry
   .registerGroups([
     ['administration', 'Administration'],
     ['math', 'Math'],
-    ['test', 'Test'],
+    //['test', 'Test'],
     ['coins', 'Coins'],
-    ['annoyance', 'Annoyance'],
-    ['how_to_win_an_arguement', 'how to win an argument'],
+    //['annoyance', 'Annoyance'],
+    //['how_to_win_an_arguement', 'how to win an argument'],
     ['github', 'GitHub'], 
     ['osu', 'osu!']
   ])

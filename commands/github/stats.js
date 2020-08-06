@@ -5,7 +5,7 @@ module.exports = class ReplyCommand extends Command {
             name: 'stats',
             group: 'github',
             memberName: 'stats',
-            description: 'Get GitHub stats',
+            description: 'Get GitHub stats (broken)',
             examples: ['repeat'],
             userPermissions: ['MANAGE_MESSAGES'],
             // args: [
@@ -21,6 +21,7 @@ module.exports = class ReplyCommand extends Command {
     }
 
     async run(msg, { user }) {
+        return msg.reply("This command will be fixed soon.");
         const embed = {
             "color": 1638182,
             "image": {

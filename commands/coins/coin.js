@@ -6,9 +6,9 @@ module.exports = class ReplyCommand extends Command {
             name: 'coin',
             group: 'coins',
             memberName: 'coin',
-            description: 'Get virtual coins',
-            examples: ['repeat'],
-            userPermissions: ['MANAGE_MESSAGES'],
+            description: 'Give people cross-server virtual coins (Admin only)',
+            examples: ['g!coin @AAGaming'],
+            userPermissions: ['ADMINISTRATOR'],
             args: [
 				{
 					key: 'user',

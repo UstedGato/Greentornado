@@ -7,7 +7,7 @@ module.exports = class ReplyCommand extends Command {
             group: 'coins',
             memberName: 'coins',
             description: 'Check your coins.',
-            examples: ['repeat'],
+            examples: ['g!coins', 'g!coins @AAGaming'],
             
             args: [
 				{

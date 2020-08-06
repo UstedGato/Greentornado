@@ -7,7 +7,7 @@ module.exports = class ReplyCommand extends Command {
             group: 'administration',
             memberName: 'purge',
             description: 'Purge Messages (only works for last 100 messages in channel)',
-            examples: ['g!purge 20', 'g!purge 20 @BirdKing'],
+            examples: ['g!purge 20', 'g!purge 20 @GreenTornado'],
             userPermissions: ['MANAGE_MESSAGES'],
             args: [
 				{
@@ -28,7 +28,7 @@ module.exports = class ReplyCommand extends Command {
     }
 
     async run(msg, { amount, user }) {
-        if (!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.reply("You need to have the Manage Messages permission to use this command.");
+        if (!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.reply("You need to have the ``Manage Messages`` permission to use this command.");
         var messages = await msg.channel.messages.fetch({limit: 100})
         var msgs = messages;
         if (user) {

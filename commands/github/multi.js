@@ -11,11 +11,13 @@ module.exports = class ReplyCommand extends Command {
             name: 'multi',
             group: 'github',
             memberName: 'multi',
-            description: 'Check your coins.',
-            examples: ['repeat'],
+            description: 'Admin-only test command.',
+            examples: ['g!multi'],
+            userPermissions: ['ADMINISTRATOR']
         });
     }
     async run(msg, { user }){
+        if (!msg.member.hasPermission("ADMINISTRATOR")) return msg.reply("You need to be an admin to use this command.");
         Embed.sendhook(msg, [embed1]);
 
     }

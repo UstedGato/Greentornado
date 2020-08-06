@@ -6,7 +6,7 @@ module.exports = class ReplyCommand extends Command {
             group: 'github',
             memberName: 'npm',
             description: 'Check NPM module stats.',
-            examples: ['repeat'],
+            examples: ['g!npm discord.js'],
             
             args: [
 				{
