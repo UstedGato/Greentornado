@@ -87,8 +87,8 @@ client.registry
   .registerDefaults()
   .registerTypesIn(path.join(__dirname, 'types'))
   .registerCommandsIn(path.join(__dirname, 'commands'))
-  .unregisterCommand("elias")
-  .unregisterCommand("search");
+  // .unregisterCommand("elias")
+  // .unregisterCommand("search");
 client.login(process.env.TOKEN);
 
 
