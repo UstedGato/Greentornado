@@ -33,9 +33,9 @@ module.exports = class ReplyCommand extends Command {
         var member  = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[1]));
         await member.roles.add(role.id);
         await msg.reply('muted');
-        setTimeout(() => async function (member, role, msg) {
+        setTimeout(async function () {
             await member.roles.remove(role.id);
             await msg.channel.send(`${member.user}` + ' has now been unmuted.')
-       }, amount * 60 * 1000);
+       }, amount * 60 * 1000, member, role, msg);
     }
 };
