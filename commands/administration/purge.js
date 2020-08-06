@@ -1,5 +1,9 @@
 const { Command } = require('discord.js-commando');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
+async function unmute(msg, member, role) {
+    await member.roles.remove(role.id);
+    await msg.channel.send(`${member.user}` + ' has now been unmuted.')
+}
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
@@ -33,9 +37,6 @@ module.exports = class ReplyCommand extends Command {
         var member  = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[1]));
         await member.roles.add(role.id);
         await msg.reply('muted');
-        setTimeout(async function () {
-            await member.roles.remove(role.id);
-            await msg.channel.send(`${member.user}` + ' has now been unmuted.')
-       }, amount * 60 * 1000, member, role, msg);
+        setTimeout(unmute, amount * 60 * 1000, member, role, msg);
     }
 };
