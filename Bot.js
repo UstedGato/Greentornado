@@ -57,9 +57,11 @@ client
   })
   .on('guildMemberAdd', member => {
     // Send the message to a designated channel on a server:
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'bot-spam');
+    var channel = member.guild.channels.cache.find(ch => ch.name === 'bot-spam');
     // Do nothing if the channel wasn't found on this server
-    if (!channel) const channel = member.guild.channels.cache.find(ch => ch.name === 'welcomes-and-goodbyes');;
+    if (!channel) {
+      var channel = member.guild.channels.cache.find(ch => ch.name === 'welcomes-and-goodbyes');
+    }
     welcomer.welcomeAUser(member, channel);
   })
   .on('message', message => {
