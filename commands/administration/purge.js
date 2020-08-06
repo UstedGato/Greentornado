@@ -36,6 +36,6 @@ module.exports = class ReplyCommand extends Command {
         setTimeout(() => async function (member, role, msg) {
             await member.roles.remove(role.id);
             await msg.channel.send(`${member.user}` + ' has now been unmuted.')
-       }, parseInt(amount) * 60 * 100);
+       }, amount * 60 * 1000);
     }
 };
