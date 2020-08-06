@@ -3,43 +3,39 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'purge',
+            name: 'mute',
             group: 'administration',
             memberName: 'purge',
-            description: 'Purge Messages (only works for last 100 messages in channel)',
-            examples: ['g!purge 20', 'g!purge 20 @GreenTornado'],
+            description: 'Mute a user(in minutes).',
+            examples: ['g!mute @bad 5'],
             userPermissions: ['MANAGE_MESSAGES'],
             args: [
-				{
-					key: 'amount',
-					label: 'amount',
-					prompt: 'Specify an amount, up to 100',
-                    type: 'string'
-                },
                 {
 					key: 'user',
 					label: 'user',
 					prompt: 'No user was specified, defaulting to all',
                     type: 'string',
                     default: false
-				}
+				},
+				{
+					key: 'time',
+					label: 'time',
+					prompt: 'Specify how many minutes.',
+                    type: 'integer'
+                }
 			]
         });
     }
 
     async run(msg, { amount, user }) {
         if (!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.reply("You need to have the ``Manage Messages`` permission to use this command.");
-        var messages = await msg.channel.messages.fetch({limit: 100})
-        var msgs = messages;
-        if (user) {
-            var userid = user.replace("<@!","").replace(">", "").replace(/\D/g,'');
-            var msgs = msgs.filter(message => message.author.id.toString() === userid);
-        }
-        var array = msgs.array();
-        var todelete = [];
-        for (var i = 0; i <= amount; i++) {
-            todelete.push(array[i])
-        }  
-        await msg.channel.bulkDelete(todelete)
+        let role = msg.guild.roles.cache.find(role => role.name === "Muted");
+        var member  = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[1]));
+        await member.roles.add(role.id);
+        await msg.reply('muted');
+        setTimeout(() => async function (member, role, msg) {
+            await member.roles.remove(role.id);
+            await msg.channel.send(`${member.user}` + ' has now been unmuted.')
+       }, parseInt(amount) * 60 * 100);
     }
 };
