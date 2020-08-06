@@ -77,17 +77,18 @@ client.registry
   .registerGroups([
     ['administration', 'Administration'],
     ['math', 'Math'],
-    //['test', 'Test'],
+    ['test', 'Test'],
     ['coins', 'Coins'],
-    //['annoyance', 'Annoyance'],
-    //['how_to_win_an_arguement', 'how to win an argument'],
+    ['annoyance', 'Annoyance'],
+    ['how_to_win_an_arguement', 'how to win an argument'],
     ['github', 'GitHub'], 
     ['osu', 'osu!']
   ])
   .registerDefaults()
   .registerTypesIn(path.join(__dirname, 'types'))
-  .registerCommandsIn(path.join(__dirname, 'commands'));
-
+  .registerCommandsIn(path.join(__dirname, 'commands'))
+  .unregisterCommand({name: "elias"})
+  .unregisterCommand({name: "search"});
 client.login(process.env.TOKEN);
 
 
