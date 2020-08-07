@@ -36,12 +36,17 @@ module.exports = class ReplyCommand extends Command {
         var member  = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[1]));
         await member.roles.add(role.id);
         const embed = {
-        "title": `Muted ${member.user} for ${amount} minutes.`,
         "color": 15350333,
         "author": {
             "name": "Mute",
             "icon_url": "https://raw.githubusercontent.com/thiagodroz/javascript30/master/02%20-%20JS%20and%20CSS%20Clock/images/baseline-volume_off-white-18/2x/baseline_volume_off_white_18dp.png"
-        }
+        },
+        "fields": [
+            {
+              "name": "⠀",
+              "value": "Muted ${member.user} for ${amount} minutes."
+            }
+        ]
         };
         await msg.reply({ embed });
         setTimeout(unmute, amount * 60 * 1000, member, role, msg);
