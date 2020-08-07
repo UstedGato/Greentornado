@@ -10,7 +10,7 @@ module.exports = class ReplyCommand extends Command {
         super(client, {
             name: 'mute',
             group: 'administration',
-            memberName: 'purge',
+            memberName: 'mute',
             description: 'Mute a user(in minutes).',
             examples: ['g!mute @bad 5'],
             userPermissions: ['MANAGE_MESSAGES'],
