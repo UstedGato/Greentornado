@@ -36,11 +36,10 @@ module.exports = class ReplyCommand extends Command {
         var member  = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[1]));
         await member.roles.add(role.id);
         const embed = {
-        "title": "Muted x for 24min",
+        "title": `Muted ${member.user} for ${amount} minutes.`,
         "color": 15350333,
         "author": {
             "name": "Mute",
-            "url": "https://discordapp.com",
             "icon_url": "https://aagaming-public.s3.us-west-000.backblazeb2.com/baseline_volume_off_white_18dp.png"
         }
         };
