@@ -1,6 +1,7 @@
 const { Command } = require('discord.js-commando');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
-async function unmute(msg, member, role) {
+async function unmute(member, role, message) {
+    console.log(member + role + msg)
     await member.roles.remove(role.id);
     await msg.channel.send(`${member.user}` + ' has now been unmuted.')
 }

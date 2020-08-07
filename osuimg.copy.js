@@ -163,12 +163,6 @@ ctx.fillRect(rectX + (cornerRadius / 2), rectY + (cornerRadius / 2), rectWidth -
 let avatar;
 try { avatar = await Canvas.loadImage("https://a.ppy.sh")}catch(e) { avatar = await Canvas.loadImage(`https://a.ppy.sh/?${Date.now()}`)};
 ctx.drawImage(avatar, canvas.width / 50, canvas.height / 15, 150, 150);
-var bgs = [];
-for (let index = 1; index < 88; index++) {
-bgs.push(await Canvas.loadImage(`./osu/${await padNumber(index)}.jpg`));
-}
-
-//await fs.unlink('output.gif', () => {});
 
 //await fs.unlink('output.gif', () => {});
 
@@ -190,26 +184,19 @@ for (let index = 0; index <= 50; index++) {
     //ctxbg.lineWidth = cornerRadius * thing;
     ctxbg.strokeRect(rectX + (cornerRadius / 2), rectY + (cornerRadius / 2), rectWidth - cornerRadius, rectHeight - cornerRadius);
     ctxbg.fillRect(rectX + (cornerRadius / 2), rectY + (cornerRadius / 2), rectWidth - cornerRadius, rectHeight - cornerRadius);
-    var img = ctxbg.getImageData(0, 0, canvasbg.width, canvasbg.height).data;
+    var img = await ctxbg.getImageData(0, 0, canvasbg.width, canvasbg.height).data;
     can.push(img);
     console.log(rectWidth);
 }
 const GIFEncoder = require('gifencoder');
-// delete file
-    fs.unlink('output.gif', function (err) {
-        if (err)
-            throw err;
-        // if no error, file has been deleted successfully
-        console.log('File deleted!');
-    });  
 const encoder = new GIFEncoder(960, 540);
 encoder.createReadStream().pipe(fs.createWriteStream('output.gif'));
 encoder.start();
 encoder.setRepeat(0);   // 0 for repeat, -1 for no-repeat
 encoder.setDelay(1);  // frame delay in ms
-encoder.setFrameRate(15);
+encoder.setFrameRate(30);
 encoder.setQuality(30); // image quality. 10 is default.
-for (let indexx = 0; indexx < 87; indexx++) {
+for (let indexx = 0; indexx < can.length; indexx++) {
     encoder.addFrame(can[indexx]);
     console.log(indexx);
 }
