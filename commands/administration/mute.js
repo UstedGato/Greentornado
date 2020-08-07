@@ -40,7 +40,7 @@ module.exports = class ReplyCommand extends Command {
         "color": 15350333,
         "author": {
             "name": "Mute",
-            "icon_url": "https://aagaming-public.s3.us-west-000.backblazeb2.com/baseline_volume_off_white_18dp.png"
+            "icon_url": "https://raw.githubusercontent.com/thiagodroz/javascript30/master/02%20-%20JS%20and%20CSS%20Clock/images/baseline-volume_off-white-18/2x/baseline_volume_off_white_18dp.png"
         }
         };
         await msg.reply({ embed });
