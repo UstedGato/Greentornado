@@ -1,13 +1,13 @@
 const statuses = [
-    { activity: { name: 'the beans' , type: "WATCHING"}},
-    { activity: { name: 'kirby with a gun', type: "PLAYING"}},
-    { activity: { name: 'shrek 2', type: "STREAMING"}},
-    { activity: { name: 'megalovania', type: "LISTENING"}},
-    { activity: { name: 'family guy online', type: "PLAYING"}},
-    { activity: { name: 'the screams of the underworld', type: "LISTENING"}},
-    { activity: { name: 'minecraft mod reviews', type: "STREAMING"}},
-    { activity: { name: 'the corn cube', type: "WATCHING"}},
-    { activity: { name: 'grus moon tycoon', type: "PLAYING"}}
+    { activity: { name: 'Milk' , type: "WATCHING"}},
+    { activity: { name: 'Undertale 2.0', type: "PLAYING"}},
+    { activity: { name: 'Undertale Online', type: "STREAMING"}},
+    { activity: { name: 'Megalovania', type: "LISTENING"}},
+    { activity: { name: 'Undertale: Extended', type: "PLAYING"}},
+    { activity: { name: 'More megalovania', type: "LISTENING"}},
+    { activity: { name: 'Undertale Last Breath', type: "STREAMING"}},
+    { activity: { name: 'Your mom undress', type: "WATCHING"}},
+    { activity: { name: 'Undertale', type: "PLAYING"}}
 ]
 
 
