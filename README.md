@@ -1,2 +1,3 @@
 # Greentornado
-a multi purpose discord bot.
+
+(Forked off of my friends bot which he let me copy)
