@@ -12,7 +12,7 @@ module.exports = class ReplyCommand extends commando.Command {
     });
   }
 
-  async run(messsage, args) {
+  async run(message, args) {
     if (message.channel.type === 'dm') return;
 
     const voiceChannel = message.member.voice.channel;
