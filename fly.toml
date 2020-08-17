@@ -1,6 +1,6 @@
 # fly.toml file generated for green-tornado-discord-bot on 2020-07-07T12:11:30-04:00
 
-app = "bruhbot"
+app = "green-tornado-discord-bot"
 
 [[services]]
   internal_port = 80

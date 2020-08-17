@@ -12,3 +12,13 @@ jobs:
         - uses: superfly/flyctl-actions@1.1
           with:
             args: "deploy"
+        - uses: sarisia/actions-status-discord@v1.5.2
+          with:
+            webhook: ${{ secrets.DISCORD_WEBHOOK }}
+            status: ${{ job.status }}
+            title: "Deployed"
+            description: "Built and deployed to fly.io"
+            nofail: false
+            nodetail: false
+            color: 0x00ff00
+            username: GreenTornado build status
