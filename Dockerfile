@@ -34,7 +34,6 @@ RUN  apk add --no-cache --virtual .gyp \
     && apk --no-cache add \
        neofetch \
        --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
-    && npm install -g yarn \
     && yarn \
     && apk del .gyp
 
