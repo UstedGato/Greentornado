@@ -8,11 +8,19 @@ module.exports = class ReplyCommand extends commando.Command {
       aliases: ['play youtube.com/video'],
       group: 'util',
       memberName: 'play',
-      description: 'Music player form youtube.'
+      description: 'Music player form youtube.',
+                  args: [
+				{
+					key: 'video',
+					label: 'video',
+					prompt: 'No video was specified, rickrolling ;)',
+                    type: 'string'
+				}
+			]
     });
   }
 
-  async run(message, args) {
+  async run(message, { video }) {
     if (message.channel.type === 'dm') return;
 
     const voiceChannel = message.member.voice.channel;
@@ -22,7 +30,7 @@ module.exports = class ReplyCommand extends commando.Command {
     }
 
     voiceChannel.join().then(connection => {
-        const stream = ytdl('https://www.youtube.com/watch?v=D57Y1PruTlw', { filter: 'audioonly' });
+        const stream = ytdl(video, { filter: 'audioonly' });
         const dispatcher = connection.play(stream);
 
         dispatcher.on('finish', () => voiceChannel.leave());
