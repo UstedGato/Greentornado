@@ -7,15 +7,15 @@
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
 print_info() {
-    # info title
-    # info underline
+    info title
+    info underline
 
     info "OS" distro
     info "Model" model
     info "Kernel" kernel
     info "Uptime" uptime
-    # info "Packages" packages
-    # info "Shell" shell
+    info "Packages" packages
+    info "Shell" shell
     # info "Resolution" resolution
     # info "DE" de
     # info "WM" wm
@@ -30,17 +30,17 @@ print_info() {
 
     info "CPU Usage" cpu_usage
     info "Disk" disk
-    info "Battery" battery
+    # info "Battery" battery
     # info "Font" font
     # info "Song" song
     info "Local IP" local_ip
     info "Public IP" public_ip
-    # info "Users" users
-    # info "Install Date" install_date
+    info "Users" users
+    info "Install Date" install_date
 
-    # info line_break
-    # info cols
-    # info line_break
+    info line_break
+    info cols
+    info line_break
 }
 
 
@@ -311,7 +311,7 @@ public_ip_host="http://ident.me"
 # disk_show=('/'):
 #      'Disk (/): 74G / 118G (66%)'
 #
-disk_show=('/' '/home')
+disk_show=('/')
 
 # Disk subtitle.
 # What to append to the Disk subtitle.
