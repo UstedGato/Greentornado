@@ -15,7 +15,7 @@ module.exports = class ReplyCommand extends commando.Command {
   async run(msg, args) {
 
 
-child = exec('neofetch --stdout --color_blocks off --gpu_brand on --gpu_type all --disk_show / --ip_host green-tornado-discord-bot.fly.dev',
+child = exec('neofetch --stdout --color_blocks off --gpu_brand on --gpu_type all --disk_show / --ip_host="green-tornado-discord-bot.fly.dev"',
    function (error, stdout, stderr) {
       console.log('stdout: ' + stdout);
       console.log('stderr: ' + stderr);
