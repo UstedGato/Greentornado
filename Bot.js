@@ -61,7 +61,7 @@ client
     var channel = member.guild.channels.cache.find(ch => ch.name === 'bot-spam');
     // Do nothing if the channel wasn't found on this server
     if (!channel) {
-      var channel = member.guild.channels.cache.find(ch => ch.name === 'welcomes-and-goodbyes');
+      var channel = member.guild.channels.cache.find(ch => ch.name.includes('welcome'));
     }
     welcomer.welcomeAUser(member, channel);
   })
@@ -85,7 +85,8 @@ client.registry
     ['annoyance', 'Annoyance'],
     ['how_to_win_an_arguement', 'how to win an argument'],
     ['github', 'GitHub'], 
-    ['osu', 'osu!']
+    ['osu', 'osu!'],
+    ['music', 'Music']
   ])
   .registerDefaults()
   .registerTypesIn(path.join(__dirname, 'types'))

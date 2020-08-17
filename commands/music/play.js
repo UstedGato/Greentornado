@@ -6,7 +6,7 @@ module.exports = class ReplyCommand extends commando.Command {
     super(client, {
       name: 'play',
       aliases: ['play youtube.com/video'],
-      group: 'util',
+      group: 'music',
       memberName: 'play',
       description: 'Music player form youtube.',
                   args: [
