@@ -28,7 +28,7 @@ print_info() {
     info "GPU" gpu
     info "Memory" memory
 
-    # info "CPU Usage" cpu_usage
+    info "CPU Usage" cpu_usage
     info "Disk" disk
     # info "Battery" battery
     # info "Font" font
