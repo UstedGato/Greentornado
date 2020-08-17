@@ -1,5 +1,7 @@
 const commando = require('discord.js-commando');
 const ytdl = require('ytdl-core');
+const fetch = require('node-fetch');
+const querystring = require('querystring');
 
 module.exports = class ReplyCommand extends commando.Command {
   constructor(client) {
@@ -29,8 +31,22 @@ module.exports = class ReplyCommand extends commando.Command {
         return message.reply('please join a voice channel first!');
     }
 
-    voiceChannel.join().then(connection => {
+    voiceChannel.join().then(connection => async function(connection){
+      if (video.includes('youtube.com') || video.includes('youtu.be')){
         const stream = ytdl(video, { filter: 'audioonly' });
+      }
+      if (video.includes('soundcloud')) {
+
+        const resloveResponse = await JSON.parse(fetch(`https://api.soundcloud.com/resolve.json?url=${querystring.stringify(video)}&client_id=${process.env.SOUNDCLOUD_CLIENT_ID}`));
+        const trackData = await JSON.parse(fetch(resloveResponse.location));
+        console.log(trackData);
+        const response = fetch(`${trackData.stream_url}?client_id=${process.env.SOUNDCLOUD_CLIENT_ID}`);
+
+        if (response.ok) {
+          let stream = response.body
+        }
+
+        }
         const dispatcher = connection.play(stream);
 
         dispatcher.on('finish', () => voiceChannel.leave());

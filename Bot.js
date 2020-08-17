@@ -13,7 +13,7 @@ const welcomer = require('./actions/welcomeUser')
 const statusRotator = require('./rotators/status')
 const client = new commando.Client({
   owner: ['421883193969344524', '373833473091436546'],
-  commandPrefix: 'g!'
+  commandPrefix: 'dg!'
 });
 
 client
@@ -90,9 +90,7 @@ client.registry
   ])
   .registerDefaults()
   .registerTypesIn(path.join(__dirname, 'types'))
-  .registerCommandsIn(path.join(__dirname, 'commands'))
-  // .unregisterCommand("elias")
-  // .unregisterCommand("search");
+  .registerCommandsIn(path.join(__dirname, 'commands'));
 client.login(process.env.TOKEN);
 
 
