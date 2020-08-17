@@ -18,7 +18,7 @@
 		"google-spreadsheet": "^3.0.10",
 		"nodesu": "^0.7.2",
 		"request": "^2.88.2",
-		"sqlite": "^3.0.0",
+		"sqlite": "^4.0.0",
 		"ytdl-core": "^3.2.1"
 	}
 }
