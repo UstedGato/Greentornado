@@ -28,6 +28,7 @@ RUN  apk add --no-cache --virtual .gyp \
         libjpeg \
         freetype \ 
         fontconfig \
+        neofetch \
     && apk --no-cache add \
        ttf-roboto \
        --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
