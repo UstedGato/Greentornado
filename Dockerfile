@@ -28,11 +28,12 @@ RUN  apk add --no-cache --virtual .gyp \
         libjpeg \
         freetype \ 
         fontconfig \
-        neofetch \
-        sed \
     && apk --no-cache add \
        ttf-roboto \
        --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
+    && apk --no-cache add \
+       neofetch \
+       --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
     && npm install \
     && apk del .gyp
 

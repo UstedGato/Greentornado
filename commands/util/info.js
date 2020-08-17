@@ -15,7 +15,7 @@ module.exports = class ReplyCommand extends commando.Command {
   async run(msg, args) {
 
 
-child = exec('neofetch|sed \'s/\x1B\[[0-9;\?]*[a-zA-Z]//g\'',
+child = exec('neofetch --stdout --color_blocks off',
    function (error, stdout, stderr) {
       console.log('stdout: ' + stdout);
       console.log('stderr: ' + stderr);
