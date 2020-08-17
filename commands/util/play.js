@@ -13,7 +13,7 @@ module.exports = class ReplyCommand extends commando.Command {
 				{
 					key: 'video',
 					label: 'video',
-					prompt: 'No video was specified, rickrolling ;)',
+					prompt: 'No video was specified',
                     type: 'string'
 				}
 			]

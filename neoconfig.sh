@@ -34,7 +34,7 @@ print_info() {
     # info "Font" font
     # info "Song" song
     info "Local IP" local_ip
-    info "Public IP" public_ip
+    # info "Public IP" public_ip
     info "Users" users
     info "Install Date" install_date
 
