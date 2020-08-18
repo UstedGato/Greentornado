@@ -35,7 +35,7 @@ module.exports = class ReplyCommand extends commando.Command {
       if (message.content.indexOf('youtu') !== -1){
         const stream = ytdl(video, { filter: 'audioonly' });
       }
-      console.log(video)
+      message.reply(video)
       if (message.content.indexOf('soundcloud') != -1) {
 
         const resloveResponse = await JSON.parse(fetch(`https://api.soundcloud.com/resolve.json?url=${querystring.stringify(video)}&client_id=${process.env.SOUNDCLOUD_CLIENT_ID}`));
