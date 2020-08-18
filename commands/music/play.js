@@ -30,21 +30,29 @@ module.exports = class ReplyCommand extends commando.Command {
     if (!voiceChannel) {
         return message.reply('please join a voice channel first!');
     }
-
+    let stream;
     let connection = await voiceChannel.join();
-      if (message.content.indexOf('youtube') !== -1){
-        const stream = ytdl(video, { filter: 'audioonly' });
+      if (message.content.indexOf('youtu') !== -1){
+        stream = ytdl(video, { filter: 'audioonly' });
       }
       message.reply(video)
       if (message.content.indexOf('soundcloud') != -1) {
+        const resolve = await fetch(`https://api-v2.soundcloud.com/resolve?url=${video}&client_id=${process.env.SOUNDCLOUD_CLIENT_ID}`);
+        const resolveResponse = await resolve.json();
+        let streamApiUrl;
+        for (let i = 0; i < resolveResponse.media.transcodings.length; i++) {
+          if (resolveResponse.media.transcodings[i].format.protocol === "progressive") {
+            streamApiUrl = resolveResponse.media.transcodings[i].url;
+            break;
+          }
+        } 
 
-        const resloveResponse = await JSON.parse(fetch(`https://api.soundcloud.com/resolve.json?url=${querystring.stringify(video)}&client_id=${process.env.SOUNDCLOUD_CLIENT_ID}`));
-        const trackData = await JSON.parse(fetch(resloveResponse.location));
-        console.log(trackData);
-        const response = fetch(`${trackData.stream_url}?client_id=${process.env.SOUNDCLOUD_CLIENT_ID}`);
+        const streamUrl = await fetch(`${streamApiUrl}?client_id=${process.env.SOUNDCLOUD_CLIENT_ID}`);
+        const streamUrlResponse = await streamUrl.json();
+        const response = await fetch(`${streamUrlResponse.url}`);
 
         if (response.ok) {
-          let stream = response.body
+          stream = response.body
         }
 
         }
