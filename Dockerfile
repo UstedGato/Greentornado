@@ -3,7 +3,7 @@ FROM node:current-alpine3.12
 WORKDIR /app
 
 COPY package.json .
-COPY package-lock.json .
+COPY yarn.lock .
 
 RUN  apk add --no-cache --virtual .gyp \
         python3 \
