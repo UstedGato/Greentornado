@@ -13,7 +13,7 @@ const welcomer = require('./actions/welcomeUser')
 const statusRotator = require('./rotators/status')
 const client = new commando.Client({
   owner: ['421883193969344524', '373833473091436546'],
-  commandPrefix: 'dg!'
+  commandPrefix: 'g!'
 });
 
 client
