@@ -73,7 +73,7 @@ client
   });
 
 client.setProvider(
-  sqlite.open(path.join(__dirname, 'database.sqlite3')).then(db => new commando.SQLiteProvider(db))
+  new commando.SyncSQLiteProvider(new sqlite(path.join(__dirname, 'database.sqlite3')))
 ).catch(console.error);
 
 client.registry
