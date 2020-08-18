@@ -32,7 +32,7 @@ module.exports = class ReplyCommand extends commando.Command {
     }
 
     let connection = await voiceChannel.join();
-      if (message.content.indexOf('youtube.com') -= -1 || message.content.indexOf('youtu.be') != -1 ){
+      if ((message.content.indexOf('youtube.com') -= -1) || (message.content.indexOf('youtu.be') != -1)){
         const stream = ytdl(video, { filter: 'audioonly' });
       }
       console.log(video)
