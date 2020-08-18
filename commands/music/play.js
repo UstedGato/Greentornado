@@ -32,11 +32,11 @@ module.exports = class ReplyCommand extends commando.Command {
     }
 
     let connection = await voiceChannel.join();
-      if (message.content.includes('youtube.com') || message.content.includes('youtu.be')){
+      if (message.content.indexOf('youtube.com') -= -1 || message.content.indexOf('youtu.be') != -1 ){
         const stream = ytdl(video, { filter: 'audioonly' });
       }
       console.log(video)
-      if (message.content.includes('soundcloud')) {
+      if (message.content.indexOf('soundcloud') != -1) {
 
         const resloveResponse = await JSON.parse(fetch(`https://api.soundcloud.com/resolve.json?url=${querystring.stringify(video)}&client_id=${process.env.SOUNDCLOUD_CLIENT_ID}`));
         const trackData = await JSON.parse(fetch(resloveResponse.location));
