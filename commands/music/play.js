@@ -31,8 +31,8 @@ module.exports = class ReplyCommand extends commando.Command {
         return message.reply('please join a voice channel first!');
     }
 
-    // let connection = await voiceChannel.join();
-      if (message.content.indexOf('youtu') !== -1){
+    let connection = await voiceChannel.join();
+      if (message.content.indexOf('youtube') !== -1){
         const stream = ytdl(video, { filter: 'audioonly' });
       }
       message.reply(video)
@@ -48,8 +48,8 @@ module.exports = class ReplyCommand extends commando.Command {
         }
 
         }
-        // const dispatcher = connection.play(stream);
+        const dispatcher = connection.play(stream);
 
-        // dispatcher.on('finish', () => voiceChannel.leave());
+        dispatcher.on('finish', () => voiceChannel.leave());
       }
 };
