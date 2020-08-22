@@ -1,5 +1,8 @@
 const { Command } = require('discord.js-commando');
-const { GoogleSpreadsheet } = require('google-spreadsheet');
+const faunadb = require('faunadb'),
+  q = faunadb.query,
+  client = new faunadb.Client({ secret: process.env.FAUNA_KEY })
+
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
@@ -20,17 +23,38 @@ module.exports = class ReplyCommand extends Command {
 			]
         });
     }
-
+    async updateCoins(id, toadd) {
+        try {
+            var coins = await client.query(
+                q.Get(
+                  q.Match(
+                      q.Index("coinIndex"),
+                      id
+                    )
+                )
+            ) 
+            } catch (error) {
+                await client.query(
+                    q.Create(
+                      q.Collection('coins'),
+                      { data: { userId: id, coins: toadd } },
+                    )
+                  )
+                return toadd
+            }
+        if (coins) {
+            await client.query(
+                q.Update(
+                  q.Ref(coins.ref),
+                  { data: { userId: id, coins: coins.data.coins + toadd } },
+                )
+              )
+              return coins.data.coins + toadd
+        }
+        return false
+    }
     async run(msg, { user }) {
         if (!msg.member.hasPermission("ADMINISTRATOR")) return msg.reply("You need to be an admin to use this command.");
-        const doc = new GoogleSpreadsheet(process.env.SHEET);
-        await doc.useServiceAccountAuth({
-            client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-            private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n'),
-          });
-        await doc.loadInfo();
-        const sheet = doc.sheetsByIndex[0];
-        var rows = await sheet.getRows();
         console.log(user);
         //var user = user.substring("<",">");
         //console.log(user);
@@ -51,28 +75,13 @@ module.exports = class ReplyCommand extends Command {
             }
         }
         console.log(user);
-        var i;
-        var rowy = 0;
-        for (i = 0; i < rows.length; i++) {
-            if (rows[i].id === user) {
-                //var rownum = i;
-                rowy = 1;
-                break;
-            }
-        }
-        if (rowy === 1) {
-            rows[i].coins = parseInt(rows[i].coins) + 1;
-            await rows[i].save();
-        } else {
-            await sheet.addRow({ id: user, coins: 1 });
-        }
-        rows = await sheet.getRows();
-        //msg.reply(rows[i].id);
         if (nouser === true) {
-            return msg.reply("you now now have " + rows[i].coins + " coin(s).");
+            const coins = await this.updateCoins(user, 1)
+            return msg.reply("you now now have " + coins + " coin(s).");
         }
         else {
-            return msg.reply(mention + " now has " + rows[i].coins + " coin(s).");
+            const coins = await this.updateCoins(Number.parseInt(user), 1)
+            return msg.reply(mention + " now has " + coins + " coin(s).");
         }
 
         

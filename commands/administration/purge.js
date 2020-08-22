@@ -1,5 +1,4 @@
 const { Command } = require('discord.js-commando');
-const { GoogleSpreadsheet } = require('google-spreadsheet');
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {

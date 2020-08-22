@@ -1,5 +1,8 @@
 const { Command } = require('discord.js-commando');
-const { GoogleSpreadsheet } = require('google-spreadsheet');
+const faunadb = require('faunadb'),
+  q = faunadb.query,
+  client = new faunadb.Client({ secret: process.env.FAUNA_KEY })
+
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
@@ -20,45 +23,41 @@ module.exports = class ReplyCommand extends Command {
 			]
         });
     }
-
+    async getCoins(id) {
+        try {
+        var coins = await client.query(
+            q.Get(
+              q.Match(
+                  q.Index("coinIndex"),
+                  id
+                )
+            )
+        ) 
+        } catch (error) {
+            return false
+            console.log(error)
+        }
+        if (coins) {
+            return coins.data.coins
+        }
+        return false
+    }
     async run(msg, { user }){
-        const doc = new GoogleSpreadsheet(process.env.SHEET);
-        await doc.useServiceAccountAuth({
-            client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-            private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n'),
-          });
-        await doc.loadInfo();
-        const sheet = doc.sheetsByIndex[0];
-        var rows = await sheet.getRows();
         var msguserid = msg.author.id;
-        var i;
         //var user = user.substring("<",">");
         user = user.replace(/[\\<>@#&!]/g, "");
         user = user.replace(/\D/g,'');
-        var rowy = 0;
         if (user === "") {
-            for (i = 0; i < rows.length; i++) {
-                if (rows[i].id === msguserid) {
-                    //var rownum = i;
-                    rowy = 1;
-                    break;
-                }
-            } 
-            if (rowy === 1) {
-                return msg.reply("You have " + rows[i].coins + " coins.");
+            const coins = await this.getCoins(msguserid)
+            if (coins) {
+                return msg.reply("You have " + coins + " coins.");
             } else {
                 return msg.reply("You're broke, idiot.");
             }
         } else {
-            for (i = 0; i < rows.length; i++) {
-                if (rows[i].id === user) {
-                    //var rownum = i;
-                    rowy = 1;
-                    break;
-                }
-            }
-            if (rowy === 1) {
-                return msg.reply("They have " + rows[i].coins + " coins.");
+            const coins = await this.getCoins(Number.parseInt(user))
+            if (coins) {
+                return msg.reply("They have " + coins + " coins.");
             } else {
                 return msg.reply("They're broke, you idiot.");
             }
