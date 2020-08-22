@@ -42,5 +42,4 @@ COPY . .
 ENV PORT=80
 EXPOSE 80
 
-CMD yarn bot
-
+CMD node Bot.js
