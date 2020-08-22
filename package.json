@@ -7,7 +7,7 @@
 		"bot": "node bot"
 	},
 	"author": "SilvershotsHQ",
-	"license": "GPL-3.0",
+	"license": "MIT",
 	"dependencies": {
 		"@discordjs/opus": "^0.3.2",
 		"better-sqlite3": "^5.0.0",
