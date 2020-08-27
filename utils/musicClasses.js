@@ -10,10 +10,13 @@ module.exports.Player = class Player {
   async play() {
     try {
     let stream;
-    if (this.message.content.indexOf('youtu') !== -1){
+    if (this.message.content.indexOf('youtube.com') === -1 && this.message.content.indexOf('soundcloud.com') !== -1) {
+      
+    }
+    if (this.message.content.indexOf('youtube.com') !== -1 || this.message.content.indexOf('youtu.be') !== -1){
       stream = ytdl(this.URL, { filter: 'audioonly' });
     }
-    if (this.message.content.indexOf('soundcloud') !== -1) {
+    if (this.message.content.indexOf('soundcloud.com') !== -1) {
       const resolve = await fetch(`https://api-v2.soundcloud.com/resolve?url=${this.URL}&client_id=${process.env.SOUNDCLOUD_CLIENT_ID}`);
       const resolveResponse = await resolve.json();
       let streamApiUrl;
