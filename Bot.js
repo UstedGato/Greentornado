@@ -13,14 +13,15 @@ const oneLine = require('common-tags').oneLine;
 const sqlite = require('better-sqlite3');
 const welcomer = require('./actions/welcomeUser')
 const statusRotator = require('./rotators/status')
+let client;
 if (process.env.BOT_ENV === "prod") {
-const client = new commando.Client({
+client = new commando.Client({
   owner: ['421883193969344524', '373833473091436546'],
   commandPrefix: 'g!'
 });
 }
 else {
-const client = new commando.Client({
+client = new commando.Client({
   owner: ['421883193969344524', '373833473091436546'],
   commandPrefix: 'dg!'
 });
