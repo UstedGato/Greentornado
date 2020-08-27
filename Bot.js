@@ -1,21 +1,30 @@
 process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
+if (process.env.BOT_ENV === "prod") {
 var express = require('express');
 var app = express();app.get('/', function (req, res) {
   res.send('Hello World!');
 });app.listen(80, function () {
   console.log('App listening on port 80');
 });
+}
 const commando = require('discord.js-commando');
 const path = require('path');
 const oneLine = require('common-tags').oneLine;
 const sqlite = require('better-sqlite3');
 const welcomer = require('./actions/welcomeUser')
 const statusRotator = require('./rotators/status')
+if (process.env.BOT_ENV === "prod") {
 const client = new commando.Client({
   owner: ['421883193969344524', '373833473091436546'],
   commandPrefix: 'g!'
 });
-
+}
+else {
+const client = new commando.Client({
+  owner: ['421883193969344524', '373833473091436546'],
+  commandPrefix: 'dg!'
+});
+}
 client
   .on('error', console.error)
   .on('warn', console.warn)

@@ -39,7 +39,7 @@ RUN  apk add --no-cache --virtual .gyp \
 
 COPY . .
 
-ENV PORT=80
+ENV PORT=80 BOT_ENV=prod
 EXPOSE 80
 
 CMD node Bot.js
