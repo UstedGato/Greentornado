@@ -23,7 +23,7 @@ client = new commando.Client({
 else {
 client = new commando.Client({
   owner: ['421883193969344524', '373833473091436546'],
-  commandPrefix: 'dg!'
+  commandPrefix: 'g!'
 });
 }
 client
@@ -101,7 +101,8 @@ client.registry
     ['how_to_win_an_arguement', 'how to win an argument'],
     ['github', 'GitHub'], 
     ['osu', 'osu!'],
-    ['music', 'Music']
+    ['music', 'Music'],
+    ['setting', 'Settings']
   ])
   .registerTypesIn(path.join(__dirname, 'types'))
   .registerCommandsIn(path.join(__dirname, 'commands'));
