@@ -16,9 +16,16 @@ module.exports = class ReplyCommand extends Command {
             msg.content.lastIndexOf("\`\`\`js") + 5, 
             msg.content.lastIndexOf("\`\`\`")
         );
+        try{
         const thing = await eval(cmd)
-        await msg.channel.send(`\`\`\`js
+        return await msg.channel.send(`\`\`\`js
 ${thing}
 \`\`\``)
+        } catch(error) {
+            await msg.channel.send(`Error in \`\`eval\`\`:\`\`\`js
+${error}
+\`\`\``)
+
+    };
     }
 };
