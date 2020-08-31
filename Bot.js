@@ -23,7 +23,7 @@ client = new commando.Client({
 else {
 client = new commando.Client({
   owner: ['421883193969344524', '373833473091436546'],
-  commandPrefix: 'g!'
+  commandPrefix: 'dg!'
 });
 }
 client
