@@ -1,4 +1,8 @@
 const { Command } = require('discord.js-commando');
+function evalInContext(js, context) {
+    //# Return the results of the in-line anonymous function we .call with the passed context
+    return function() { return eval(js); }.call(context);
+}
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
@@ -17,14 +21,20 @@ module.exports = class ReplyCommand extends Command {
             msg.content.lastIndexOf("\`\`\`")
         );
         try{
-        const thing = await eval(cmd)
+        let thing = await evalInContext(cmd, this)
+        try {
+            const thingjson = JSON.stringify(this)
+            thing = thingjson
+        } catch(e) {
+            thing = thing
+        }
         return await msg.channel.send(`\`\`\`js
-${thing}
-\`\`\``)
+${thing.toString()}
+\`\`\``, {split: true})
         } catch(error) {
             await msg.channel.send(`Error in \`\`eval\`\`:\`\`\`js
 ${error}
-\`\`\``)
+\`\`\``, {split: true})
 
     };
     }
