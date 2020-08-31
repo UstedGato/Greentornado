@@ -87,6 +87,11 @@ client.setProvider(
 ).catch(console.error);
 
 client.registry
+  .registerDefaultTypes()
+  .registerDefaultGroups()
+  .registerDefaultCommands({
+    eval: false
+  })
   .registerGroups([
     ['administration', 'Administration'],
     ['math', 'Math'],
@@ -98,7 +103,6 @@ client.registry
     ['osu', 'osu!'],
     ['music', 'Music']
   ])
-  .registerDefaults()
   .registerTypesIn(path.join(__dirname, 'types'))
   .registerCommandsIn(path.join(__dirname, 'commands'));
 client.login(process.env.TOKEN);
