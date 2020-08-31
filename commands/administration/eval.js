@@ -8,6 +8,7 @@ module.exports = class ReplyCommand extends Command {
             description: 'eval (owners only)',
             examples: ['g!purge 20', 'g!purge 20 @GreenTornado']
         });
+        this.client = client
     }
 
     async run(msg) {
