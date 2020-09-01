@@ -1,5 +1,32 @@
 const { MessageAttachment } = require("discord.js");
-exports.welcomeAUser = async function (member, channel) {
+const faunadb = require('faunadb'),
+  q = faunadb.query,
+  client = new faunadb.Client({ secret: process.env.FAUNA_KEY })
+  async function getSettings(id) {
+    let settings;
+    try {
+        settings = await client.query(
+            q.Get(
+                q.Match(
+                    q.Index("guildIndex"),
+                    id
+                )
+            )
+        ) 
+        } catch (error) {
+            const settings = await client.query(
+                q.Create(
+                    q.Collection('guildSettings'),
+                    { data: { id: id, background: "https://discordjs.guide/assets/img/8CQvVRV.cced9193.png", welcomeChannel: 0 } },
+                )
+                )
+            return settings
+        }
+    return settings
+  }
+exports.welcomeAUser = async function (member) {
+  const channelid = await getSettings(member.guild.id)
+  const channel = await member.guild.channels.cache.find(ch => ch.id === channelid.data.welcomeChannel);
   // Send the message, mentioning the member
   const Canvas = require('canvas');
   const canvas = Canvas.createCanvas(700, 250);
