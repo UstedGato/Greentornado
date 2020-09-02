@@ -30,11 +30,11 @@ module.exports = class ReplyCommand extends Command {
         }
         return await msg.channel.send(`\`\`\`js
 ${thing.toString()}
-\`\`\``, {split: true})
+\`\`\``)
         } catch(error) {
             await msg.channel.send(`Error in \`\`eval\`\`:\`\`\`js
 ${error}
-\`\`\``, {split: true})
+\`\`\``)
 
     };
     }

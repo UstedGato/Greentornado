@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const faunadb = require('faunadb'),
   q = faunadb.query,
-  client = new faunadb.Client({ secret: process.env.FAUNA_KEY })
+  fauna = new faunadb.Client({ secret: process.env.FAUNA_KEY })
 
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
@@ -25,7 +25,7 @@ module.exports = class ReplyCommand extends Command {
     }
     async getCoins(id) {
         try {
-        var coins = await client.query(
+        var coins = await fauna.query(
             q.Get(
               q.Match(
                   q.Index("coinIndex"),

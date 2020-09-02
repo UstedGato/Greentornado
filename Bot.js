@@ -1,4 +1,7 @@
 process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
+const faunadb = require('faunadb'),
+  q = faunadb.query,
+  fclient = new faunadb.Client({ secret: process.env.FAUNA_KEY })
 if (process.env.BOT_ENV === "prod") {
 var express = require('express');
 var app = express();app.get('/', function (req, res) {
@@ -67,13 +70,7 @@ client
 		`);
   })
   .on('guildMemberAdd', member => {
-    // Send the message to a designated channel on a server:
-    var channel = member.guild.channels.cache.find(ch => ch.name === 'bot-spam');
-    // Do nothing if the channel wasn't found on this server
-    if (!channel) {
-      var channel = member.guild.channels.cache.find(ch => ch.name.includes('welcome'));
-    }
-    welcomer.welcomeAUser(member, channel);
+    welcomer.welcomeAUser(member);
   })
   .on('message', message => {
     if (message.content === '!join') {
@@ -101,7 +98,8 @@ client.registry
     ['how_to_win_an_arguement', 'how to win an argument'],
     ['github', 'GitHub'], 
     ['osu', 'osu!'],
-    ['music', 'Music']
+    ['music', 'Music'],
+    ['settings', 'Settings']
   ])
   .registerTypesIn(path.join(__dirname, 'types'))
   .registerCommandsIn(path.join(__dirname, 'commands'));
