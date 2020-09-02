@@ -20,6 +20,9 @@ RUN  apk add --no-cache --virtual .gyp \
         pangomm-dev \
         libjpeg-turbo-dev \
         freetype-dev \
+        libtool \
+        autoconf \
+        automake \
     && apk --no-cache add \
         pixman \
         cairo \
