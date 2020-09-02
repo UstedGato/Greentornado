@@ -86,9 +86,7 @@ client.setProvider(
 client.registry
   .registerDefaultTypes()
   .registerDefaultGroups()
-  .registerDefaultCommands({
-    eval: false
-  })
+  .registerDefaultCommands()
   .registerGroups([
     ['administration', 'Administration'],
     ['math', 'Math'],
