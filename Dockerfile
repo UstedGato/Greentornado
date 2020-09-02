@@ -21,7 +21,7 @@ RUN  apk add --no-cache --virtual .gyp \
         libjpeg-turbo-dev \
         freetype-dev \
         libtool \
-        libsodium \
+        autoconf \
     && apk --no-cache add \
         pixman \
         cairo \
