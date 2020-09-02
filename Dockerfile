@@ -22,6 +22,7 @@ RUN  apk add --no-cache --virtual .gyp \
         freetype-dev \
         libtool \
         autoconf \
+        automake \
     && apk --no-cache add \
         pixman \
         cairo \
