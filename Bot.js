@@ -73,7 +73,7 @@ client
     welcomer.welcomeAUser(member);
   })
   .on('message', message => {
-    if (message.content === '!join') {
+    if (message.content === 'debug!join') {
       if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You need to be an admin to use this command.");
       client.emit('guildMemberAdd', message.member);
     }
