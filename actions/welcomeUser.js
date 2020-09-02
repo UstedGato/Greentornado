@@ -19,17 +19,16 @@ const faunadb = require('faunadb'),
     return settings
   }
 exports.welcomeAUser = async function (member) {
-  const settings = getSettings(member.guild.id)
+  const settings = await getSettings(member.guild.id)
   if (!settings) return false
-  const channelid = await getSettings(member.guild.id)
-  const channel = await member.guild.channels.cache.find(ch => ch.id === channelid.data.welcomeChannel);
+  const channel = await member.guild.channels.cache.find(ch => ch.id === settings.data.welcomeChannel);
   // Send the message, mentioning the member
   const Canvas = require('canvas');
   const canvas = Canvas.createCanvas(700, 250);
   const ctx = canvas.getContext('2d');
   
   // Since the image takes time to load, you should await it
-  const background = await Canvas.loadImage(`https://proxy.duckduckgo.com/iu/?u=${settings.background}`);
+  const background = await Canvas.loadImage(`https://proxy.duckduckgo.com/iu/?u=${settings.data.background}`);
   // This uses the canvas dimensions to stretch the image onto the entire canvas
   ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
       
@@ -53,6 +52,6 @@ exports.welcomeAUser = async function (member) {
   ctx.drawImage(avatar, canvas.width / 2.6, canvas.height / 20, 150, 150);
   const attachment = new MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
   console.log(member.id + "and" + member.user.avatar);
-  await settings.welcomeChannel.send({ files: [ attachment ]});
+  await channel.send({ files: [ attachment ]});
   return true
 }; 
