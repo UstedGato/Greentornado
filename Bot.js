@@ -20,8 +20,7 @@ let client;
 if (process.env.BOT_ENV === "prod") {
 client = new commando.Client({
   owner: ['421883193969344524', '373833473091436546'],
-  commandPrefix: 'g!',
-  fauna: fclient
+  commandPrefix: 'g!'
 });
 }
 else {
