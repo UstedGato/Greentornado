@@ -2,3 +2,7 @@
 /googlekey.txt
 /database.sqlite3
 /test.png
+.pnp.js
+.yarnrc.yml
+.yarn
+yarn-error.log
