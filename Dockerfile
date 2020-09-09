@@ -38,7 +38,8 @@ RUN  apk add --no-cache --virtual .gyp \
        neofetch \
        --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
     && yarn set version berry \
-    && yarn install --production \
+    && yarn plugin import workspace-tools \
+    && yarn workspaces focus --all --production \
     && apk del .gyp
 
 COPY . .
