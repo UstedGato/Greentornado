@@ -39,7 +39,7 @@ RUN  apk add --no-cache --virtual .gyp \
        --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
     && yarn set version berry \
     && yarn plugin import workspace-tools \
-    && yarn workspaces focus --all --production \
+    && yarn workspaces focus --all --production --verbose \
     && apk del .gyp
 
 COPY . .
