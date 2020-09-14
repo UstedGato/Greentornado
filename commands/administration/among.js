@@ -29,6 +29,7 @@ module.exports = class ReplyCommand extends Command {
 
     async run(msg, { amount, user }) {
         if (yes === false) {
+            yes = true
             await client.login(process.env.BRIDGE_TOKEN)
             const guildthroughotherclient = await client.guilds.fetch(msg.guild.id)
             const alivechannel = await msg.guild.channels.cache.get(process.env.ALIVE_AMONG_CHANNEL)
@@ -65,13 +66,13 @@ module.exports = class ReplyCommand extends Command {
             mixer.pipe(connection)
             deadchannel.play(connection)
         } else {
+            yes= false
             await aliveconnection.disconnect()
             await deadconnection.disconnect()
             await client.destroy()
             users = []
             inputs = []
             mixer = null
-            yes = true;
         }
     }
 };
