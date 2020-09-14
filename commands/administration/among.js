@@ -68,9 +68,7 @@ module.exports = class ReplyCommand extends Command {
                 });
               }
             });
-            mixer.pipe(stream => {
-                deadconnection.play(stream);
-              });
+            deadconnection.play(mixer);
         } else {
             yes= false
             await aliveconnection.disconnect()
