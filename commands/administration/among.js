@@ -2,6 +2,9 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const AudioMixer = require('audio-mixer');
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }  
 let yes = false;
 let deadconnection;
 let aliveconnection;
@@ -31,6 +34,7 @@ module.exports = class ReplyCommand extends Command {
         if (yes === false) {
             yes = true
             await client.login(process.env.BRIDGE_TOKEN)
+            await sleep(5000);
             const guildthroughotherclient = await client.guilds.fetch(msg.guild.id)
             const alivechannel = await msg.guild.channels.cache.get(process.env.ALIVE_AMONG_CHANNEL)
             const deadchannel = await guildthroughotherclient.channels.cache.get(process.env.DEAD_AMONG_CHANNEL)
@@ -61,7 +65,7 @@ module.exports = class ReplyCommand extends Command {
 
               }
             });
-            let connection = new ReadableStream
+            let connection;
             mixer.pipe(connection)
             deadchannel.play(connection)
         } else {
