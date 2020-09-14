@@ -14,7 +14,6 @@ let inputs = [];
 client
 .on('error', console.error)
 .on('warn', console.warn)
-.on('debug', console.log)
 .on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
