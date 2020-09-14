@@ -55,20 +55,19 @@ module.exports = class ReplyCommand extends Command {
               if (speaking) {
                 console.log(`I'm listening to ${user}`);
                 // this creates a 16-bit signed PCM, stereo 48KHz PCM stream.
-                let userstream;
-                users[user.id] = userstream = await aliveconnection.receiver.createStream(user, {mode: 'pcm'});
+                users[user.id] = await aliveconnection.receiver.createStream(user, {mode: 'pcm'});
                 inputs[user.id] = mixer.input({
                     channels: 1,
                     volume: 100
                 });
-                userstream.pipe(inputs[user.id]);
+                users[user.id].pipe(inputs[user.id]);
                 // when the stream ends (the user stopped talking) tell the user
-                userstream.on('end', () => {
+                users[user.id].on('end', () => {
                     mixer.removeInput(inputs[user.id])
                 });
               }
             });
-            let connection;
+            let connection = new WritableStream();
             mixer.pipe(connection)
             deadchannel.play(connection)
         } else {
