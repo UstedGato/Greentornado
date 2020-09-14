@@ -67,7 +67,7 @@ module.exports = class ReplyCommand extends Command {
                 });
               }
             });
-            deadchannel.play(mixer)
+            deadconnection.play(mixer)
         } else {
             yes= false
             await aliveconnection.disconnect()
