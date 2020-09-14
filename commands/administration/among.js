@@ -51,6 +51,7 @@ module.exports = class ReplyCommand extends Command {
                 clearInterval: 250
             });
             aliveconnection.on('speaking', async (user, speaking) => {
+                console.log(speaking)
               if (speaking) {
                 console.log(`I'm listening to ${user}`);
                 // this creates a 16-bit signed PCM, stereo 48KHz PCM stream.
