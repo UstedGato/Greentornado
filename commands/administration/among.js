@@ -55,7 +55,8 @@ module.exports = class ReplyCommand extends Command {
               if (speaking) {
                 console.log(`I'm listening to ${user}`);
                 // this creates a 16-bit signed PCM, stereo 48KHz PCM stream.
-                users[user.id], userstream = await aliveconnection.receiver.createStream(user, {mode: 'pcm'});
+                let userstream;
+                users[user.id] = userstream = await aliveconnection.receiver.createStream(user, {mode: 'pcm'});
                 inputs[user.id] = mixer.input({
                     channels: 1,
                     volume: 100
