@@ -70,6 +70,7 @@ module.exports = class ReplyCommand extends Command {
             users = []
             inputs = []
             mixer = null
+            yes = true;
         }
     }
 };
