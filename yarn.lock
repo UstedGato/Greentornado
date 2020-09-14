@@ -414,7 +414,7 @@ discord.js-commando@discordjs/Commando#master:
     common-tags "^1.8.0"
     require-all "^3.0.0"
 
-discord.js@^12.0.0:
+discord.js@^12.3.0:
   version "12.3.1"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-12.3.1.tgz#8f58ac17d29b068dbfeb6c01fc7777bacd5324cf"
   integrity sha512-mSFyV/mbvzH12UXdS4zadmeUf8IMQOo/YdunubG1wWt1xjWvtaJz/s9CGsFD2B5pTw1W/LXxxUbrQjIZ/xlUdw==
