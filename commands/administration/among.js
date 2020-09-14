@@ -54,7 +54,7 @@ module.exports = class ReplyCommand extends Command {
             await aliveconnection.play('./join.mp3');
             aliveconnection.on('speaking', async (user, speaking) => {
                 console.log(speaking)
-              if (speaking) {
+              if (speaking.bitfield === 1) {
                 console.log(`I'm listening to ${user}`);
                 // this creates a 16-bit signed PCM, stereo 48KHz PCM stream.
                 users[user.id] = await aliveconnection.receiver.createStream(user, {mode: 'pcm'});
