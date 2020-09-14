@@ -36,7 +36,7 @@ module.exports = class ReplyCommand extends Command {
             console.log(deadchannel, alivechannel)
             deadconnection = await deadchannel.join()
             aliveconnection = await alivechannel.join()
-            const receiver = aliveconnection.createReceiver();
+            const receiver = aliveconnection.receiver.createReceiver();
             mixer = new AudioMixer.Mixer({
                 channels: 1,
                 bitDepth: 16,
