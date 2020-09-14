@@ -37,7 +37,6 @@ module.exports = class ReplyCommand extends Command {
             console.log(deadchannel, alivechannel)
             deadconnection = await deadchannel.join()
             aliveconnection = await alivechannel.join()
-            const receiver = aliveconnection.receiver.createReceiver();
             mixer = new AudioMixer.Mixer({
                 channels: 1,
                 bitDepth: 16,
@@ -48,7 +47,7 @@ module.exports = class ReplyCommand extends Command {
               if (speaking) {
                 console.log(`I'm listening to ${user}`);
                 // this creates a 16-bit signed PCM, stereo 48KHz PCM stream.
-                users[user.id] = await receiver.createPCMStream(user);
+                users[user.id] = await aliveconnection.receiver.createStream(user, {mode: 'pcm'});
                 inputs[user.id] = mixer.input({
                     channels: 1,
                     volume: 100
