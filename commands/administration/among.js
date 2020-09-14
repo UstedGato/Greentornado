@@ -29,10 +29,10 @@ module.exports = class ReplyCommand extends Command {
 
     async run(msg, { amount, user }) {
         if (yes === false) {
-            client.login(process.env.BRIDGE_TOKEN)
+            await client.login(process.env.BRIDGE_TOKEN)
             const guildthroughotherclient = await client.guilds.resolveID(msg.guild.id)
-            const alivechannel = msg.guild.channels.resolveID(process.env.ALIVE_AMONG_CHANNEL)
-            const deadchannel = guildthroughotherclient.channels.resolveID(process.env.DEAD_AMONG_CHANNEL)
+            const alivechannel = await msg.guild.channels.resolveID(process.env.ALIVE_AMONG_CHANNEL)
+            const deadchannel = await guildthroughotherclient.channels.resolveID(process.env.DEAD_AMONG_CHANNEL)
             deadconnection = await deadchannel.join()
             aliveconnection = await alivechannel.join()
             const receiver = aliveconnection.createReceiver();
@@ -46,7 +46,7 @@ module.exports = class ReplyCommand extends Command {
               if (speaking) {
                 console.log(`I'm listening to ${user}`);
                 // this creates a 16-bit signed PCM, stereo 48KHz PCM stream.
-                users[user.id] = receiver.createPCMStream(user);
+                users[user.id] = await receiver.createPCMStream(user);
                 inputs[user.id] = mixer.input({
                     channels: 1,
                     volume: 100
@@ -64,9 +64,9 @@ module.exports = class ReplyCommand extends Command {
             mixer.pipe(connection)
             deadchannel.play(connection)
         } else {
-            aliveconnection.disconnect()
-            deadconnection.disconnect()
-            client.destroy()
+            await aliveconnection.disconnect()
+            await deadconnection.disconnect()
+            await client.destroy()
             users = []
             inputs = []
             mixer = null
