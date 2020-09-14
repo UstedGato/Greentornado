@@ -51,7 +51,7 @@ module.exports = class ReplyCommand extends Command {
                 clearInterval: 250
             });
             await sleep(5000)
-            await aliveconnection.play('../../join.mp3', { passes: 5 });
+            await aliveconnection.play('./join.mp3');
             aliveconnection.on('speaking', async (user, speaking) => {
                 console.log(speaking)
               if (speaking) {
