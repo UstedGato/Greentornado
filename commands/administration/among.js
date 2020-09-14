@@ -31,8 +31,9 @@ module.exports = class ReplyCommand extends Command {
         if (yes === false) {
             await client.login(process.env.BRIDGE_TOKEN)
             const guildthroughotherclient = await client.guilds.fetch(msg.guild.id)
-            const alivechannel = await msg.guild.channels.cache.find(ch => ch.id === process.env.ALIVE_AMONG_CHANNEL)
-            const deadchannel = await guildthroughotherclient.channels.cache.find(ch => ch.id === process.env.DEAD_AMONG_CHANNEL)
+            const alivechannel = await msg.guild.channels.cache.get(process.env.ALIVE_AMONG_CHANNEL)
+            const deadchannel = await guildthroughotherclient.channels.cache.get(process.env.DEAD_AMONG_CHANNEL)
+            console.log(deadchannel, alivechannel)
             deadconnection = await deadchannel.join()
             aliveconnection = await alivechannel.join()
             const receiver = aliveconnection.createReceiver();
