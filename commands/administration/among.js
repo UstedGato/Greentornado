@@ -67,9 +67,7 @@ module.exports = class ReplyCommand extends Command {
                 });
               }
             });
-            let connection = new WritableStream();
-            mixer.pipe(connection)
-            deadchannel.play(connection)
+            deadchannel.play(mixer)
         } else {
             yes= false
             await aliveconnection.disconnect()
