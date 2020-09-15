@@ -70,6 +70,9 @@ module.exports = class ReplyCommand extends Command {
               }
             });
             console.log(mixer)
+            mixer.on('data', (chunk) => {
+                console.log(chunk)
+            })
             deadconnection.play(mixer, {type: 'converted'})
             .on('error', console.error)
             .on('warn', console.warn)
