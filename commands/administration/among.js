@@ -70,7 +70,6 @@ module.exports = class ReplyCommand extends Command {
               }
             });
             console.log(mixer)
-            mixer.pipe(console.log)
             deadconnection.play(mixer);
         } else {
             yes= false
