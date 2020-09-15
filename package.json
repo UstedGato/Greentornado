@@ -10,6 +10,7 @@
 	"license": "GPL-3.0",
 	"dependencies": {
 		"@discordjs/opus": "^0.3.2",
+		"audio-mixer": "^2.1.4",
 		"better-sqlite3": "^5.0.0",
 		"bufferutil": "^4.0.1",
 		"canvas": "^2.6.1",
@@ -20,7 +21,6 @@
 		"faunadb": "^3.0.1",
 		"ffmpeg-static": "^4.2.7",
 		"is-url": "^1.2.4",
-		"audio-mixer": "^2.1.4",
 		"nodesu": "^0.7.2",
 		"request": "^2.88.2",
 		"sodium": "^3.0.2",
