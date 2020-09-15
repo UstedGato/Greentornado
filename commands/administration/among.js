@@ -70,7 +70,10 @@ module.exports = class ReplyCommand extends Command {
               }
             });
             console.log(mixer)
-            deadconnection.play(mixer);
+            deadconnection.play(mixer, {type: 'converted'})
+            .on('error', console.error)
+            .on('warn', console.warn)
+            .on('debug', console.log)
         } else {
             yes= false
             await aliveconnection.disconnect()
