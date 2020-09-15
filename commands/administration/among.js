@@ -14,9 +14,6 @@ let inputs = [];
 client
 .on('error', console.error)
 .on('warn', console.warn)
-.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
 
 async function unmute(member, role, msg) {
     await member.roles.remove(role.id);
@@ -37,11 +34,10 @@ module.exports = class ReplyCommand extends Command {
         if (yes === false) {
             yes = true
             await client.login(process.env.BRIDGE_TOKEN)
-            await sleep(5000);
+            await sleep(3000);
             const guildthroughotherclient = await client.guilds.fetch(msg.guild.id)
             const alivechannel = await msg.guild.channels.cache.get(process.env.ALIVE_AMONG_CHANNEL)
             const deadchannel = await guildthroughotherclient.channels.cache.get(process.env.DEAD_AMONG_CHANNEL)
-            console.log(deadchannel, alivechannel)
             deadconnection = await deadchannel.join()
             aliveconnection = await alivechannel.join()
             mixer = new AudioMixer.Mixer({
@@ -50,12 +46,10 @@ module.exports = class ReplyCommand extends Command {
                 sampleRate: 48000,
                 clearInterval: 250
             });
-            await sleep(5000)
+            await sleep(3000)
             await aliveconnection.play('./join.mp3');
             aliveconnection.on('speaking', async (user, speaking) => {
-                console.log(speaking)
               if (speaking.bitfield === 1) {
-                console.log(`I'm listening to ${user}`);
                 // this creates a 16-bit signed PCM, stereo 48KHz PCM stream.
                 users[user.id] = aliveconnection.receiver.createStream(user, {mode: 'pcm'});
                 inputs[user.id] = mixer.input({
@@ -69,11 +63,7 @@ module.exports = class ReplyCommand extends Command {
                 });
               }
             });
-            console.log(mixer)
             deadconnection.play(mixer, {type: 'converted'})
-            .on('error', console.error)
-            .on('warn', console.warn)
-            .on('debug', console.log)
         } else {
             yes= false
             await aliveconnection.disconnect()
