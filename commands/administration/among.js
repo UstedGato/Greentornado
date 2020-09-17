@@ -24,7 +24,7 @@ module.exports = class ReplyCommand extends Command {
             name: 'among',
             group: 'administration',
             memberName: 'amongus',
-            description: 'Mute a user(in minutes).',
+            description: 'Bridge the 2 among us channels.',
             examples: ['g!among'],
             userPermissions: ['ADMINISTRATOR']
         });
