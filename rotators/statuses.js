@@ -13,7 +13,8 @@ const statuses = [
     { activity: { name: 'with fire', type: "PLAYING"}},
     { activity: { name: 'AHHHHHHHHHHHHHHHH', type: "LISTENING"}},
     { activity: { name: 'shaggys revenge', type: "PLAYING"}},
-    { activity: { name: 'despacito (minecraft cover)', type: "LISTENING"}}
+    { activity: { name: 'despacito (minecraft cover)', type: "LISTENING"}},
+    { activity: { name: 'to Elias Alafifi Sucks', type: "LISTENING"}}
 ]
 
 
