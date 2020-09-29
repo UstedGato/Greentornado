@@ -6,6 +6,7 @@ class SettingsMenu {
         this.fauna = fauna
         this.client = client
         this.pages = getPages()
+        this.settingId = 0
         }
     async init() {
         this.message = await this.triggerMessage.channel.send('<a:botloader:750419652256989331>')
@@ -24,6 +25,15 @@ class SettingsMenu {
           this.collector.on('end', collected => console.log(`Collected ${collected.size} items`));
           this.currentSetting = new this.pages[0](this)
           await this.currentSetting.init()
+    }
+    async changePage (forward) {
+        await this.currentSetting.destroy()
+        forward ? this.settingId++ : this.settingId--
+        if (this.settingId < 0) {
+            this.settingId = 1
+        }
+        this.currentSetting = new this.pages[this.settingId](this)
+        await this.currentSetting.init()
     }
     async stop() {
         await this.currentSetting.destroy()

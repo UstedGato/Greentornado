@@ -9,6 +9,7 @@ module.exports = class ReplyCommand extends commando.Command {
       aliases: ['play youtube.com/url'],
       group: 'music',
       memberName: 'play',
+      hidden: true, //i need to fix it y e s
       description: 'Music player.',
                   args: [
 				{

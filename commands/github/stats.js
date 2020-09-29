@@ -8,6 +8,8 @@ module.exports = class ReplyCommand extends Command {
             description: 'Get GitHub stats (broken)',
             examples: ['repeat'],
             userPermissions: ['MANAGE_MESSAGES'],
+            ownerOnly: true,
+            hidden: true
             // args: [
 			// 	{
 			// 		key: 'user',

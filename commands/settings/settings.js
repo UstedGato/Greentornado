@@ -6,11 +6,11 @@ const faunadb = require('faunadb'),
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'guildsettings',
+            name: 'settings',
             group: 'settings',
-            memberName: 'guildsettings',
+            memberName: 'settings',
             description: 'opens guild settings.',
-            examples: ['g!guildsettings'],
+            examples: ['g!settings'],
             userPermissions: ['ADMINISTRATOR'],
         });
     }

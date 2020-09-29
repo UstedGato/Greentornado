@@ -14,6 +14,8 @@ module.exports = class AddNumbersCommand extends commando.Command {
 				This command is the envy of all other commands.
 			`,
       examples: ['add-numbers 42 1337'],
+      ownerOnly: true,
+      hidden: true,
 
       args: [
         {

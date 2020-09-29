@@ -15,9 +15,6 @@ client
 .on('error', console.error)
 .on('warn', console.warn)
 
-async function unmute(member, role, msg) {
-    await member.roles.remove(role.id);
-}
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
@@ -26,7 +23,8 @@ module.exports = class ReplyCommand extends Command {
             memberName: 'amongus',
             description: 'Mute a user(in minutes).',
             examples: ['g!among'],
-            userPermissions: ['ADMINISTRATOR']
+            ownerOnly: true,
+            hidden: true
         });
     }
 

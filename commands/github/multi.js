@@ -13,7 +13,8 @@ module.exports = class ReplyCommand extends Command {
             memberName: 'multi',
             description: 'Admin-only test command.',
             examples: ['g!multi'],
-            userPermissions: ['ADMINISTRATOR']
+            ownerOnly: true,
+            hidden: true
         });
     }
     async run(msg, { user }){
