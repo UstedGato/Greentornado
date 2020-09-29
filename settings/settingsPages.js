@@ -1,6 +1,6 @@
 const GuildSettings = require('./guild')
 const pages = []
-pages.push(GuildSettingsHelper)
+pages.push(GuildSettings)
 
 module.exports = {
     getPages: function() {

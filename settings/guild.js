@@ -104,7 +104,7 @@ module.exports = class GuildSettings {
     "fields": [
       {
         "name": "#⃣ - Welcome channel:",
-        "value": `${channel}`
+        "value": `${channel || "None"}`
       },
       {
         "name": "🌃 - Welcome background:",
