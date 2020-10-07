@@ -9,13 +9,13 @@ module.exports = (app, client) => {
 <rect width="1024" height="447" fill="url(#paint0_linear)"/>
 <rect width="1024" height="447" fill="#436E76"/>
 <rect width="1024" height="447" fill="url(#paint1_linear)"/>
-<text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="62" font-weight="bold" letter-spacing="0em"><tspan x="353" y="215.056">${presence[0].name}</tspan></text>
-<text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" letter-spacing="0em"><tspan x="353" y="289.124">${presence[0].details}</tspan></text>
-<text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="40" y="82.124">Playing</tspan></text>
+<text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="62" font-weight="bold" letter-spacing="0em"><tspan x="353" y="215.056">${presence[0] ? presence[0].name : ''}</tspan></text>
+<text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" letter-spacing="0em"><tspan x="353" y="289.124">${presence[0] ? presence[0].details : ''}</tspan></text>
+<text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="40" y="82.124">${presence[0] ? 'Playing' : 'Playing nothing'}</tspan></text>
 <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="40" y="140" width="270" height="265">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M80 405C57.9086 405 40 387.091 40 365V180C40 157.909 57.9086 140 80 140H270C292.091 140 310 157.909 310 180V329.258C301.581 324.023 291.643 321 281 321C250.624 321 226 345.624 226 376C226 386.643 229.023 396.581 234.258 405H80Z" fill="#FFC200"/>
-</mask>
-<g mask="url(#mask0)">
+</mask>` +
+(presence[0] ? `<g mask="url(#mask0)">
 <rect x="40" y="140" width="270" height="265" fill="url(#pattern0)"/>
 </g>
 <mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="237" y="332" width="88" height="88">
@@ -23,8 +23,8 @@ module.exports = (app, client) => {
 </mask>
 <g mask="url(#mask1)">
 <rect x="237" y="332" width="88" height="88" fill="url(#pattern1)"/>
-</g>
-<defs>
+</g>` : '') +
+`<defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0" transform="translate(0 -0.00943396) scale(0.0078125 0.00795991)"/>
 </pattern>
@@ -39,8 +39,8 @@ module.exports = (app, client) => {
 <stop stop-color="#355960"/>
 <stop offset="1" stop-color="white" stop-opacity="0"/>
 </linearGradient>
-<image id="image0" width="128" height="128" xlink:href="${presence[0]?.assets?.largeImageURL()}"/>
-<image id="image1" width="128" height="128" xlink:href="${presence[0]?.assets?.smallImageURL()}"/>
+<image id="image0" width="128" height="128" xlink:href="${presence[0] ? presence[0]?.assets?.largeImageURL() : ''}"/>
+<image id="image1" width="128" height="128" xlink:href="${presence[0] ? presence[0]?.assets?.smallImageURL() : ''}"/>
 </defs>
 </svg>
         `
