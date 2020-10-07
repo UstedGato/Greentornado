@@ -1,4 +1,4 @@
-const fetch = require('fetch-base64');
+const fetch = require('fetch-base64').remote;
 module.exports = (app, client) => {
     app.get('/api/badge/:id', async (req, res) => {
         let data;
@@ -9,15 +9,9 @@ module.exports = (app, client) => {
             return
         }
         const presence = data.presence.activities.filter((a) => a.type != 'CUSTOM_STATUS' & typeof a.details !== typeof null)
-// soon tm <text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">00:24 elapsed</tspan></text>
-        let largeData;
-        let smallData;        
-        if (presence[0] && presence[0].assets) {
-        const largeImageRes = await fetch.remote(presence[0]?.assets?.largeImageURL())
-        largeData = largeImageRes[1]
-        const smallImageRes = await fetch.remote(presence[0]?.assets?.smallImageURL())
-        smallData =smallImageRes[1]
-        }
+// soon tm <text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">00:24 elapsed</tspan></text>     
+        const largeData = presence[0]?.assets?.largeImage ? await fetch(presence[0]?.assets?.largeImageURL())[1] : undefined
+        const smallData = presence[0]?.assets?.smallImage ? await fetch(presence[0]?.assets?.smallImageURL())[1] : undefined
         const svg = `
 <svg width="495" height="240" viewBox="0 0 1024 495" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="1024" height="447" fill="#E5E5E5"/>
@@ -30,7 +24,7 @@ module.exports = (app, client) => {
 <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="40" y="140" width="270" height="265">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M80 405C57.9086 405 40 387.091 40 365V180C40 157.909 57.9086 140 80 140H270C292.091 140 310 157.909 310 180V329.258C301.581 324.023 291.643 321 281 321C250.624 321 226 345.624 226 376C226 386.643 229.023 396.581 234.258 405H80Z" fill="#FFC200"/>
 </mask>` +
-(presence[0].assets.largeImage ? `<g mask="url(#mask0)">
+(presence[0]?.assets?.largeImage ? `<g mask="url(#mask0)">
 <rect x="40" y="140" width="270" height="265" fill="url(#pattern0)"/>
 </g>` +
 (presence[0]?.assets?.smallImage ? `<mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="237" y="332" width="88" height="88">
@@ -54,8 +48,8 @@ module.exports = (app, client) => {
 <stop stop-color="#355960"/>
 <stop offset="1" stop-color="white" stop-opacity="0"/>
 </linearGradient>
-<image id="image0" width="128" height="128" xlink:href="${presence[0] ? largeData : ''}"/>
-<image id="image1" width="128" height="128" xlink:href="${presence[0] ? smallData : ''}"/>
+<image id="image0" width="128" height="128" xlink:href="${presence[0]?.assets ? largeData : ''}"/>
+<image id="image1" width="128" height="128" xlink:href="${presence[0]?.assets ? smallData : ''}"/>
 </defs>
 </svg>
         `
