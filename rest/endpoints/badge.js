@@ -10,8 +10,8 @@ module.exports = (app, client) => {
         }
         const presence = data.presence.activities.filter((a) => a.type != 'CUSTOM_STATUS' & typeof a.details !== typeof null)
 // soon tm <text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">00:24 elapsed</tspan></text>     
-        const largeData = presence[0]?.assets?.largeImage ? await fetch(presence[0]?.assets?.largeImageURL())[1] : undefined
-        const smallData = presence[0]?.assets?.smallImage ? await fetch(presence[0]?.assets?.smallImageURL())[1] : undefined
+        const largeData = presence[0]?.assets.largeImage ? await fetch(presence[0]?.assets?.largeImageURL()) : undefined
+        const smallData = presence[0]?.assets.smallImage ? await fetch(presence[0]?.assets?.smallImageURL()) : undefined
         const svg = `
 <svg width="495" height="240" viewBox="0 0 1024 495" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="1024" height="447" fill="#E5E5E5"/>
@@ -48,8 +48,8 @@ module.exports = (app, client) => {
 <stop stop-color="#355960"/>
 <stop offset="1" stop-color="white" stop-opacity="0"/>
 </linearGradient>
-<image id="image0" width="128" height="128" xlink:href="${presence[0]?.assets ? largeData : ''}"/>
-<image id="image1" width="128" height="128" xlink:href="${presence[0]?.assets ? smallData : ''}"/>
+<image id="image0" width="128" height="128" href="${presence[0]?.assets ? largeData[1] : ''}"/>
+<image id="image1" width="128" height="128" href="${presence[0]?.assets ? smallData[1] : ''}"/>
 </defs>
 </svg>
         `
