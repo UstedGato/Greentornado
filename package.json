@@ -19,6 +19,7 @@
 		"erlpack": "discord/erlpack",
 		"express": "^4.17.1",
 		"faunadb": "^3.0.1",
+		"fetch-base64": "^2.1.2",
 		"ffmpeg-static": "^4.2.7",
 		"is-url": "^1.2.4",
 		"nodesu": "^0.7.2",
