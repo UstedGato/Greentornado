@@ -22,6 +22,7 @@
 		"ffmpeg-static": "^4.2.7",
 		"is-url": "^1.2.4",
 		"nodesu": "^0.7.2",
+		"pm2": "^4.5.0",
 		"request": "^2.88.2",
 		"sodium": "^3.0.2",
 		"utf-8-validate": "^5.0.2",

@@ -1,15 +1,4 @@
 process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
-const faunadb = require('faunadb'),
-  q = faunadb.query,
-  fclient = new faunadb.Client({ secret: process.env.FAUNA_KEY })
-if (process.env.BOT_ENV === "prod") {
-var express = require('express');
-var app = express();app.get('/', function (req, res) {
-  res.send('Hello World!');
-});app.listen(80, function () {
-  console.log('App listening on port 80');
-});
-}
 const commando = require('discord.js-commando');
 const path = require('path');
 const oneLine = require('common-tags').oneLine;
@@ -35,6 +24,15 @@ client
   .on('ready', () => {
     console.log(`Client ready; logged in as ${client.user.username}#${client.user.discriminator} (${client.user.id})`);
     statusRotator.startRotation(client);
+    // start the REST api
+    const app = require('express')();
+    require('./rest')(app, client)
+    app.get('/', function (req, res) {
+      res.send('GreenTornado REST API v1');
+    });
+    app.listen(process.env.BOT_ENV === "prod" ? 80 : 8080, function () {
+      console.log('App listening on port 80');
+    });
   })
   .on('disconnect', () => { console.warn('Disconnected!'); })
   .on('reconnecting', () => { console.warn('Reconnecting...'); })
