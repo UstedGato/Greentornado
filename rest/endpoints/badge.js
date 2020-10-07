@@ -30,15 +30,15 @@ module.exports = (app, client) => {
 <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="40" y="140" width="270" height="265">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M80 405C57.9086 405 40 387.091 40 365V180C40 157.909 57.9086 140 80 140H270C292.091 140 310 157.909 310 180V329.258C301.581 324.023 291.643 321 281 321C250.624 321 226 345.624 226 376C226 386.643 229.023 396.581 234.258 405H80Z" fill="#FFC200"/>
 </mask>` +
-(presence[0] ? `<g mask="url(#mask0)">
+(presence[0].assets.largeImage ? `<g mask="url(#mask0)">
 <rect x="40" y="140" width="270" height="265" fill="url(#pattern0)"/>
-</g>
-<mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="237" y="332" width="88" height="88">
+</g>` +
+(presence[0]?.assets?.smallImage ? `<mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="237" y="332" width="88" height="88">
 <circle cx="281" cy="376" r="44" fill="black"/>
 </mask>
 <g mask="url(#mask1)">
 <rect x="237" y="332" width="88" height="88" fill="url(#pattern1)"/>
-</g>` : '') +
+</g>` : '' ) : '') +
 `<defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0" transform="translate(0 -0.00943396) scale(0.0078125 0.00795991)"/>
