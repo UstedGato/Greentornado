@@ -4,7 +4,7 @@ module.exports = (app, client) => {
         const presence = data.presence.activities.filter((a) => a.type != 'CUSTOM_STATUS' & typeof a.details !== typeof null)
 // soon tm <text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">00:24 elapsed</tspan></text>
         const svg = `
-<svg width="1024" height="447" viewBox="0 0 1024 447" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="495" heigh495 viewBox="0 0 1024 447" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="1024" height="447" fill="#E5E5E5"/>
 <rect width="1024" height="447" fill="url(#paint0_linear)"/>
 <rect width="1024" height="447" fill="#436E76"/>
