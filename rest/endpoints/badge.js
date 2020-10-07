@@ -1,7 +1,13 @@
 const fetch = require('fetch-base64');
 module.exports = (app, client) => {
     app.get('/api/badge/:id', async (req, res) => {
-        const data = await client.users.fetch(req.params.id)
+        let data;
+        try {
+        data = await client.users.fetch(req.params.id)
+        } catch (e) {
+            res.send(e)
+            return
+        }
         const presence = data.presence.activities.filter((a) => a.type != 'CUSTOM_STATUS' & typeof a.details !== typeof null)
 // soon tm <text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">00:24 elapsed</tspan></text>
         let largeData;
