@@ -15,13 +15,13 @@ class SettingsMenu {
         this.message.react('🛑')
           this.collector = await this.message.createReactionCollector(filter);
           this.collector.on('collect', r => {
-              console.log(r.emoji.name)
+              this.client.logger.log('info', r.emoji.name)
             if (r.emoji.name === '🛑') {
                 this.stop()
             }
             r.users.remove(this.triggerMessage.author)
           });
-          this.collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+          this.collector.on('end', collected => this.client.logger.log('info', `Collected ${collected.size} items`));
           this.currentSetting = new this.pages[0](this)
           await this.currentSetting.init()
     }

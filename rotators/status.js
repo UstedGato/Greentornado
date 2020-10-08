@@ -25,5 +25,5 @@ async function rotate(client) {
 exports.startRotation = async function (client) {
     setInterval(rotate, 60000, client);
     rotate(client)
-    console.log("Started status rotator")
+    client.logger.log('info', "Started status rotator")
 }

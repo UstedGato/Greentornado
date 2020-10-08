@@ -1,5 +1,5 @@
 async function hook(webhook, embedstosend){
-    console.log(webhook)
+    this.client.logger.log('info', webhook)
 
     await webhook.send('Webhook test', {
         embeds: embedstosend,

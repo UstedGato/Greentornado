@@ -55,9 +55,9 @@ module.exports = class ReplyCommand extends Command {
     }
     async run(msg, { user }) {
         if (!msg.member.hasPermission("ADMINISTRATOR")) return msg.reply("You need to be an admin to use this command.");
-        console.log(user);
+        this.client.logger.log('info', user);
         //var user = user.substring("<",">");
-        //console.log(user);
+        //this.client.logger.log('info', user);
         var mention = user;
         var nouser = false;
         if (user === "") {
@@ -70,11 +70,11 @@ module.exports = class ReplyCommand extends Command {
             }
             else {
                 user = user.replace(/[\\<>@#&!]/g, "");
-                console.log(user);
+                this.client.logger.log('info', user);
                 user = user.replace(/\D/g,'');
             }
         }
-        console.log(user);
+        this.client.logger.log('info', user);
         if (nouser === true) {
             const coins = await this.updateCoins(user, 1)
             return msg.reply("you now now have " + coins + " coin(s).");

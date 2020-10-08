@@ -6,7 +6,7 @@
 //   res.send('Hello World!');
 // });
 // app.listen(80, function () {
-//   console.log('App listening on port 80');
+//   this.client.logger.log('info', 'App listening on port 80');
 // });
 // var token = "";
 // var refreshtoken = "";
@@ -26,7 +26,7 @@
 //     })
 // });
 // const res2 = await req2.json();
-// console.log(res2);
+// this.client.logger.log('info', res2);
 // token = res2.access_token;
 // refreshtoken = res2.refresh_token;
 // setTimeout(refresh, res2.expires_in * 1000 - 100, refreshtoken);
@@ -47,7 +47,7 @@
 //     })
 // });
 // const res = await req.json();
-// console.log(res);
+// this.client.logger.log('info', res);
 // token = res.access_token;
 // refreshtoken = res.refresh_token;
 // setTimeout(refresh, res.expires_in * 1000 - 100, refreshtoken);
@@ -64,7 +64,7 @@
 //     }
 // });
 // const res = await req.json();
-// console.log(res);
+// this.client.logger.log('info', res);
 // await main(res);
 // }
 
@@ -186,7 +186,7 @@ for (let index = 0; index <= 50; index++) {
     ctxbg.fillRect(rectX + (cornerRadius / 2), rectY + (cornerRadius / 2), rectWidth - cornerRadius, rectHeight - cornerRadius);
     var img = await ctxbg.getImageData(0, 0, canvasbg.width, canvasbg.height).data;
     can.push(img);
-    console.log(rectWidth);
+    this.client.logger.log('info', rectWidth);
 }
 const GIFEncoder = require('gifencoder');
 const encoder = new GIFEncoder(960, 540);
@@ -198,7 +198,7 @@ encoder.setFrameRate(30);
 encoder.setQuality(30); // image quality. 10 is default.
 for (let indexx = 0; indexx < can.length; indexx++) {
     encoder.addFrame(can[indexx]);
-    console.log(indexx);
+    this.client.logger.log('info', indexx);
 }
 encoder.finish();
 }

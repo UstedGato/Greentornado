@@ -35,7 +35,7 @@ module.exports = class ReplyCommand extends Command {
         ) 
         } catch (error) {
             return false
-            console.log(error)
+            this.client.logger.log('info', error)
         }
         if (coins) {
             return coins.data.coins

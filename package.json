@@ -27,6 +27,7 @@
 		"request": "^2.88.2",
 		"sodium": "^3.0.2",
 		"utf-8-validate": "^5.0.2",
+		"winston": "^3.3.3",
 		"youtube-search": "^1.1.4",
 		"ytdl-core": "^3.2.1",
 		"zlib-sync": "^0.1.7"

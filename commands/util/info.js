@@ -17,10 +17,10 @@ module.exports = class ReplyCommand extends commando.Command {
 
 child = exec('neofetch --stdout --color_blocks off --config ./neoconfig.sh',
    function (error, stdout, stderr) {
-      console.log('stdout: ' + stdout);
-      console.log('stderr: ' + stderr);
+      this.client.logger.log('info', 'stdout: ' + stdout);
+      this.client.logger.log('info', 'stderr: ' + stderr);
       if (error !== null) {
-          console.log('exec error: ' + error);
+          this.client.logger.log('info', 'exec error: ' + error);
       }
       msg.reply(`\`\`\`css\n${stdout}\n\`\`\``);
    });

@@ -25,7 +25,7 @@ module.exports = class ReplyCommand extends commando.Command {
     if (message.channel.type === 'dm') return;
     const voiceChannel = message.member.voice.channel;
     if (url.indexOf('youtube.com') === -1 && url.indexOf('soundcloud.com') === -1) {
-      console.log('searching')
+      this.client.logger.log('info', 'searching')
       const ytsearch = await search(url, {
         maxResults: 1,
         key: process.env.YOUTUBE_KEY

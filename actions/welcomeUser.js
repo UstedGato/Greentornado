@@ -51,7 +51,6 @@ exports.welcomeAUser = async function (member) {
   const avatar = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png`);
   ctx.drawImage(avatar, canvas.width / 2.6, canvas.height / 20, 150, 150);
   const attachment = new MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-  console.log(member.id + "and" + member.user.avatar);
   await channel.send({ files: [ attachment ]});
   return true
 }; 
