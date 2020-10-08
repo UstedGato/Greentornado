@@ -60,9 +60,9 @@ text {
 <rect width="1024" height="447" fill="url(#paint0_linear)"/>
 <rect width="1024" height="447" fill="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>
 <rect width="1024" height="447" fill="url(#paint1_linear)"/>
-<text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req?.query.font || 'Noto Sans'}" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="40" y="82.124">${presence[0] ? 'Playing' : 'Playing nothing'}</tspan></text>
-<text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req?.query.font || 'Noto Sans'}" font-size="62" font-weight="bold" letter-spacing="0em"><tspan x="353" y="215.056">${presence[0] ? presence[0].name : ''}</tspan></text>
-<text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req?.query.font || 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="289.124">${presence[0] ? presence[0].details : ''}</tspan></text>
+<text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req?.query.font) : 'Noto Sans'}" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="40" y="82.124">${presence[0] ? 'Playing' : 'Playing nothing'}</tspan></text>
+<text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req?.query.font) : 'Noto Sans'}" font-size="62" font-weight="bold" letter-spacing="0em"><tspan x="353" y="215.056">${presence[0] ? presence[0].name : ''}</tspan></text>
+<text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req?.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="289.124">${presence[0] ? presence[0].details : ''}</tspan></text>
 ` +
 (presence[0]?.assets?.largeImage ? `
 <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="40" y="140" width="270" height="265">
