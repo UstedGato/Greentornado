@@ -13,7 +13,7 @@ module.exports = (app, client) => {
         const largeData = presence[0]?.assets.largeImage ? await fetch(presence[0]?.assets?.largeImageURL()) : undefined
         const smallData = presence[0]?.assets.smallImage ? await fetch(presence[0]?.assets?.smallImageURL()) : undefined
         const svg = `
-<svg width="495" height="240" viewBox="0 0 1024 495" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="495" height="216.1" viewBox="0 0 1024 495" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
 svg {
     overflow: hidden;
