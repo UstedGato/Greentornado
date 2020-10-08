@@ -61,11 +61,16 @@ text {
     100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
   }
   
-</style>
+</style>` +
+(req?.query?.gradient !== 'false' ? `
 <rect width="1024" height="447" fill="${req?.query.color2 ? '#' + req.query.color2 : '#E5E5E5'}"/>
 <rect width="1024" height="447" fill="url(#paint0_linear)"/>
-<rect width="1024" height="447" fill="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>
+` : '') + `
+<rect width="1024" height="447" fill="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>` +
+(req?.query?.gradient !== 'false' ? `
 <rect width="1024" height="447" fill="url(#paint1_linear)"/>
+` : '') +
+`
 <text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req?.query.font) : 'Noto Sans'}" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="40" y="82.124">${presence[0] ? 'Playing' : 'Playing nothing'}</tspan></text>
 <text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req?.query.font) : 'Noto Sans'}" font-size="62" font-weight="bold" letter-spacing="0em"><tspan x="353" y="215.056">${presence[0] ?  createTextNode(presence[0].name) : ''}</tspan></text>
 <text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req?.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="289.124">${presence[0] ?  createTextNode(presence[0].details) : ''}</tspan></text>
@@ -94,7 +99,7 @@ text {
 </pattern>
 <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use href="#image1" transform="scale(0.0078125)"/>
-</pattern>
+</pattern>` + (req?.query?.gradient !== 'false' ? `
 <linearGradient id="paint0_linear" x1="512" y1="0" x2="512" y2="447" gradientUnits="userSpaceOnUse">
 <stop stop-color="white" stop-opacity="0"/>
 <stop offset="1" stop-color="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>
@@ -102,7 +107,7 @@ text {
 <linearGradient id="paint1_linear" x1="512" y1="0" x2="512" y2="447" gradientUnits="userSpaceOnUse">
 <stop stop-color="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>
 <stop offset="1" stop-color="white" stop-opacity="0"/>
-</linearGradient>
+</linearGradient>` : '') + `
 <image id="image0" width="128" height="128" href="${largeData ? largeData[1] : ''}"/>
 <image id="image1" width="128" height="128" href="${smallData ? smallData[1] : ''}"/>
 </defs>
