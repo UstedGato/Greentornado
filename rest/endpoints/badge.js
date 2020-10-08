@@ -9,7 +9,7 @@ module.exports = (app, client) => {
             return
         }
         const presence = data.presence.activities.filter((a) => a.type != 'CUSTOM_STATUS' & typeof a.details !== typeof null)
-// soon tm <text fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">00:24 elapsed</tspan></text>     
+// soon tm <text fill="white" xml:space="preserve" style="white-space: pre" font-family="${req?.query.font || 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">00:24 elapsed</tspan></text>     
         const largeData = presence[0]?.assets.largeImage ? await fetch(presence[0]?.assets?.largeImageURL()) : undefined
         const smallData = presence[0]?.assets.smallImage ? await fetch(presence[0]?.assets?.smallImageURL()) : undefined
         const svg = `
@@ -56,13 +56,13 @@ text {
   }
   
 </style>
-<rect width="1024" height="447" fill="${req?.query.color2 || '#E5E5E5'}"/>
+<rect width="1024" height="447" fill="${req?.query.color2 ? '#' + req.query.color2 : '#E5E5E5'}"/>
 <rect width="1024" height="447" fill="url(#paint0_linear)"/>
-<rect width="1024" height="447" fill="${req?.query.color1 || '#436E76'}"/>
+<rect width="1024" height="447" fill="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>
 <rect width="1024" height="447" fill="url(#paint1_linear)"/>
-<text fill="${req?.query.textcolor || 'white'}" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="40" y="82.124">${presence[0] ? 'Playing' : 'Playing nothing'}</tspan></text>
-<text fill="${req?.query.textcolor || 'white'}" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="62" font-weight="bold" letter-spacing="0em"><tspan x="353" y="215.056">${presence[0] ? presence[0].name : ''}</tspan></text>
-<text fill="${req?.query.textcolor || 'white'}" xml:space="preserve" style="white-space: pre" font-family="Noto Sans" font-size="48" letter-spacing="0em"><tspan x="353" y="289.124">${presence[0] ? presence[0].details : ''}</tspan></text>
+<text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req?.query.font || 'Noto Sans'}" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="40" y="82.124">${presence[0] ? 'Playing' : 'Playing nothing'}</tspan></text>
+<text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req?.query.font || 'Noto Sans'}" font-size="62" font-weight="bold" letter-spacing="0em"><tspan x="353" y="215.056">${presence[0] ? presence[0].name : ''}</tspan></text>
+<text fill="${req?.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req?.query.font || 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="289.124">${presence[0] ? presence[0].details : ''}</tspan></text>
 ` +
 (presence[0]?.assets?.largeImage ? `
 <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="40" y="140" width="270" height="265">
