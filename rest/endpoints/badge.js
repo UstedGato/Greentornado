@@ -66,6 +66,7 @@ svg {
   border-radius: ${req.query.borderradius}px;
   ${req?.query?.bordercolor ? `border-color: #${req.query.bordercolor};
   border-style: solid;` : ''}
+  ${req?.query?.borderwidth ? `border-width: ${req.query.borderwidth}px`: ''};
 }
 ` : '') + `
 </style>` +
