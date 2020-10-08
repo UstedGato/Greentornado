@@ -76,7 +76,7 @@ text {
 </mask>
 ` : `
 <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="270" height="265">
-<path class="bigimg" d="M0 225C0 247.091 17.9086 265 40 265H230C252.091 265 270 247.091 270 225V40C270 17.9086 252.091 0 230 0H40C17.9086 0 0 17.9086 0 40V225Z" fill="#FFC200"/>
+<path clas="bigimg" d="M40 365C40 387.091 57.9086 405 80 405H270C292.091 405 310 387.091 310 365V180C310 157.909 292.091 140 270 140H80C57.9086 140 40 157.909 40 180V365Z" fill="#FFC200"/>
 </mask>
 `) + `
 <g mask="url(#mask0)">
