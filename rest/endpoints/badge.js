@@ -16,58 +16,67 @@ module.exports = (app, client) => {
         const largeData = presence[0]?.assets.largeImage ? await fetch(presence[0]?.assets?.largeImageURL()) : undefined
         const smallData = presence[0]?.assets.smallImage ? await fetch(presence[0]?.assets?.smallImageURL()) : undefined
         const svg = `
-<svg width="495" height="241" viewBox="0 0 1024 495" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="495" height="216" viewBox="0 0 1024 447" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
 svg {
     overflow: hidden;
 }
 text {
+  opacity: 0;
+  animation: fade 0.3s ease-in-out forwards;
+}
+tspan {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bigimg, .smallimg {
+  transform: scale(0);
+  animation: scale 1s ease-in-out forwards, fade 0.3s ease-in-out forwards;
+}
+text:nth-of-type(1) { animation-delay: 450ms; }
+text:nth-of-type(2) { animation-delay: 600ms; }
+text:nth-of-type(3) { animation-delay: 750ms; }
+text:nth-of-type(4) { animation-delay: 900ms; }
+
+@keyframes fade {
+  from {
     opacity: 0;
-    animation: fade 0.3s ease-in-out forwards;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
   }
-  .bigimg, .smallimg {
-    transform: scale(0);
-    animation: scale 1s ease-in-out forwards, fade 0.3s ease-in-out forwards;
+  to {
+    opacity: 1;
   }
-  text:nth-of-type(1) { animation-delay: 450ms; }
-  text:nth-of-type(2) { animation-delay: 600ms; }
-  text:nth-of-type(3) { animation-delay: 750ms; }
-  text:nth-of-type(4) { animation-delay: 900ms; }
-  
-  @keyframes fade {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  
-  
-  @keyframes scale { 
-    0% { -webkit-transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    5.81% { -webkit-transform: matrix3d(0.483, 0, 0, 0, 0, 0.483, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.483, 0, 0, 0, 0, 0.483, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    11.61% { -webkit-transform: matrix3d(0.88, 0, 0, 0, 0, 0.88, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.88, 0, 0, 0, 0, 0.88, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    17.42% { -webkit-transform: matrix3d(1.09, 0, 0, 0, 0, 1.09, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.09, 0, 0, 0, 0, 1.09, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    23.12% { -webkit-transform: matrix3d(1.142, 0, 0, 0, 0, 1.142, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.142, 0, 0, 0, 0, 1.142, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    30.33% { -webkit-transform: matrix3d(1.098, 0, 0, 0, 0, 1.098, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.098, 0, 0, 0, 0, 1.098, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    37.44% { -webkit-transform: matrix3d(1.033, 0, 0, 0, 0, 1.033, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.033, 0, 0, 0, 0, 1.033, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    44.54% { -webkit-transform: matrix3d(0.994, 0, 0, 0, 0, 0.994, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.994, 0, 0, 0, 0, 0.994, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    51.65% { -webkit-transform: matrix3d(0.984, 0, 0, 0, 0, 0.984, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.984, 0, 0, 0, 0, 0.984, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    80.28% { -webkit-transform: matrix3d(1.002, 0, 0, 0, 0, 1.002, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.002, 0, 0, 0, 0, 1.002, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
-  }
-  
+}
+
+
+
+@keyframes scale { 
+  0% { -webkit-transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  5.81% { -webkit-transform: matrix3d(0.483, 0, 0, 0, 0, 0.483, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.483, 0, 0, 0, 0, 0.483, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  11.61% { -webkit-transform: matrix3d(0.88, 0, 0, 0, 0, 0.88, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.88, 0, 0, 0, 0, 0.88, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  17.42% { -webkit-transform: matrix3d(1.09, 0, 0, 0, 0, 1.09, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.09, 0, 0, 0, 0, 1.09, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  23.12% { -webkit-transform: matrix3d(1.142, 0, 0, 0, 0, 1.142, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.142, 0, 0, 0, 0, 1.142, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  30.33% { -webkit-transform: matrix3d(1.098, 0, 0, 0, 0, 1.098, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.098, 0, 0, 0, 0, 1.098, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  37.44% { -webkit-transform: matrix3d(1.033, 0, 0, 0, 0, 1.033, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.033, 0, 0, 0, 0, 1.033, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  44.54% { -webkit-transform: matrix3d(0.994, 0, 0, 0, 0, 0.994, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.994, 0, 0, 0, 0, 0.994, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  51.65% { -webkit-transform: matrix3d(0.984, 0, 0, 0, 0, 0.984, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.984, 0, 0, 0, 0, 0.984, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  80.28% { -webkit-transform: matrix3d(1.002, 0, 0, 0, 0, 1.002, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.002, 0, 0, 0, 0, 1.002, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
+}
+` + 
+(req?.query?.borderradius ? `
+svg {
+  border-radius: ${req.query.borderradius}px;
+  ${req?.query?.bordercolor ? `border-color: #${req.query.bordercolor};
+  border-style: solid;` : ''}
+}
+` : '') + `
 </style>` +
 (req?.query?.gradient !== 'false' ? `
 <rect width="1024" height="447" fill="${req?.query.color2 ? '#' + req.query.color2 : '#E5E5E5'}"/>
 <rect width="1024" height="447" fill="url(#paint0_linear)"/>
 ` : '') + `
-<rect width="1024" height="447" fill="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>` +
+<rect width="1024" rx="15" height="447" fill="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>` +
 (req?.query?.gradient !== 'false' ? `
 <rect width="1024" height="447" fill="url(#paint1_linear)"/>
 ` : '') +
