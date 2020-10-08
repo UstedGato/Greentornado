@@ -24,10 +24,7 @@ client.logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console()
 	],
-	format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.simple()
-  )
+	format: winston.format.printf(log => `[NODE ${log.level.toUpperCase()}] - ${log.message}`),
 })
 client
   .on('debug', m => client.logger.log('debug', m))

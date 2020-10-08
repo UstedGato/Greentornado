@@ -82,8 +82,8 @@ text {
 <path class="bigimg" fill-rule="evenodd" clip-rule="evenodd" d="M80 405C57.9086 405 40 387.091 40 365V180C40 157.909 57.9086 140 80 140H270C292.091 140 310 157.909 310 180V329.258C301.581 324.023 291.643 321 281 321C250.624 321 226 345.624 226 376C226 386.643 229.023 396.581 234.258 405H80Z" fill="#FFC200"/>
 </mask>
 ` : `
-<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="270" height="265">
-<path clas="bigimg" d="M40 365C40 387.091 57.9086 405 80 405H270C292.091 405 310 387.091 310 365V180C310 157.909 292.091 140 270 140H80C57.9086 140 40 157.909 40 180V365Z" fill="#FFC200"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="40" y="140" width="270" height="265">
+<path class="bigimg" fill-rule="evenodd" clip-rule="evenodd" d="M40 365C40 387.091 57.9086 405 80 405H270C292.091 405 310 387.091 310 365V180C310 157.909 292.091 140 270 140H80C57.9086 140 40 157.909 40 180V365Z" fill="#FFC200"/>
 </mask>
 `) + `
 <g mask="url(#mask0)">
