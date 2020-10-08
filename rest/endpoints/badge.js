@@ -86,10 +86,10 @@ text {
 </pattern>
 <linearGradient id="paint0_linear" x1="512" y1="0" x2="512" y2="447" gradientUnits="userSpaceOnUse">
 <stop stop-color="white" stop-opacity="0"/>
-<stop offset="1" stop-color="#355960"/>
+<stop offset="1" stop-color="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>
 </linearGradient>
 <linearGradient id="paint1_linear" x1="512" y1="0" x2="512" y2="447" gradientUnits="userSpaceOnUse">
-<stop stop-color="#355960"/>
+<stop stop-color="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>
 <stop offset="1" stop-color="white" stop-opacity="0"/>
 </linearGradient>
 <image id="image0" width="128" height="128" href="${presence[0]?.assets ? largeData[1] : ''}"/>
