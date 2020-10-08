@@ -95,8 +95,8 @@ text {
 <stop stop-color="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>
 <stop offset="1" stop-color="white" stop-opacity="0"/>
 </linearGradient>
-<image id="image0" width="128" height="128" href="${presence[0]?.assets ? largeData[1] : ''}"/>
-<image id="image1" width="128" height="128" href="${presence[0]?.assets ? smallData[1] : ''}"/>
+<image id="image0" width="128" height="128" href="${largeData ? largeData[1] : ''}"/>
+<image id="image1" width="128" height="128" href="${smallData ? smallData[1] : ''}"/>
 </defs>
 </svg>
         `
