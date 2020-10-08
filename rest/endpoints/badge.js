@@ -24,6 +24,9 @@ svg {
 text {
     opacity: 0;
     animation: fade 0.3s ease-in-out forwards;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
   }
   .bigimg, .smallimg {
     transform: scale(0);
