@@ -45,8 +45,6 @@ text:nth-of-type(4) { animation-delay: 900ms; }
   }
 }
 
-
-
 @keyframes scale { 
   0% { -webkit-transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
   5.81% { -webkit-transform: matrix3d(0.483, 0, 0, 0, 0, 0.483, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.483, 0, 0, 0, 0, 0.483, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
