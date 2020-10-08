@@ -35,6 +35,7 @@ text {
   text:nth-of-type(1) { animation-delay: 450ms; }
   text:nth-of-type(2) { animation-delay: 600ms; }
   text:nth-of-type(3) { animation-delay: 750ms; }
+  text:nth-of-type(4) { animation-delay: 900ms; }
   
   @keyframes fade {
     from {
