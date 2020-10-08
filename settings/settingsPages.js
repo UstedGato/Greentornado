@@ -86,7 +86,7 @@ pages[0] = class GuildSettings {
     channel = await channelobj.toString()
     } catch(e) {
       channel = 'None'
-      this.client.logger.log('info', e)
+      this.parent.client.logger.log('info', e)
     }
     const embed = {
     "title": `${this.parent.message.guild.name}`,
@@ -132,14 +132,14 @@ pages[0] = class GuildSettings {
       this.setWelcomeImage()
     }
   });
-  this.collector.on('end', collected => this.client.logger.log('info', `Collected ${collected.size} items`));
+  this.collector.on('end', collected => this.parent.client.logger.log('info', `Collected ${collected.size} items`));
   }
   async setWelcomeImage () {
     const filter = m => isURL(m.content);
     const collector = this.parent.message.channel.createMessageCollector(filter, { limit: 1 });
     const queryMessage = await this.parent.message.channel.send('Send the url to the image.')
     collector.on('collect', m => {
-      this.client.logger.log('info', `Collected ${m.content}`);
+      this.parent.client.logger.log('info', `Collected ${m.content}`);
       this.parent.message.edit('<a:botloader:750419652256989331>', { embed: null })
       m.delete()
       queryMessage.delete()
@@ -154,7 +154,7 @@ pages[0] = class GuildSettings {
     const collector = this.parent.message.channel.createMessageCollector(filter, { limit: 1 });
     const queryMessage = await this.parent.message.channel.send('Tag a channel.')
     collector.on('collect', m => {
-      this.client.logger.log('info', `Collected ${m.content}`);
+      this.parent.client.logger.log('info', `Collected ${m.content}`);
       this.parent.message.edit('<a:botloader:750419652256989331>', { embed: null })
       m.delete()
       queryMessage.delete()
@@ -162,7 +162,7 @@ pages[0] = class GuildSettings {
         m.content.lastIndexOf("<#") + 2, 
         m.content.lastIndexOf(">")
       );
-      this.client.logger.log('info', channel)
+      this.parent.client.logger.log('info', channel)
       patchSettings({ welcomeChannel: channel }, this.parent.fauna, this.parent.guildId)
       setTimeout(() => {
         this.reload()
