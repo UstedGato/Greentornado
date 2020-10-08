@@ -18,9 +18,6 @@ module.exports = (app, client) => {
         const svg = `
 <svg width="495" height="216" viewBox="0 0 1024 447" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
-svg {
-    overflow: hidden;
-}
 text {
   opacity: 0;
   animation: fade 0.3s ease-in-out forwards;
