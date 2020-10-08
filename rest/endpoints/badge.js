@@ -63,7 +63,7 @@ text:nth-of-type(4) { animation-delay: 900ms; }
 <rect width="1024" height="447" fill="${req?.query.color2 ? '#' + req.query.color2 : '#E5E5E5'}"/>
 <rect width="1024" height="447" fill="url(#paint0_linear)"/>
 ` : '') + `
-<rect width="1024" rx="15" height="447"` + (req?.query?.borderradius ? `rx="${req?.query?.borderradius}" stroke="#${req?.query?.bordercolor || 'ffffff'}" stroke=opacity="1" stroke-width="${req?.query?.borderwidth || '5'}" ` : '') + ` fill="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>` +
+<rect width="1024" rx="15" height="447"` + (req?.query?.borderradius ? ` rx="${req?.query?.borderradius}" stroke="#${req?.query?.bordercolor || 'ffffff'}" stroke=opacity="1" stroke-width="${req?.query?.borderwidth || '5'}" ` : '') + ` fill="${req?.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>` +
 (req?.query?.gradient !== 'false' ? `
 <rect width="1024" height="447" fill="url(#paint1_linear)"/>
 ` : '') +
