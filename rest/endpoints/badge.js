@@ -70,9 +70,11 @@ text:nth-of-type(4) { animation-delay: 900ms; }
 `
 <text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="40" y="82.124">${presence[0] ? 'Playing' : 'Playing nothing'}</tspan></text>
 <text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="62" font-weight="bold" letter-spacing="0em"><tspan x="353" y="215.056">${presence[0] ?  createTextNode(presence[0].name) : ''}</tspan></text>
+` + (presence[0]?.details ? `
 <text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="289.124">${presence[0] ?  createTextNode(presence[0].details) : ''}</tspan></text>
+` : '') + (presence[0]?.state ? `
 <text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">${presence[0] ?  createTextNode(presence[0].state) : ''}</tspan></text>
-` +
+` : '') +
 (presence[0]?.assets?.largeImage ? (presence[0]?.assets?.smallImage ? `
 <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="40" y="140" width="270" height="265">
 <path class="bigimg" fill-rule="evenodd" clip-rule="evenodd" d="M80 405C57.9086 405 40 387.091 40 365V180C40 157.909 57.9086 140 80 140H270C292.091 140 310 157.909 310 180V329.258C301.581 324.023 291.643 321 281 321C250.624 321 226 345.624 226 376C226 386.643 229.023 396.581 234.258 405H80Z" fill="#FFC200"/>
