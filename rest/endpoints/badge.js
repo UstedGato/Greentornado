@@ -13,8 +13,8 @@ module.exports = (app, client) => {
         }
         const presence = data.presence.activities.filter((a) => a.type != 'CUSTOM_STATUS')
 // soon tm <text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">00:24 elapsed</tspan></text>     
-        const largeData = presence[0]?.assets.largeImage ? await fetch(presence[0]?.assets?.largeImageURL()) : undefined
-        const smallData = presence[0]?.assets.smallImage ? await fetch(presence[0]?.assets?.smallImageURL()) : undefined
+        const largeData = presence[0]?.assets?.largeImage ? await fetch(presence[0].assets.largeImageURL()) : undefined
+        const smallData = presence[0]?.assets?.smallImage ? await fetch(presence[0].assets.smallImageURL()) : undefined
         const svg = `
 <svg width="495" height="216" viewBox="0 0 1024 447" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
