@@ -13,6 +13,11 @@ jobs:
       steps:
         - uses: actions/checkout@v2
 
+        - name: Checkout submodules
+          uses: srt32/git-actions@0.0.3
+          with:
+            args: git submodule update --init --recursive
+
         - uses: satackey/action-docker-layer-caching@v0.0.8
 
         - uses: superfly/flyctl-actions@1.1
