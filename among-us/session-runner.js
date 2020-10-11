@@ -11,22 +11,19 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import child_process from "child_process";
-import eris from "eris";
 import debounce from "lodash.debounce";
 import path from "path";
-import { EMOTE_IDS_TO_COLOR, GROUPING_TOGGLE_EMOJI, LEAVE_EMOJI, SERVER_IPS, SHORT_REGION_NAMES, } from "./constants";
-import { orm } from "./database";
-import PlayerLink from "./database/player-link";
-import SessionChannel, { SessionChannelType } from "./database/session-channel";
-const WORKING_DIR = path.resolve(process.env.AU_CLIENT_DIR);
+const AU_CLIENT_DIR = '/app/among-us/Client'
+const WORKING_DIR = path.resolve(AU_CLIENT_DIR);
 const CLIENT = path.join(WORKING_DIR, process.platform === "win32" ? "client.exe" : "client");
 /**
  * Class that handles all communication with the AU client in C#, using
  * JSON messages passed over the standard out to receive data from the client.
  */
 class SessionRunner {
-    constructor(bot, session) {
+    constructor(bot, session, msg) {
         this.bot = bot;
+        this.msg = msg;
         this.session = session;
         this.playerData = [];
         this.deadPlayers = new Set(); // clientIds of dead players
@@ -49,38 +46,40 @@ class SessionRunner {
             if (!msg.length)
                 return;
             const _a = JSON.parse(msg), { type } = _a, rest = __rest(_a, ["type"]);
-            if (type === "connect") {
-                await this.handleConnect();
-            }
-            if (type === "gameEnd") {
-                console.log(`[+] Session ${this.session.id}: game ended`);
-                await this.setStateTo("lobby" /* LOBBY */);
-                await this.unmutePlayers();
-                await movePlayersToTalkingChannel(this.bot, this.session);
-            }
-            if (type === "talkingStart") {
-                console.log(`[+] Session ${this.session.id}: talking started`);
-                await this.setStateTo("discussing" /* DISCUSSING */);
-                await movePlayersToTalkingChannel(this.bot, this.session);
-            }
-            if (type === "talkingEnd") {
-                console.log(`[+] Session ${this.session.id}: talking ended`);
-                if (this.session.state === "lobby" /* LOBBY */) {
-                    // Don't transition until we have all the impostor information.
-                    return;
-                }
-                await this.setStateTo("playing" /* PLAYING */);
-                await movePlayersToSilenceChannel(this.bot, this.session);
-            }
-            if (type === "disconnect") {
-                await this.handleDisconnect();
-            }
-            if (type === "gameData") {
-                await this.handlePlayerDataUpdate(rest.data);
-            }
-            if (type === "error") {
-                await this.handleError(rest.message);
-            }
+            // if (type === "connect") {
+            //     await this.handleConnect();
+            // }
+            // if (type === "gameEnd") {
+            //     console.log(`[+] Session ${this.session.id}: game ended`);
+            //     await this.setStateTo("lobby" /* LOBBY */);
+            //     await this.unmutePlayers();
+            //     await movePlayersToTalkingChannel(this.bot, this.session);
+            // }
+            // if (type === "talkingStart") {
+            //     console.log(`[+] Session ${this.session.id}: talking started`);
+            //     await this.setStateTo("discussing" /* DISCUSSING */);
+            //     await movePlayersToTalkingChannel(this.bot, this.session);
+            // }
+            // if (type === "talkingEnd") {
+            //     console.log(`[+] Session ${this.session.id}: talking ended`);
+            //     if (this.session.state === "lobby" /* LOBBY */) {
+            //         // Don't transition until we have all the impostor information.
+            //         return;
+            //     }
+            //     await this.setStateTo("playing" /* PLAYING */);
+            //     await movePlayersToSilenceChannel(this.bot, this.session);
+            // }
+            // if (type === "disconnect") {
+            //     await this.handleDisconnect();
+            // }
+            // if (type === "gameData") {
+            //     await this.handlePlayerDataUpdate(rest.data);
+            // }
+            // if (type === "error") {
+            //     await this.handleError(rest.message);
+            // }
+            console.log(_a)
+            this.msg.channel.send(_a)
         };
     }
     /**
@@ -238,30 +237,31 @@ class SessionRunner {
         if (this.isConnected || this.isDestroyed)
             return;
         console.log(`[+] Session ${this.session.id} connected to lobby.`);
-        const category = await this.bot.createChannel(this.session.guild, "Among Us - " + SHORT_REGION_NAMES[this.session.region] + " - " + this.session.lobbyCode, 4, "Among Us: Create category for voice channels.");
-        this.session.channels.add(new SessionChannel(category.id, SessionChannelType.CATEGORY));
-        const talkingChannel = await this.bot.createChannel(this.session.guild, "Discussion", 2, {
-            parentID: category.id,
-        });
-        const talkingInvite = await talkingChannel.createInvite({
-            unique: true,
-        });
-        this.session.channels.add(new SessionChannel(talkingChannel.id, SessionChannelType.TALKING, talkingInvite.code));
-        const mutedChannel = await this.bot.createChannel(this.session.guild, "Muted", 2, {
-            parentID: category.id,
-            permissionOverwrites: [
-                {
-                    type: "role",
-                    id: this.session.guild,
-                    deny: eris.Constants.Permissions.voiceSpeak,
-                    allow: 0,
-                },
-            ],
-        });
-        this.session.channels.add(new SessionChannel(mutedChannel.id, SessionChannelType.SILENCE));
+        // const category = await this.bot.createChannel(this.session.guild, "Among Us - " + SHORT_REGION_NAMES[this.session.region] + " - " + this.session.lobbyCode, 4, "Among Us: Create category for voice channels.");
+        // this.session.channels.add(new SessionChannel(category.id, SessionChannelType.CATEGORY));
+        // const talkingChannel = await this.bot.createChannel(this.session.guild, "Discussion", 2, {
+        //     parentID: category.id,
+        // });
+        // const talkingInvite = await talkingChannel.createInvite({
+        //     unique: true,
+        // });
+        // this.session.channels.add(new SessionChannel(talkingChannel.id, SessionChannelType.TALKING, talkingInvite.code));
+        // const mutedChannel = await this.bot.createChannel(this.session.guild, "Muted", 2, {
+        //     parentID: category.id,
+        //     permissionOverwrites: [
+        //         {
+        //             type: "role",
+        //             id: this.session.guild,
+        //             deny: eris.Constants.Permissions.voiceSpeak,
+        //             allow: 0,
+        //         },
+        //     ],
+        // });
+        // this.session.channels.add(new SessionChannel(mutedChannel.id, SessionChannelType.SILENCE));
         this.isConnected = true;
         await orm.em.persistAndFlush(this.session);
-        await Promise.all([this.setStateTo("lobby" /* LOBBY */), addMessageReactions(this.bot, this.session)]);
+        //await Promise.all([this.setStateTo("lobby" /* LOBBY */), addMessageReactions(this.bot, this.session)])
+        await this.setStateTo("lobby" /* LOBBY */);
     }
     /**
      * Simple method that changes the current state of the lobby to the specified
@@ -343,8 +343,8 @@ export function getRunnerForSession(session) {
  * it to connect to the lobby and handle events. This method should never
  * directly throw.
  */
-export default async function startSession(bot, session) {
-    const runner = new SessionRunner(bot, session);
+export default async function startSession(bot, session, msg) {
+    const runner = new SessionRunner(bot, session, msg);
     sessions.set(session.id, runner);
     await runner.start();
 }

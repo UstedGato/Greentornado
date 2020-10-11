@@ -63,7 +63,7 @@ RUN  apk add --no-cache --virtual .gyp \
     && yarn install --production \
     && apk del .gyp
 
-COPY among-us/Client .
+COPY among-us ./among-us
 
 WORKDIR /app/among-us/Client
 
