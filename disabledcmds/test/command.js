@@ -1,6 +1,6 @@
-const { Command } = require('discord.js-commando');
-
-module.exports = class ReplyCommand extends Command {
+import discord from "discord.js-commando";
+const { Command } = discord;
+export default (class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'ree',
@@ -10,11 +10,10 @@ module.exports = class ReplyCommand extends Command {
             examples: ['reply']
         });
     }
-
     run(msg) {
-        var arrivederci='reeeee';
+        var arrivederci = 'reeeee';
         msg.say('Goodbye');
         msg.say(arrivederci);
         return msg.say('no one loves you');
     }
-};
+});

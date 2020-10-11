@@ -1,7 +1,8 @@
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
+    for (var p in s)
+        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+            t[p] = s[p];
     if (s != null && typeof Object.getOwnPropertySymbols === "function")
         for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
             if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
@@ -13,7 +14,7 @@ import child_process from "child_process";
 import eris from "eris";
 import debounce from "lodash.debounce";
 import path from "path";
-import { EMOTE_IDS_TO_COLOR, GROUPING_TOGGLE_EMOJI, LEAVE_EMOJI, SERVER_IPS, SessionState, SHORT_REGION_NAMES, } from "./constants";
+import { EMOTE_IDS_TO_COLOR, GROUPING_TOGGLE_EMOJI, LEAVE_EMOJI, SERVER_IPS, SHORT_REGION_NAMES, } from "./constants";
 import { orm } from "./database";
 import PlayerLink from "./database/player-link";
 import SessionChannel, { SessionChannelType } from "./database/session-channel";
@@ -53,22 +54,22 @@ class SessionRunner {
             }
             if (type === "gameEnd") {
                 console.log(`[+] Session ${this.session.id}: game ended`);
-                await this.setStateTo(SessionState.LOBBY);
+                await this.setStateTo("lobby" /* LOBBY */);
                 await this.unmutePlayers();
                 await movePlayersToTalkingChannel(this.bot, this.session);
             }
             if (type === "talkingStart") {
                 console.log(`[+] Session ${this.session.id}: talking started`);
-                await this.setStateTo(SessionState.DISCUSSING);
+                await this.setStateTo("discussing" /* DISCUSSING */);
                 await movePlayersToTalkingChannel(this.bot, this.session);
             }
             if (type === "talkingEnd") {
                 console.log(`[+] Session ${this.session.id}: talking ended`);
-                if (this.session.state === SessionState.LOBBY) {
+                if (this.session.state === "lobby" /* LOBBY */) {
                     // Don't transition until we have all the impostor information.
                     return;
                 }
-                await this.setStateTo(SessionState.PLAYING);
+                await this.setStateTo("playing" /* PLAYING */);
                 await movePlayersToSilenceChannel(this.bot, this.session);
             }
             if (type === "disconnect") {
@@ -169,7 +170,7 @@ class SessionRunner {
      * Handles the usage of the toggle impostor grouping react by any user.
      */
     async toggleImpostorGrouping(userId) {
-        if (userId !== this.session.creator || this.session.state !== SessionState.LOBBY) {
+        if (userId !== this.session.creator || this.session.state !== "lobby" /* LOBBY */) {
             return;
         }
         this.session.groupImpostors = !this.session.groupImpostors;
@@ -260,7 +261,7 @@ class SessionRunner {
         this.session.channels.add(new SessionChannel(mutedChannel.id, SessionChannelType.SILENCE));
         this.isConnected = true;
         await orm.em.persistAndFlush(this.session);
-        await Promise.all([this.setStateTo(SessionState.LOBBY), addMessageReactions(this.bot, this.session)]);
+        await Promise.all([this.setStateTo("lobby" /* LOBBY */), addMessageReactions(this.bot, this.session)]);
     }
     /**
      * Simple method that changes the current state of the lobby to the specified
@@ -297,8 +298,8 @@ class SessionRunner {
             await this.debouncedUpdateMessage();
         }
         // if we're in lobby but everyone has tasks now, we've started
-        if (this.session.state === SessionState.LOBBY && !this.playerData.some(x => !x.tasks || !x.tasks.length)) {
-            await this.setStateTo(SessionState.PLAYING);
+        if (this.session.state === "lobby" /* LOBBY */ && !this.playerData.some(x => !x.tasks || !x.tasks.length)) {
+            await this.setStateTo("playing" /* PLAYING */);
             await movePlayersToSilenceChannel(this.bot, this.session);
         }
     }

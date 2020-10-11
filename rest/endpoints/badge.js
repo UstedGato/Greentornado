@@ -1,20 +1,22 @@
-const fetch = require('fetch-base64').remote;
+import fetchBase64 from "fetch-base64";
+const fetch = fetchBase64.remote;
 function createTextNode(n) {
-  return n.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+    return n.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 }
-module.exports = (app, client) => {
+export default (app, client) => {
     app.get('/api/badge/:id', async (req, res) => {
         let data;
         try {
-        data = await client.users.fetch(req.params.id)
-        } catch (e) {
-            res.send(e)
-            return
+            data = await client.users.fetch(req.params.id);
         }
-        const presence = data.presence.activities.filter((a) => a.type != 'CUSTOM_STATUS')
-// soon tm <text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">00:24 elapsed</tspan></text>     
-        const largeData = presence[0]?.assets?.largeImage ? await fetch(presence[0].assets.largeImageURL()) : undefined
-        const smallData = presence[0]?.assets?.smallImage ? await fetch(presence[0].assets.smallImageURL()) : undefined
+        catch (e) {
+            res.send(e);
+            return;
+        }
+        const presence = data.presence.activities.filter((a) => a.type != 'CUSTOM_STATUS');
+        // soon tm <text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">00:24 elapsed</tspan></text>     
+        const largeData = presence[0]?.assets?.largeImage ? await fetch(presence[0].assets.largeImageURL()) : undefined;
+        const smallData = presence[0]?.assets?.smallImage ? await fetch(presence[0].assets.smallImageURL()) : undefined;
         const svg = `
 <svg width="495" height="216" viewBox="0 0 1024 447" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
@@ -59,23 +61,23 @@ text:nth-of-type(4) { animation-delay: 900ms; }
   100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
 }
 </style>` +
-(req.query.gradient !== 'false' ? `
+            (req.query.gradient !== 'false' ? `
 <rect width="1024" height="447" fill="${req.query.color2 ? '#' + req.query.color2 : '#E5E5E5'}"/>
 <rect width="1024" height="447" fill="url(#paint0_linear)"/>
 ` : '') + `
 <rect width="1024" height="447"` + (req.query.borderradius ? ` rx="${req.query.borderradius}" stroke="#${req.query.bordercolor || 'ffffff'}" stroke-opacity="1" stroke-width="${req.query.borderwidth || '5'}" ` : '') + ` fill="${req.query.color1 ? '#' + req.query.color1 : '#436E76'}"/>` +
-(req.query.gradient !== 'false' ? `
+            (req.query.gradient !== 'false' ? `
 <rect width="1024" height="447" fill="url(#paint1_linear)"/>
 ` : '') +
-`
+            `
 <text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" font-weight="bold" letter-spacing="0em"><tspan x="40" y="82.124">${presence[0] ? 'Playing' : 'Playing nothing'}</tspan></text>
-<text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="62" font-weight="bold" letter-spacing="0em"><tspan x="353" y="215.056">${presence[0] ?  createTextNode(presence[0].name) : ''}</tspan></text>
+<text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="62" font-weight="bold" letter-spacing="0em"><tspan x="353" y="215.056">${presence[0] ? createTextNode(presence[0].name) : ''}</tspan></text>
 ` + (presence[0]?.details ? `
-<text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="289.124">${presence[0] ?  createTextNode(presence[0].details) : ''}</tspan></text>
+<text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="289.124">${presence[0] ? createTextNode(presence[0].details) : ''}</tspan></text>
 ` : '') + (presence[0]?.state ? `
-<text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">${presence[0] ?  createTextNode(presence[0].state) : ''}</tspan></text>
+<text fill="${req.query.textcolor ? '#' + req.query.textcolor : 'white'}" xml:space="preserve" style="white-space: pre" font-family="${req.query.font ? decodeURIComponent(req.query.font) : 'Noto Sans'}" font-size="48" letter-spacing="0em"><tspan x="353" y="368.124">${presence[0] ? createTextNode(presence[0].state) : ''}</tspan></text>
 ` : '') +
-(presence[0]?.assets?.largeImage ? (presence[0]?.assets?.smallImage ? `
+            (presence[0]?.assets?.largeImage ? (presence[0]?.assets?.smallImage ? `
 <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="40" y="140" width="270" height="265">
 <path class="bigimg" fill-rule="evenodd" clip-rule="evenodd" d="M80 405C57.9086 405 40 387.091 40 365V180C40 157.909 57.9086 140 80 140H270C292.091 140 310 157.909 310 180V329.258C301.581 324.023 291.643 321 281 321C250.624 321 226 345.624 226 376C226 386.643 229.023 396.581 234.258 405H80Z" fill="#FFC200"/>
 </mask>
@@ -87,13 +89,13 @@ text:nth-of-type(4) { animation-delay: 900ms; }
 <g mask="url(#mask0)">
 <rect class="bigimg" x="40" y="140" width="270" height="265" fill="url(#pattern0)"/>
 </g>` +
-(presence[0]?.assets?.smallImage ? `<mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="237" y="332" width="88" height="88">
+                (presence[0]?.assets?.smallImage ? `<mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="237" y="332" width="88" height="88">
 <circle cx="281" cy="376" r="44" fill="black"/>
 </mask>
 <g class="smallimg" mask="url(#mask1)">
 <rect x="237" y="332" width="88" height="88" fill="url(#pattern1)"/>
-</g>` : '' ) : '') +
-`<defs>
+</g>` : '') : '') +
+            `<defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use href="#image0" transform="translate(0 -0.00943396) scale(0.0078125 0.00795991)"/>
 </pattern>
@@ -112,11 +114,11 @@ text:nth-of-type(4) { animation-delay: 900ms; }
 <image id="image1" width="128" height="128" href="${smallData ? smallData[1] : ''}"/>
 </defs>
 </svg>
-        `
+        `;
         res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
         res.setHeader('Expires', '-1');
         res.setHeader('Pragma', 'no-cache');
-        res.setHeader('content-type', 'image/svg+xml')
-        res.send(svg)
-    })
-}
+        res.setHeader('content-type', 'image/svg+xml');
+        res.send(svg);
+    });
+};

@@ -1,12 +1,13 @@
-module.exports = (app, client) => {
+export default (app, client) => {
     app.get('/api/user/:id', async (req, res) => {
         let data;
         try {
-        data = await client.users.fetch(req.params.id)
-        } catch (e) {
-            res.send(e)
-            return
+            data = await client.users.fetch(req.params.id);
         }
-        res.json(data)
-    })
-}
+        catch (e) {
+            res.send(e);
+            return;
+        }
+        res.json(data);
+    });
+};

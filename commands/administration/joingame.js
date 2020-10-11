@@ -1,5 +1,6 @@
-const { Command } = require('discord.js-commando');
-module.exports = class ReplyCommand extends Command {
+import discord from "discord.js-commando";
+const { Command } = discord;
+export default (class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'joingame',
@@ -10,8 +11,6 @@ module.exports = class ReplyCommand extends Command {
             userPermissions: ['ADMINISTRATOR']
         });
     }
-
     async run(msg, { amount, user }) {
-
     }
-};
+});

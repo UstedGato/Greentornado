@@ -1,9 +1,9 @@
-const { Command } = require('discord.js-commando');
-const SettingsMenu = require('../../settings/settings')
-const faunadb = require('faunadb'),
-  q = faunadb.query,
-  faunaclient = new faunadb.Client({ secret: process.env.FAUNA_KEY })
-module.exports = class ReplyCommand extends Command {
+import discord from "discord.js-commando";
+import SettingsMenu from "../../settings/settings";
+import faunadb from "faunadb";
+const { Command } = discord;
+const q = faunadb.query, faunaclient = new faunadb.Client({ secret: process.env.FAUNA_KEY });
+export default (class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'guildsettings',
@@ -14,9 +14,8 @@ module.exports = class ReplyCommand extends Command {
             userPermissions: ['ADMINISTRATOR'],
         });
     }
-
-    async run(msg){
-        let setting = new SettingsMenu(msg.guild.id, msg, faunaclient, this.client)
-        await setting.init()
+    async run(msg) {
+        let setting = new SettingsMenu(msg.guild.id, msg, faunaclient, this.client);
+        await setting.init();
     }
-};
+});
