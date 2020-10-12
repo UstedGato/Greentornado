@@ -6,6 +6,11 @@ import * as welcomer from "./actions/welcomeUser.js";
 import * as statusRotator from "./rotators/status.js";
 import express from "express";
 import rest from "./rest/index.js";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 const oneLine = commonTags.oneLine;
 let client;
