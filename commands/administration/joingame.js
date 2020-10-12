@@ -1,7 +1,5 @@
-import discord from "discord.js-commando";
-import runner from '../../among-us/session-runner'
-const { Command } = discord;
-export default (class ReplyCommand extends Command {
+const { Command } = require('discord.js-commando');
+module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'joingame',
@@ -31,4 +29,4 @@ export default (class ReplyCommand extends Command {
     async run(msg, { region, id }) {
         await runner(this.client, {lobbyCode: id, region}, msg)
     }
-});
+};

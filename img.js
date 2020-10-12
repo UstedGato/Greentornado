@@ -1,5 +1,3 @@
-import fs from "fs";
-import Canvas from "canvas";
 /**
  * Draws a rounded rectangle using the current state of the canvas.
  * If you omit the last three params, it will draw a rectangle
@@ -9,7 +7,7 @@ import Canvas from "canvas";
  * @param {Number} y The top left y coordinate
  * @param {Number} width The width of the rectangle
  * @param {Number} height The height of the rectangle
- * @param {Number} [radius = 5] The corner radius; It can also be an object
+ * @param {Number} [radius = 5] The corner radius; It can also be an object 
  *                 to specify different radii for corners
  * @param {Number} [radius.tl = 0] Top left
  * @param {Number} [radius.tr = 0] Top right
@@ -20,19 +18,18 @@ import Canvas from "canvas";
  */
 function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
     if (typeof stroke === 'undefined') {
-        stroke = true;
+      stroke = true;
     }
     if (typeof radius === 'undefined') {
-        radius = 5;
+      radius = 5;
     }
     if (typeof radius === 'number') {
-        radius = { tl: radius, tr: radius, br: radius, bl: radius };
-    }
-    else {
-        var defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 };
-        for (var side in defaultRadius) {
-            radius[side] = radius[side] || defaultRadius[side];
-        }
+      radius = {tl: radius, tr: radius, br: radius, bl: radius};
+    } else {
+      var defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
+      for (var side in defaultRadius) {
+        radius[side] = radius[side] || defaultRadius[side];
+      }
     }
     ctx.beginPath();
     ctx.moveTo(x + radius.tl, y);
@@ -46,40 +43,46 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
     ctx.quadraticCurveTo(x, y, x + radius.tl, y);
     ctx.closePath();
     if (fill) {
-        ctx.fill();
+      ctx.fill();
     }
     if (stroke) {
-        ctx.stroke();
+      ctx.stroke();
     }
-}
-async function draw() {
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
-    // Since the image takes time to load, you should await it
-    const background = await Canvas.loadImage('./wallpaper.png');
-    // This uses the canvas dimensions to stretch the image onto the entire canvas
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = "rgb(255, 0, 0)";
-    ctx.fillStyle = "rgba(255, 255, 0, .5)";
-    roundRect(ctx, 50, 50, 600, 200, true);
-    // Select the font size and type from one of the natively available fonts
-    ctx.font = '60px sans-serif';
-    // Select the style that will be used to fill the text in
-    ctx.fillStyle = '#ffffff';
-    // Actually fill the text with a solid color
-    ctx.textAlign = "center";
-    ctx.fillText('Welcome AAGaming!', canvas.width / 2, canvas.height / 1.1);
-    // Pick up the pen
-    ctx.beginPath();
-    // Start the arc to form a circle
-    ctx.arc(canvas.width / 2.04, canvas.height / 2.8, 70, 0, Math.PI * 2, true);
-    // Put the pen down
-    ctx.closePath();
-    // Clip off the region you drew on
-    ctx.clip();
-    const avatar = await Canvas.loadImage("https://cdn.discordapp.com/avatars/634500033366065186/e31c1191cff7699f973b87f25c8f3bd3.png?size=2048");
-    ctx.drawImage(avatar, canvas.width / 2.6, canvas.height / 20, 150, 150);
-    const buffer = canvas.toBuffer('image/png');
-    fs.writeFileSync('./test.png', buffer);
+  
+  }
+async function draw(){
+const fs = require('fs');
+const Canvas = require('canvas');
+const canvas = Canvas.createCanvas(700, 250);
+const ctx = canvas.getContext('2d');
+
+// Since the image takes time to load, you should await it
+const background = await Canvas.loadImage('./wallpaper.png');
+// This uses the canvas dimensions to stretch the image onto the entire canvas
+ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+ctx.strokeStyle = "rgb(255, 0, 0)";
+ctx.fillStyle = "rgba(255, 255, 0, .5)";
+roundRect(ctx, 50, 50, 600, 200, true);
+
+// Select the font size and type from one of the natively available fonts
+ctx.font = '60px sans-serif';
+// Select the style that will be used to fill the text in
+ctx.fillStyle = '#ffffff';
+// Actually fill the text with a solid color
+ctx.textAlign = "center"; 
+ctx.fillText('Welcome AAGaming!', canvas.width / 2, canvas.height / 1.1);
+// Pick up the pen
+ctx.beginPath();
+// Start the arc to form a circle
+ctx.arc(canvas.width / 2.04, canvas.height / 2.8, 70, 0, Math.PI * 2, true);
+// Put the pen down
+ctx.closePath();
+// Clip off the region you drew on
+ctx.clip();
+const avatar = await Canvas.loadImage("https://cdn.discordapp.com/avatars/634500033366065186/e31c1191cff7699f973b87f25c8f3bd3.png?size=2048");
+ctx.drawImage(avatar, canvas.width / 2.6, canvas.height / 20, 150, 150);
+
+const buffer = canvas.toBuffer('image/png');
+fs.writeFileSync('./test.png', buffer);
 }
 draw();

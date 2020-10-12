@@ -1,8 +1,7 @@
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
-    for (var p in s)
-        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-            t[p] = s[p];
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
     if (s != null && typeof Object.getOwnPropertySymbols === "function")
         for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
             if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
@@ -13,16 +12,8 @@ var __rest = (this && this.__rest) || function (s, e) {
 import child_process from "child_process";
 import debounce from "lodash.debounce";
 import path from "path";
-const AU_CLIENT_DIR = '/app/among-us/Client'
 const WORKING_DIR = path.resolve(AU_CLIENT_DIR);
 const CLIENT = path.join(WORKING_DIR, process.platform === "win32" ? "client.exe" : "client");
-/**
- * Class that handles all communication with the AU client in C#, using
- * JSON messages passed over the standard out to receive data from the client.
- */
-class SessionRunner {
-    constructor(bot, session, msg) {
-        this.bot = bot;
         this.msg = msg;
         this.session = session;
         this.playerData = [];
@@ -169,7 +160,7 @@ class SessionRunner {
      * Handles the usage of the toggle impostor grouping react by any user.
      */
     async toggleImpostorGrouping(userId) {
-        if (userId !== this.session.creator || this.session.state !== "lobby" /* LOBBY */) {
+        if (userId !== this.session.creator || this.session.state !== SessionState.LOBBY) {
             return;
         }
         this.session.groupImpostors = !this.session.groupImpostors;
@@ -298,8 +289,8 @@ class SessionRunner {
             await this.debouncedUpdateMessage();
         }
         // if we're in lobby but everyone has tasks now, we've started
-        if (this.session.state === "lobby" /* LOBBY */ && !this.playerData.some(x => !x.tasks || !x.tasks.length)) {
-            await this.setStateTo("playing" /* PLAYING */);
+        if (this.session.state === SessionState.LOBBY && !this.playerData.some(x => !x.tasks || !x.tasks.length)) {
+            await this.setStateTo(SessionState.PLAYING);
             await movePlayersToSilenceChannel(this.bot, this.session);
         }
     }

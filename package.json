@@ -1,9 +1,8 @@
 {
-	"name": "greentornado",
+	"name": "GreenTornado",
 	"version": "1.0.0",
 	"description": "A Discord Bot.",
 	"main": "Bot.js",
-	"type": "module",
 	"scripts": {
 		"bot": "node Bot.js"
 	},

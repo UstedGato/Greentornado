@@ -1,6 +1,6 @@
-import discord from "discord.js-commando";
-const { Command } = discord;
-export default (class ReplyCommand extends Command {
+const { Command } = require('discord.js-commando');
+
+module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'elias',
@@ -9,15 +9,17 @@ export default (class ReplyCommand extends Command {
             description: 'Punish Elias.',
             examples: ['reply'],
             args: [
-                {
-                    key: 'length',
+				{
+					key: 'length',
                     label: 'length',
                     prompt: 'ghjfghg',
                     type: 'integer',
-                }
-            ]
+                    //default: ''
+				}
+			]
         });
     }
+
     run(msg, { length }) {
         var i;
         var id = msg.author.id;
@@ -27,4 +29,4 @@ export default (class ReplyCommand extends Command {
         }
         return msg.say(`<@!${id.toString()}>`);
     }
-});
+};
