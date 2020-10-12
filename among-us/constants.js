@@ -1,4 +1,4 @@
-mmodule.exports.SERVER_IPS = {
+module.exports.SERVER_IPS = {
     ["Europe" /* EUROPE */]: "172.105.251.170",
     ["North America" /* NORTH_AMERICA */]: "198.58.99.71",
     ["Asia" /* ASIA */]: "139.162.111.196",
@@ -37,9 +37,9 @@ module.exports.DEAD_COLOR_EMOTES = {
     [11]: "crewmate_lime_dead:761987905064402985",
 };
 module.exports.BOT_INVITE_LINK = "https://discord.com/api/oauth2/authorize?client_id=755520374510321745&permissions=21261521&scope=bot";
-module.exports.COLOR_EMOTE_IDS = Object.values(COLOR_EMOTES).map(x => x.split(":")[1]);
+module.exports.COLOR_EMOTE_IDS = Object.values(module.exports.COLOR_EMOTES).map(x => x.split(":")[1]);
 module.exports.EMOTE_IDS_TO_COLOR = {};
-Object.entries(COLOR_EMOTES).forEach(x => (EMOTE_IDS_TO_COLOR[x[1].split(":")[1]] = +x[0]));
+Object.entries(module.exports.COLOR_EMOTES).forEach(x => (module.exports.EMOTE_IDS_TO_COLOR[x[1].split(":")[1]] = +x[0]));
 module.exports.GROUPING_DISABLED_EMOJI = "<:impostor_grouping_disabled:761985590123954176>";
 module.exports.GROUPING_ENABLED_EMOJI = "<:impostor_grouping_enabled:761985589784215565>";
 module.exports.GROUPING_TOGGLE_EMOJI = "toggle_impostor_grouping:761987527493943326";

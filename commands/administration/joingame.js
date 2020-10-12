@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando');
+const runner = require('../../among-us/session-runner')
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
@@ -9,13 +10,13 @@ module.exports = class ReplyCommand extends Command {
             examples: ['g!joingame'],
             userPermissions: ['ADMINISTRATOR'],
             args: [
-                {
-                    key: 'region',
-                    label: 'region',
-                    prompt: 'ghjfghg',
-                    type: 'string',
-                    default: ''
-                },
+                // {
+                //     key: 'region',
+                //     label: 'region',
+                //     prompt: 'ghjfghg',
+                //     type: 'string',
+                //     default: ''
+                // },
                 {
                     key: 'id',
                     label: 'id',
@@ -26,7 +27,7 @@ module.exports = class ReplyCommand extends Command {
             ]
         });
     }
-    async run(msg, { region, id }) {
-        await runner(this.client, {lobbyCode: id, region}, msg)
+    async run(msg, { id }) {
+        await runner(this.client, {lobbyCode: id, region: 'North America'}, msg)
     }
 };

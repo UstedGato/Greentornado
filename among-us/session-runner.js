@@ -12,6 +12,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 const child_process = require("child_process");
 const debounce = require("lodash.debounce");
 const path = require("path");
+const { SERVER_IPS, SHORT_REGIION_NAMES, COLOR_EMOTES, DEAD_COLOR_EMOTES, COLOR_EMOTE_IDS } = require('./constants')
 const AU_CLIENT_DIR = '/app/among-us/Client'
 const WORKING_DIR = path.resolve(AU_CLIENT_DIR);
 const CLIENT = path.join(WORKING_DIR, process.platform === "win32" ? "client.exe" : "client");

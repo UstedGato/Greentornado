@@ -75,7 +75,7 @@ WORKDIR /app
 
 COPY . .
 
-ENV PORT=80 BOT_ENV=prod
+ENV PORT=80 BOT_ENV=dev
 EXPOSE 80
 
 CMD node Bot.js
