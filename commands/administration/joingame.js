@@ -1,5 +1,7 @@
 const { Command } = require('discord.js-commando');
 const runner = require('../../among-us-js/session-runner')
+let session;
+let started = false;
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
@@ -28,6 +30,13 @@ module.exports = class ReplyCommand extends Command {
         });
     }
     async run(msg, { id }) {
-        await runner(this.client, {lobbyCode: id, region: 'North America'}, msg)
+        if (!started) {
+            started = true
+            session = await runner(this.client, {lobbyCode: id, region: 'North America'}, msg)
+        } else {
+            await session.leaveLobby()
+            session = null
+            started = false
+        }
     }
 };

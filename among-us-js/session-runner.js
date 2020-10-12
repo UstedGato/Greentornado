@@ -78,8 +78,8 @@ class SessionRunner {
             // if (type === "error") {
             //     await this.handleError(rest.message);
             // }
-            console.log(_a, rest)
-            this.msg.channel.send(_a + rest)
+            console.log(rest)
+            this.msg.channel.send(JSON.stringify(rest, null, 2))
         };
     }
     /**
@@ -207,12 +207,12 @@ class SessionRunner {
             return;
         this.isConnected = false;
         console.log(`[+] Session ${this.session.id} disconnected from Among Us`);
-        await this.session.channels.init();
+        // await this.session.channels.init();
         // for (const channel of this.session.channels) {
         //     await this.bot.deleteChannel(channel.channelId, "Among Us: Session is over.").catch(() => { });
         // }
         // await updateMessageWithSessionOver(this.bot, this.session);
-        await orm.em.removeAndFlush(this.session);
+        // await orm.em.removeAndFlush(this.session);
         sessions.delete(this.session.id);
         this.isDestroyed = true;
     }
@@ -226,7 +226,7 @@ class SessionRunner {
             return;
         console.log(`[+] Session ${this.session.id} encountered an error: '${error}'`);
         await updateMessageWithError(this.bot, this.session, error);
-        await orm.em.removeAndFlush(this.session);
+        // await orm.em.removeAndFlush(this.session);
         this.isDestroyed = true;
         sessions.delete(this.session.id);
     }
@@ -260,7 +260,7 @@ class SessionRunner {
         // });
         // this.session.channels.add(new SessionChannel(mutedChannel.id, SessionChannelType.SILENCE));
         this.isConnected = true;
-        await orm.em.persistAndFlush(this.session);
+        // await orm.em.persistAndFlush(this.session);
         //await Promise.all([this.setStateTo("lobby" /* LOBBY */), addMessageReactions(this.bot, this.session)])
         await this.setStateTo("lobby" /* LOBBY */);
     }
@@ -272,7 +272,7 @@ class SessionRunner {
         if (this.isDestroyed)
             return;
         this.session.state = state;
-        await orm.em.flush();
+        // await orm.em.flush();
         await this.updateMessage();
     }
     /**
@@ -348,4 +348,5 @@ module.exports = async function startSession(bot, session, msg) {
     const runner = new SessionRunner(bot, session, msg);
     sessions.set(session.id, runner);
     await runner.start();
+    return runner
 }
