@@ -9,11 +9,19 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import child_process from "child_process";
-import debounce from "lodash.debounce";
-import path from "path";
+const child_process = require("child_process");
+const debounce = require("lodash.debounce");
+const path = require("path");
+const AU_CLIENT_DIR = '/app/among-us/Client'
 const WORKING_DIR = path.resolve(AU_CLIENT_DIR);
 const CLIENT = path.join(WORKING_DIR, process.platform === "win32" ? "client.exe" : "client");
+/**
+ * Class that handles all communication with the AU client in C#, using
+ * JSON messages passed over the standard out to receive data from the client.
+ */
+class SessionRunner {
+    constructor(bot, session, msg) {
+        this.bot = bot;
         this.msg = msg;
         this.session = session;
         this.playerData = [];
@@ -326,7 +334,7 @@ const sessions = new Map();
  * Returns the current session runner for the specified session, or null
  * if it does not exist.
  */
-export function getRunnerForSession(session) {
+function getRunnerForSession(session) {
     return sessions.get(session.id) || null;
 }
 /**
@@ -334,7 +342,7 @@ export function getRunnerForSession(session) {
  * it to connect to the lobby and handle events. This method should never
  * directly throw.
  */
-export default async function startSession(bot, session, msg) {
+module.exports = async function startSession(bot, session, msg) {
     const runner = new SessionRunner(bot, session, msg);
     sessions.set(session.id, runner);
     await runner.start();
