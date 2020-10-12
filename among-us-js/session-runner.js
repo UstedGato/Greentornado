@@ -72,14 +72,14 @@ class SessionRunner {
             // if (type === "disconnect") {
             //     await this.handleDisconnect();
             // }
-            // if (type === "gameData") {
-            //     await this.handlePlayerDataUpdate(rest.data);
-            // }
+            if (type === "gameData") {
+                await this.handlePlayerDataUpdate(rest.data);
+            }
             // if (type === "error") {
             //     await this.handleError(rest.message);
             // }
-            console.log(rest)
-            this.msg.channel.send(JSON.stringify(rest, null, 2))
+            console.log(rest, type)
+            this.msg.channel.send(JSON.stringify(rest, null, 2) + type)
         };
     }
     /**
@@ -98,6 +98,8 @@ class SessionRunner {
             this.process.kill("SIGTERM");
             this.handleError("It took too long to connect to the Among Us services. This is likely due to server load issues. Try again in a bit.");
         }, 30 * 1000);
+        await this.msg.channel.send('react with your crewmate to link')
+        
         let buffered = "";
         this.process.stdout.setEncoding("utf-8");
         this.process.stdout.on("data", data => {
@@ -291,17 +293,18 @@ class SessionRunner {
         for (const [newId, newData] of newByClientId) {
             if ((newData.statusBitField & 4 /* DEAD */) !== 0 && !this.deadPlayers.has(newId)) {
                 this.deadPlayers.add(newId);
-                this.mutePlayer(newId).catch(() => { });
+                this.msg.channel.send(newData.name + ' has died')
+                // this.mutePlayer(newId).catch(() => { });
             }
         }
         this.playerData = newData;
-        if (shouldUpdateMessage && this.isConnected) {
-            await this.debouncedUpdateMessage();
-        }
+        // if (shouldUpdateMessage && this.isConnected) {
+        //     await this.debouncedUpdateMessage();
+        // }
         // if we're in lobby but everyone has tasks now, we've started
         if (this.session.state === SessionState.LOBBY && !this.playerData.some(x => !x.tasks || !x.tasks.length)) {
             await this.setStateTo(SessionState.PLAYING);
-            await movePlayersToSilenceChannel(this.bot, this.session);
+            // await movePlayersToSilenceChannel(this.bot, this.session);
         }
     }
     /**

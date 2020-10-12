@@ -14,10 +14,6 @@ let inputs = [];
 client
 .on('error', console.error)
 .on('warn', console.warn)
-
-async function unmute(member, role, msg) {
-    await member.roles.remove(role.id);
-}
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {
