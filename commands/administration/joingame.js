@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando');
-const runner = require('../../among-us/session-runner')
+const runner = require('../../among-us-js/session-runner')
 module.exports = class ReplyCommand extends Command {
     constructor(client) {
         super(client, {

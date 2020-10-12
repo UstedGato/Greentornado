@@ -69,13 +69,14 @@ COPY among-us ./among-us
 
 WORKDIR /app/among-us/Client
 
-RUN dotnet build
+RUN dotnet build -o ./bin
 
 WORKDIR /app
 
-COPY . .
 
 ENV PORT=80 BOT_ENV=dev
 EXPOSE 80
+
+COPY . .
 
 CMD node Bot.js

@@ -13,7 +13,7 @@ const child_process = require("child_process");
 const debounce = require("lodash.debounce");
 const path = require("path");
 const { SERVER_IPS, SHORT_REGIION_NAMES, COLOR_EMOTES, DEAD_COLOR_EMOTES, COLOR_EMOTE_IDS } = require('./constants')
-const AU_CLIENT_DIR = '/app/among-us/Client'
+const AU_CLIENT_DIR = '/app/among-us/Client/bin'
 const WORKING_DIR = path.resolve(AU_CLIENT_DIR);
 const CLIENT = path.join(WORKING_DIR, process.platform === "win32" ? "client.exe" : "client");
 /**
@@ -46,9 +46,9 @@ class SessionRunner {
             if (!msg.length)
                 return;
             const _a = JSON.parse(msg), { type } = _a, rest = __rest(_a, ["type"]);
-            // if (type === "connect") {
-            //     await this.handleConnect();
-            // }
+            if (type === "connect") {
+                await this.handleConnect();
+            }
             // if (type === "gameEnd") {
             //     console.log(`[+] Session ${this.session.id}: game ended`);
             //     await this.setStateTo("lobby" /* LOBBY */);
@@ -78,8 +78,8 @@ class SessionRunner {
             // if (type === "error") {
             //     await this.handleError(rest.message);
             // }
-            console.log(_a)
-            this.msg.channel.send(_a)
+            console.log(_a, rest)
+            this.msg.channel.send(_a + rest)
         };
     }
     /**
@@ -92,6 +92,7 @@ class SessionRunner {
         });
         // Kill the process if it doesn't do anything after 30 seconds.
         setTimeout(() => {
+            console.log(this.isConnected)
             if (this.isConnected || this.isDestroyed)
                 return;
             this.process.kill("SIGTERM");
@@ -207,10 +208,10 @@ class SessionRunner {
         this.isConnected = false;
         console.log(`[+] Session ${this.session.id} disconnected from Among Us`);
         await this.session.channels.init();
-        for (const channel of this.session.channels) {
-            await this.bot.deleteChannel(channel.channelId, "Among Us: Session is over.").catch(() => { });
-        }
-        await updateMessageWithSessionOver(this.bot, this.session);
+        // for (const channel of this.session.channels) {
+        //     await this.bot.deleteChannel(channel.channelId, "Among Us: Session is over.").catch(() => { });
+        // }
+        // await updateMessageWithSessionOver(this.bot, this.session);
         await orm.em.removeAndFlush(this.session);
         sessions.delete(this.session.id);
         this.isDestroyed = true;
