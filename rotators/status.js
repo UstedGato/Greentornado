@@ -1,4 +1,4 @@
-import statusesmodule from "./statuses";
+import statusesmodule from "./statuses.js";
 const statuses = statusesmodule.getStatuses();
 const activities = ['online', 'idle', 'dnd'];
 function getRandomInt(max) {

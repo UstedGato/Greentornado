@@ -1,12 +1,11 @@
 import commando from "discord.js-commando";
 import path from "path";
 import commonTags from "common-tags";
-import sqlite from "better-sqlite3";
 import winston from "winston";
-import * as welcomer from "./actions/welcomeUser";
-import * as statusRotator from "./rotators/status";
+import * as welcomer from "./actions/welcomeUser.js";
+import * as statusRotator from "./rotators/status.js";
 import express from "express";
-import rest from "./rest";
+import rest from "./rest/index.js";
 process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 const oneLine = commonTags.oneLine;
 let client;
@@ -88,7 +87,6 @@ client
         client.emit('guildMemberAdd', message.member);
     }
 });
-client.setProvider(new commando.SyncSQLiteProvider(new sqlite(path.join(__dirname, 'database.sqlite3')))).catch(console.error);
 client.registry
     .registerDefaultTypes()
     .registerDefaultGroups()

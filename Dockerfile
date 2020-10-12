@@ -5,7 +5,17 @@ WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
 
-RUN  apk add --no-cache --virtual .gyp \
+RUN    apk add --no-cache \
+        #for dotnet
+        icu-libs \
+        krb5-libs \
+        libgcc \
+        libintl \
+        libssl1.1 \
+        libstdc++ \
+        zlib \
+        gcompat \
+    && apk add --no-cache --virtual .gyp \
         python3 \
         make \
         g++ \
@@ -31,14 +41,6 @@ RUN  apk add --no-cache --virtual .gyp \
         libjpeg \
         freetype \ 
         fontconfig \
-        #for dotnet
-        icu-libs \
-        krb5-libs \
-        libgcc \
-        libintl \
-        libssl1.1 \
-        libstdc++ \
-        zlib \
     && apk --no-cache add \
        ttf-roboto \
        --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
