@@ -74,7 +74,7 @@ RUN dotnet build -o ./bin
 WORKDIR /app
 
 
-ENV PORT=80 BOT_ENV=dev
+ENV PORT=80 BOT_ENV=prod
 EXPOSE 80
 
 COPY . .
