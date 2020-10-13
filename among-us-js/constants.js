@@ -1,3 +1,18 @@
+module.exports.LobbyRegion = {
+    ASIA : "Asia",
+    NORTH_AMERICA: "North America",
+    EUROPE: "Europe",
+}
+module.exports.SessionState = {
+    LOBBY: "lobby",
+    PLAYING: "playing",
+    DISCUSSING: "discussing",
+}
+module.exports.REGIONS = {
+    ["EU" /* EUROPE */]: "Europe",
+    ["NA" /* NORTH_AMERICA */]: "North America",
+    ["AS" /* ASIA */]: "Asia",
+};
 module.exports.SERVER_IPS = {
     ["Europe" /* EUROPE */]: "172.105.251.170",
     ["North America" /* NORTH_AMERICA */]: "198.58.99.71",

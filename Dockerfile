@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
 
-RUN    apk add --no-cache \
+RUN    apk add --no-cache --virtual .net \
         #for dotnet
         icu-libs \
         krb5-libs \

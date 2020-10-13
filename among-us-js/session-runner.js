@@ -12,7 +12,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 const child_process = require("child_process");
 const debounce = require("lodash.debounce");
 const path = require("path");
-const { SERVER_IPS, SHORT_REGIION_NAMES, COLOR_EMOTES, DEAD_COLOR_EMOTES, COLOR_EMOTE_IDS } = require('./constants')
+const { SERVER_IPS, SHORT_REGIION_NAMES, COLOR_EMOTES, DEAD_COLOR_EMOTES, COLOR_EMOTE_IDS, EMOTE_IDS_TO_COLOR, GROUPING_TOGGLE_EMOJI, GROUPING_DISABLED_EMOJI, GROUPING_ENABLED_EMOJI, LobbyRegion, SessionState, LEAVE_EMOJI } = require('./constants')
 const AU_CLIENT_DIR = '/app/among-us/Client/bin'
 const WORKING_DIR = path.resolve(AU_CLIENT_DIR);
 const CLIENT = path.join(WORKING_DIR, process.platform === "win32" ? "client.exe" : "client");
@@ -25,6 +25,7 @@ class SessionRunner {
         this.bot = bot;
         this.msg = msg;
         this.session = session;
+        this.session.links = {};
         this.playerData = [];
         this.deadPlayers = new Set(); // clientIds of dead players
         this.mutedPlayers = new Set(); // snowflakes of muted players
@@ -49,12 +50,12 @@ class SessionRunner {
             if (type === "connect") {
                 await this.handleConnect();
             }
-            // if (type === "gameEnd") {
-            //     console.log(`[+] Session ${this.session.id}: game ended`);
-            //     await this.setStateTo("lobby" /* LOBBY */);
-            //     await this.unmutePlayers();
-            //     await movePlayersToTalkingChannel(this.bot, this.session);
-            // }
+            if (type === "gameEnd") {
+                console.log(`[+] Session ${this.session.id}: game ended`);
+                await this.setStateTo("lobby" /* LOBBY */);
+                await this.unmutePlayers();
+                //await movePlayersToTalkingChannel(this.bot, this.session);
+            }
             // if (type === "talkingStart") {
             //     console.log(`[+] Session ${this.session.id}: talking started`);
             //     await this.setStateTo("discussing" /* DISCUSSING */);
@@ -69,17 +70,17 @@ class SessionRunner {
             //     await this.setStateTo("playing" /* PLAYING */);
             //     await movePlayersToSilenceChannel(this.bot, this.session);
             // }
-            // if (type === "disconnect") {
-            //     await this.handleDisconnect();
-            // }
+            if (type === "disconnect") {
+                await this.handleDisconnect();
+            }
             if (type === "gameData") {
                 await this.handlePlayerDataUpdate(rest.data);
             }
             // if (type === "error") {
             //     await this.handleError(rest.message);
             // }
-            console.log(rest, type)
-            this.msg.channel.send(JSON.stringify(rest, null, 2) + type)
+            // console.log(rest, type)
+            // this.msg.channel.send(JSON.stringify(rest, null, 2) + type)
         };
     }
     /**
@@ -87,6 +88,13 @@ class SessionRunner {
      * the relevant lobby, as configured in the session.
      */
     async start() {
+        this.message = await this.msg.channel.send('react with your crewmate to link')
+        const guild = await this.bot.guilds.fetch('750175402059759636')
+        COLOR_EMOTE_IDS.forEach(async (e) => {
+            this.message.react(await guild.emojis.cache.get(e))
+        })
+        this.collector = this.message.createReactionCollector((_, u) => u.id !== this.bot.user.id);
+        this.collector.on('collect', (r, u) => {this.handleEmojiSelection(r.emoji.id, u.id)})
         this.process = child_process.spawn(CLIENT, [SERVER_IPS[this.session.region], this.session.lobbyCode], {
             cwd: WORKING_DIR,
         });
@@ -98,8 +106,6 @@ class SessionRunner {
             this.process.kill("SIGTERM");
             this.handleError("It took too long to connect to the Among Us services. This is likely due to server load issues. Try again in a bit.");
         }, 30 * 1000);
-        await this.msg.channel.send('react with your crewmate to link')
-        
         let buffered = "";
         this.process.stdout.setEncoding("utf-8");
         this.process.stdout.on("data", data => {
@@ -120,6 +126,7 @@ class SessionRunner {
      * emoji id. It is already verified that emojiId is a valid color reaction.
      */
     async handleEmojiSelection(emojiId, userId) {
+        console.log('handling', emojiId, userId)
         if (this.isDestroyed)
             return;
         if (emojiId === GROUPING_TOGGLE_EMOJI.split(":")[1]) {
@@ -131,24 +138,27 @@ class SessionRunner {
             return;
         }
         const selectedColor = EMOTE_IDS_TO_COLOR[emojiId];
+        console.log(selectedColor)
         if (selectedColor === undefined)
             return;
-        await this.session.links.init();
+        // await this.session.links.init();
         const relevantPlayer = this.playerData.find(x => x.color === selectedColor);
+        console.log(relevantPlayer)
         if (!relevantPlayer)
             return;
         // Check if they had a different color selected, and remove if that was the case.
-        const oldMatching = this.session.links.getItems().find(x => x.snowflake === userId);
+        const oldMatching = (this.session.links[relevantPlayer.clientId] == userId);
         if (oldMatching) {
-            await this.session.links.remove(oldMatching);
+            delete this.session.links[oldMatching.clientId];
         }
         // if the old matching had the same client id, this is a re-react to remove the link.
         // if they don't match, add the link
         if (!oldMatching || oldMatching.clientId !== "" + relevantPlayer.clientId) {
-            await this.session.links.add(new PlayerLink("" + relevantPlayer.clientId, userId));
+            this.session.links[relevantPlayer.clientId] = userId;
         }
-        await orm.em.flush();
-        await this.updateMessage();
+        console.log(this.session.links)
+        // await orm.em.flush();
+        //await this.updateMessage();
         // If this user already died, retroactively apply the mute.
         if (this.deadPlayers.has(relevantPlayer.clientId)) {
             this.mutePlayer(relevantPlayer.clientId).catch(() => { });
@@ -176,28 +186,28 @@ class SessionRunner {
             return;
         }
         this.session.groupImpostors = !this.session.groupImpostors;
-        await orm.em.persistAndFlush(this.session);
+        // await orm.em.persistAndFlush(this.session);
         await this.updateMessage();
         console.log(`[+] Set impostor grouping to ${this.session.groupImpostors} for session ${this.session.id}`);
         // Create the impostor channel if needed.
         if (this.session.groupImpostors) {
-            await this.session.channels.init();
-            if (this.session.channels.getItems().some(x => x.type === SessionChannelType.IMPOSTORS))
-                return;
-            const categoryChannel = this.session.channels.getItems().find(x => x.type === SessionChannelType.CATEGORY);
-            const impostorChannel = await this.bot.createChannel(this.session.guild, "Impostors", 2, {
-                parentID: categoryChannel.channelId,
-                permissionOverwrites: [
-                    {
-                        type: "role",
-                        id: this.session.guild,
-                        deny: eris.Constants.Permissions.readMessages,
-                        allow: 0,
-                    },
-                ],
-            });
-            this.session.channels.add(new SessionChannel(impostorChannel.id, SessionChannelType.IMPOSTORS));
-            await orm.em.persistAndFlush(this.session);
+            // await this.session.channels.init();
+            // if (this.session.channels.getItems().some(x => x.type === SessionChannelType.IMPOSTORS))
+            //     return;
+            // const categoryChannel = this.session.channels.getItems().find(x => x.type === SessionChannelType.CATEGORY);
+            // const impostorChannel = await this.bot.createChannel(this.session.guild, "Impostors", 2, {
+            //     parentID: categoryChannel.channelId,
+            //     permissionOverwrites: [
+            //         {
+            //             type: "role",
+            //             id: this.session.guild,
+            //             deny: eris.Constants.Permissions.readMessages,
+            //             allow: 0,
+            //         },
+            //     ],
+            // });
+            // this.session.channels.add(new SessionChannel(impostorChannel.id, SessionChannelType.IMPOSTORS));
+           // // await orm .em.persistAndFlush(this.session);
         }
     }
     /**
@@ -208,13 +218,14 @@ class SessionRunner {
         if (!this.isConnected)
             return;
         this.isConnected = false;
+        await this.collector.stop()
         console.log(`[+] Session ${this.session.id} disconnected from Among Us`);
-        // await this.session.channels.init();
+        // // await this.session.channels.init();
         // for (const channel of this.session.channels) {
         //     await this.bot.deleteChannel(channel.channelId, "Among Us: Session is over.").catch(() => { });
         // }
         // await updateMessageWithSessionOver(this.bot, this.session);
-        // await orm.em.removeAndFlush(this.session);
+        // // // await orm.em.removeAndFlush(this.session);
         sessions.delete(this.session.id);
         this.isDestroyed = true;
     }
@@ -227,8 +238,8 @@ class SessionRunner {
         if (this.isDestroyed)
             return;
         console.log(`[+] Session ${this.session.id} encountered an error: '${error}'`);
-        await updateMessageWithError(this.bot, this.session, error);
-        // await orm.em.removeAndFlush(this.session);
+        // await updateMessageWithError(this.bot, this.session, error);
+        // // // await orm.em.removeAndFlush(this.session);
         this.isDestroyed = true;
         sessions.delete(this.session.id);
     }
@@ -262,7 +273,7 @@ class SessionRunner {
         // });
         // this.session.channels.add(new SessionChannel(mutedChannel.id, SessionChannelType.SILENCE));
         this.isConnected = true;
-        // await orm.em.persistAndFlush(this.session);
+        // // // await orm.em.persistAndFlush(this.session);
         //await Promise.all([this.setStateTo("lobby" /* LOBBY */), addMessageReactions(this.bot, this.session)])
         await this.setStateTo("lobby" /* LOBBY */);
     }
@@ -274,8 +285,8 @@ class SessionRunner {
         if (this.isDestroyed)
             return;
         this.session.state = state;
-        // await orm.em.flush();
-        await this.updateMessage();
+        // // await orm.em.flush();
+        //await this.updateMessage();
     }
     /**
      * Processes a game data update from the client, updating the message where
@@ -290,11 +301,12 @@ class SessionRunner {
             if (!newData || oldData.name !== newData.name || oldData.color !== newData.color)
                 shouldUpdateMessage = true;
         }
+        //this.msg.channel.send(JSON.stringify(newByClientId, null, false))
         for (const [newId, newData] of newByClientId) {
             if ((newData.statusBitField & 4 /* DEAD */) !== 0 && !this.deadPlayers.has(newId)) {
                 this.deadPlayers.add(newId);
-                this.msg.channel.send(newData.name + ' has died')
-                // this.mutePlayer(newId).catch(() => { });
+                // this.msg.channel.send(newData.name + ' has died')
+                this.mutePlayer(newId);
             }
         }
         this.playerData = newData;
@@ -318,19 +330,23 @@ class SessionRunner {
      * if they had linked their among us character with their discord.
      */
     async mutePlayer(clientId) {
-        await this.session.links.init();
-        await this.session.channels.init();
-        const links = this.session.links.getItems().filter(x => x.clientId === "" + clientId);
-        for (const link of links) {
-            this.mutedPlayers.add(link.snowflake);
-            await mutePlayerInChannels(this.bot, this.session, link.snowflake);
-        }
+        // await this.session.links.init();
+        // await this.session.channels.init();
+        const link = this.session.links[clientId]
+        console.log(link)
+        //for (const link of links) {
+            this.mutedPlayers.add(link);
+            const user = await this.msg.guild.members.fetch(link)
+            await user.voice.setChannel('754852099673555027')
+            //await mutePlayerInChannels(this.bot, this.session, link.snowflake);
+        //}
     }
     /**
      * Unmutes all players in the main channel that were previously muted.
      */
     async unmutePlayers() {
-        await Promise.all([...this.mutedPlayers].map(x => unmutePlayerInChannels(this.bot, this.session, x)));
+        const moveFrom = await this.msg.guild.channels.resolve('754852099673555027')
+        await Promise.all(moveFrom.members.map(x => x.voice.setChannel('754847477806530690')));
         this.mutedPlayers.clear();
     }
 }
