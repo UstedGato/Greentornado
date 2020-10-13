@@ -89,7 +89,7 @@ class SessionRunner {
      */
     async start() {
         this.message = await this.msg.channel.send('react with your crewmate to link')
-        const guild = await this.bot.guilds.fetch('750175402059759636')
+        const guild = await this.bot.guilds.fetch(process.env.EMOTE_GUILD)
         COLOR_EMOTE_IDS.forEach(async (e) => {
             this.message.react(await guild.emojis.cache.get(e))
         })
@@ -337,7 +337,7 @@ class SessionRunner {
         //for (const link of links) {
             this.mutedPlayers.add(link);
             const user = await this.msg.guild.members.fetch(link)
-            await user.voice.setChannel('754852099673555027')
+            await user.voice.setChannel(process.env.DEAD_AMONG_CHANNEL)
             //await mutePlayerInChannels(this.bot, this.session, link.snowflake);
         //}
     }
@@ -345,8 +345,8 @@ class SessionRunner {
      * Unmutes all players in the main channel that were previously muted.
      */
     async unmutePlayers() {
-        const moveFrom = await this.msg.guild.channels.resolve('754852099673555027')
-        await Promise.all(moveFrom.members.map(x => x.voice.setChannel('754847477806530690')));
+        const moveFrom = await this.msg.guild.channels.resolve(process.env.DEAD_AMONG_CHANNEL)
+        await Promise.all(moveFrom.members.map(x => x.voice.setChannel(process.env.ALIVE_AMONG_CHANNEL)));
         this.mutedPlayers.clear();
     }
 }

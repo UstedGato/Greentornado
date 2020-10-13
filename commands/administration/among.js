@@ -2,6 +2,9 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const AudioMixer = require('audio-mixer');
+const runner = require('../../among-us-js/session-runner')
+const { REGIONS } = require('../../among-us-js/constants')
+let session;
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }  
@@ -22,7 +25,22 @@ module.exports = class ReplyCommand extends Command {
             memberName: 'amongus',
             description: 'Bridge the 2 among us channels.',
             examples: ['g!among'],
-            userPermissions: ['ADMINISTRATOR']
+            userPermissions: ['ADMINISTRATOR'],
+            args: [
+                {
+                    key: 'id',
+                    label: 'id',
+                    prompt: 'enter a room code you idiot.',
+                    type: 'string',
+                },
+                {
+                    key: 'region',
+                    label: 'region',
+                    prompt: 'ghjfghg',
+                    type: 'string',
+                    default: 'NA'
+                }
+            ]
         });
     }
 
@@ -60,8 +78,12 @@ module.exports = class ReplyCommand extends Command {
               }
             });
             deadconnection.play(mixer, {type: 'converted'})
+            session = await runner(this.client, {lobbyCode: id, region: REGIONS[region]}, msg)
         } else {
-            yes= false
+            yes = false
+            msg.channel.send('stopping')
+            await session.leaveLobby()
+            session = null
             await aliveconnection.disconnect()
             await deadconnection.disconnect()
             await client.destroy()
