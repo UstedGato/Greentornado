@@ -4,7 +4,7 @@ COPY among-us /app/among-us
 
 WORKDIR /app/among-us/Client
 
-RUN dotnet publish -o ./bin
+RUN dotnet publish -o ./bin --self-contained true
 
 FROM node:current-alpine3.12
 
