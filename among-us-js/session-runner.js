@@ -352,6 +352,7 @@ class SessionRunner {
             }
         }))
         this.mutedPlayers.clear();
+        this.deadPlayers.clear();
     }
 }
 const sessions = new Map();
