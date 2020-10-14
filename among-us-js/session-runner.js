@@ -147,9 +147,9 @@ class SessionRunner {
         if (!relevantPlayer)
             return;
         // Check if they had a different color selected, and remove if that was the case.
-        const oldMatching = (this.session.links[relevantPlayer.clientId] == userId);
+        const oldMatching = (this.session.links[relevantPlayer.clientId]);
         if (oldMatching) {
-            delete this.session.links[oldMatching.clientId];
+            this.session.links[oldMatching.clientId] = undefined;
         }
         // if the old matching had the same client id, this is a re-react to remove the link.
         // if they don't match, add the link
