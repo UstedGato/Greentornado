@@ -346,7 +346,11 @@ class SessionRunner {
      */
     async unmutePlayers() {
         const moveFrom = await this.msg.guild.channels.resolve(process.env.DEAD_AMONG_CHANNEL)
-        await Promise.all(moveFrom.members.map(x => x.voice.setChannel(process.env.ALIVE_AMONG_CHANNEL)));
+        await Promise.all(moveFrom.members.map(x => {
+            if (x.id != '754855423781109921') {
+                x.voice.setChannel(process.env.ALIVE_AMONG_CHANNEL);
+            }
+        }))
         this.mutedPlayers.clear();
     }
 }
