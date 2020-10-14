@@ -306,7 +306,7 @@ class SessionRunner {
             if ((newData.statusBitField & 4 /* DEAD */) !== 0 && !this.deadPlayers.has(newId)) {
                 this.deadPlayers.add(newId);
                 // this.msg.channel.send(newData.name + ' has died')
-                this.mutePlayer(newId);
+                this.mutePlayer(newId).catch(() => {});
             }
         }
         this.playerData = newData;
