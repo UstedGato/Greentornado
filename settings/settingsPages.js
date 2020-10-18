@@ -93,7 +93,7 @@ pages[0] = class GuildSettings {
     "description": "React with one of theese reactions to change its setting",
     "color": 9174784,
     "thumbnail": {
-      "url": `${this.parent.message.guild.iconURL()}`
+      "url": `${this.parent.message.guild.iconURL() || 'https://icon-library.com/images/blue-discord-icon/blue-discord-icon-15.jpg'}`
     },
     "image": {
       "url": `${this.settings.background}`
