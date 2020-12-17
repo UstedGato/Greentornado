@@ -5,7 +5,9 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"start": "node ."
+		"start": "node .",
+		"postinstall": "link-module-alias",
+		"preinstall": "command -v link-module-alias && link-module-alias clean || true"
 	},
 	"author": "SilvershotsHQ, AAGaming00",
 	"license": "GPL-3.0",
@@ -16,8 +18,12 @@
 		"eris": "^0.14.0",
 		"erlpack": "abalabahaha/erlpack",
 		"faunadb": "^4.0.0",
+		"link-module-alias": "^1.2.0",
 		"sodium-native": "^3.2.0",
 		"winston": "^3.3.3",
 		"zlib-sync": "^0.1.7"
-	}
+	},
+	"_moduleAliases": {
+		"~": "."
+	  }
 }

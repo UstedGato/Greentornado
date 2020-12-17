@@ -1,4 +1,5 @@
-import { CommandClient } from 'eris';
+import Eris, { CommandClient } from 'eris';
+import Endpoints from 'eris/lib/rest/Endpoints';
 import winston from 'winston';
 import { promises as fs } from 'fs';
 import Database from './db';
@@ -17,29 +18,39 @@ export default class Bot extends CommandClient {
     }
 
     get logger() { return this._logger }
-
-
     
     /**
-     * @description Recrusively registers commands in a directory
+     * @description Registers commands in a directory. Optionally recrusive.
      * @param  {string} dir - The directory to register commands in.
+     * @param  {boolean} recrusive - Wether to recruse. Defaults to true.
      */
-    async registerCommands(dir) {
+    async registerCommands(dir, recrusive = true) {
       const commandsPath = join(dir)
       const files = await fs.readdir(commandsPath)
       files.forEach(async file => {
         const stats = await fs.stat(file)
-        if (stats.isDirectory()) return await this.registerCommands(file)
+        if (stats.isDirectory()){
+          if (recrusive) return await this.registerCommands(file)
+          return
+        }
         if (!file.endsWith('.js')) return this.logger.debug(`Ignoring ${file}: Not a JavaScript file.`)
         const command = await import(file)
         if (command.default && typeof command.options === 'object') {
-          return this.registerCommand(
-            command.options.name,
-            command.default,
-            command
-          )
+          const instance = new command.default(() => this)
+          return this.commands[instance.options.label] = instance.label
         }
         return this.logger.error(`Invalid command: ${file}, check to make sure that it is correctly exported`)
         })
+    }
+
+    /**
+     * @description Fetches a user by ID
+     * @see https://gist.github.com/nirewen/507b4ff8ad93d138068a6e514849dda9#file-erisprototypes-js-L79
+     * @param  {string} userID - The user's ID
+     * @returns {Promise<Eris.User>}
+     */
+    async fetchUser(userID) {
+      const user = await this.requestHandler.request('GET', Endpoints.USER(userID), true);
+      return new Eris.User(user, this);
     }
 }
