@@ -1,5 +1,8 @@
-import { join } from 'path';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import Bot from './classes/bot';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));  // Since we are using ESM, we have to define __dirname manually.
 
 // Setup the Bot instance
 const bot = new Bot(process.env.TOKEN, {}, {
@@ -9,7 +12,9 @@ const bot = new Bot(process.env.TOKEN, {}, {
 })
 
 // Connect to gateway
-bot.connect()
+await bot.connect()
 
-// Register all commands in ./commands
-bot.registerCommands(join(__dirname, 'commands'))
+bot.on("ready", async () => {
+    // Register all commands in ./commands
+    await bot.registerCommands(join(__dirname, 'commands'))
+});

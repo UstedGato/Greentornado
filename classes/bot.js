@@ -2,6 +2,7 @@ import Eris, { CommandClient } from 'eris';
 import Endpoints from 'eris/lib/rest/Endpoints';
 import winston from 'winston';
 import { promises as fs } from 'fs';
+import { join } from 'path';
 import Database from './db';
 
 export default class Bot extends CommandClient {
@@ -9,12 +10,16 @@ export default class Bot extends CommandClient {
         super(...opts);
 
         this._logger = winston.createLogger({
+          level: 'debug',
+          format: winston.format.simple(),
           transports: [
             new winston.transports.Console()
           ]
         });
 
         this._db = new Database({ secret: process.env.FAUNA_KEY })
+
+        this.logger.info('Bot class created')
     }
 
     get logger() { return this._logger }
@@ -25,9 +30,10 @@ export default class Bot extends CommandClient {
      * @param  {boolean} recrusive - Wether to recruse. Defaults to true.
      */
     async registerCommands(dir, recrusive = true) {
-      const commandsPath = join(dir)
-      const files = await fs.readdir(commandsPath)
-      files.forEach(async file => {
+      this.logger.debug(`Loading commands in ${dir}`)
+      const files = await fs.readdir(dir)
+      files.forEach(async filename => {
+        const file = join(dir, filename)
         const stats = await fs.stat(file)
         if (stats.isDirectory()){
           if (recrusive) return await this.registerCommands(file)
@@ -35,11 +41,16 @@ export default class Bot extends CommandClient {
         }
         if (!file.endsWith('.js')) return this.logger.debug(`Ignoring ${file}: Not a JavaScript file.`)
         const command = await import(file)
-        if (command.default && typeof command.options === 'object') {
+        if (command.default) {
+          try {
           const instance = new command.default(() => this)
-          return this.commands[instance.options.label] = instance.label
+          this.commands[instance.options.label] = instance
+          } catch(e) {
+            this.logger.error(`Error loading command ${file}, \n\n${e.stack}`)
+          }
+        } else {
+          return this.logger.error(`Invalid command: ${file}, check to make sure that it is correctly exported`)
         }
-        return this.logger.error(`Invalid command: ${file}, check to make sure that it is correctly exported`)
         })
     }
 

@@ -4,10 +4,11 @@ import BotCommand from '~/classes/command';
 export default class PurgeCommand extends BotCommand {
     constructor(client) {
         const options = {
-            name: 'purge',
+            label: 'purge',
             group: 'administration', // @todo: add group suppoer
             description: 'Purge Messages (only works for last 100 messages in channel)',
             usage: 'g!purge <amount> [user]',
+            invalidUsageMessage: () => `Invalid usage! Example: \`${options.usage}\``,
             requirements: {
                 permissions: {
                     manageMessages: true
