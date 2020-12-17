@@ -28,16 +28,16 @@ module.exports = class ReplyCommand extends Command {
 
     async run(msg, { amount, user }) {
         if (!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.reply("You need to have the ``Manage Messages`` permission to use this command.");
-        var messages = await msg.channel.messages.fetch({limit: 100})
-        var msgs = messages;
+        const messages = await msg.channel.messages.fetch({limit: amount || 100})
+        let msgs = messages;
         if (user) {
-            var userid = user.replace("<@!","").replace(">", "").replace(/\D/g,'');
-            var msgs = msgs.filter(message => message.author.id.toString() === userid);
+            var userid = user.match(/<@(?:!?)(\D)>/g)[1];
+            msgs = msgs.filter(message => message.author.id.toString() === userid);
         }
-        var array = msgs.array();
-        var todelete = [];
-        for (var i = 0; i <= amount; i++) {
-            todelete.push(array[i])
+        const array = msgs.array();
+        const todelete = [];
+        for (const item of array) {
+            todelete.push(item)
         }  
         await msg.channel.bulkDelete(todelete)
     }

@@ -12,6 +12,7 @@ module.exports = class ReplyCommand extends Command {
             description: 'Bridge the 2 among us channels.',
             examples: ['g!joingame'],
             userPermissions: ['ADMINISTRATOR'],
+            disabled: true,
             args: [
                 {
                     key: 'id',
