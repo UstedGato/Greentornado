@@ -34,7 +34,7 @@ jobs:
             webhook: ${{ secrets.DISCORD_WEBHOOK }}
             status: ${{ job.status }}
             title: "Deployed"
-            description: "Commit hash: ``" ${{ github.event.commit.sha }} "``"
+            description: \`\`${{ github.event.commit.sha }} \`\`
             nofail: false
             nodetail: false
             color: 0x00ff00
