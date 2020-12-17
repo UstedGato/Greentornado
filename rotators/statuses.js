@@ -33,8 +33,4 @@ const statuses = [
 
 
 
-module.exports = {
-    getStatuses: function() {
-        return statuses
-    }
-};
+module.exports = statuses

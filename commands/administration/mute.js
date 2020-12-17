@@ -43,7 +43,7 @@ module.exports = class ReplyCommand extends Command {
         "fields": [
             {
               "name": "⠀",
-              "value": "Muted ${member.user} for ${amount} minutes."
+              "value": `Muted ${member.user} for ${amount} minutes.`
             }
         ]
         };
