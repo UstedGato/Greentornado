@@ -238,10 +238,9 @@ enabled@2.0.x:
   resolved "https://registry.yarnpkg.com/enabled/-/enabled-2.0.0.tgz#f9dd92ec2d6f4bbc0d5d1e64e21d61cd4665e7c2"
   integrity sha512-AKrN98kuwOzMIdAizXGI86UFBoo26CL21UM763y1h/GMSJ4/OHU9k2YlsmBpyScFo/wbLzWQJBMCW4+IO3/+OQ==
 
-eris@^0.14.0:
+eris@abalabahaha/eris#fdf9ea82149ad43fbecf08110e0a47c3e37d4867:
   version "0.14.0"
-  resolved "https://registry.yarnpkg.com/eris/-/eris-0.14.0.tgz#0d13391c0fc1a7b678b2f8d1fc3ec6aef05700d3"
-  integrity sha512-/W6X0SFR2swtA9oc4ga5Wh1TQcZtPgbUaDDdwYc67fvFUAtwC+V1xzWUZq2yDeJnTfB8Uot9SJWA8Lthe2sDtQ==
+  resolved "https://codeload.github.com/abalabahaha/eris/tar.gz/fdf9ea82149ad43fbecf08110e0a47c3e37d4867"
   dependencies:
     ws "^7.2.1"
   optionalDependencies:

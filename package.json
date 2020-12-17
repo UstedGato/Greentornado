@@ -15,7 +15,7 @@
 	"dependencies": {
 		"@discordjs/opus": "0.3",
 		"bufferutil": "^4.0.2",
-		"eris": "^0.14.0",
+		"eris": "abalabahaha/eris#fdf9ea82149ad43fbecf08110e0a47c3e37d4867",
 		"erlpack": "abalabahaha/erlpack",
 		"faunadb": "^4.0.0",
 		"link-module-alias": "^1.2.0",
@@ -25,5 +25,5 @@
 	},
 	"_moduleAliases": {
 		"~": "."
-	  }
+	}
 }

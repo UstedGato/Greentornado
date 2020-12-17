@@ -30,7 +30,14 @@ export default class PurgeCommand extends BotCommand {
         super(options, client)
     }
 
-    run (msg, { amount, user }) {
-        return `${amount} and ${user}`
+    async run (msg, { amount, user }) {
+        const messages = await msg.channel.getMessages(amount || 100)
+        let msgs = messages;
+        if (user) {
+            var userid = user.match(/<@!?(\d+)>/g)[1];
+            msgs = msgs.filter(message => message.author.id === userid);
+        }
+        const todelete = msgs.map(message => message.id)
+        await msg.channel.deleteMessages(todelete)
     }
 }
