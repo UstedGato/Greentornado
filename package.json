@@ -1,36 +1,20 @@
 {
 	"name": "GreenTornado",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"description": "A Discord Bot.",
-	"main": "Bot.js",
+	"main": "index.js",
 	"scripts": {
-		"bot": "node Bot.js"
+		"start": "node ."
 	},
-	"author": "SilvershotsHQ",
+	"author": "SilvershotsHQ, AAGaming00",
 	"license": "GPL-3.0",
+	"devDependencies": {},
 	"dependencies": {
-		"@discordjs/opus": "^0.3.3",
-		"audio-mixer": "^2.1.4",
+		"@discordjs/opus": "0.3",
 		"bufferutil": "^4.0.2",
-		"canvas": "^2.6.1",
-		"discord.js": "^12.5.1",
-		"discord.js-commando": "discordjs/Commando#master",
-		"erlpack": "discord/erlpack",
-		"express": "^4.17.1",
-		"faunadb": "^4.0.0",
-		"fetch-base64": "^2.1.2",
-		"ffmpeg-static": "^4.2.7",
-		"is-url": "^1.2.4",
-		"lodash.debounce": "^4.0.8",
-		"nodesu": "^0.7.2",
-		"pm2": "^4.5.1",
-		"request": "^2.88.2",
-		"sodium": "^3.0.2",
-		"utf-8-validate": "^5.0.3",
-		"winston": "^3.3.3",
-		"youtube-search": "^1.1.4",
-		"ytdl-core": "^4.1.6",
+		"eris": "^0.14.0",
+		"erlpack": "abalabahaha/erlpack",
+		"sodium-native": "^3.2.0",
 		"zlib-sync": "^0.1.7"
-	},
-	"devDependencies": {}
+	}
 }
