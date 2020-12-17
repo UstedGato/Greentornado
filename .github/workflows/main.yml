@@ -33,7 +33,7 @@ jobs:
           with:
             webhook: ${{ secrets.DISCORD_WEBHOOK }}
             status: ${{ job.status }}
-            title: "Deployed"
+            #title: "Deployed"
             description: Commit hash:" "${{ github.event.commit.id }}
             nofail: false
             nodetail: false
