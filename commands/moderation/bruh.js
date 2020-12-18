@@ -7,9 +7,13 @@ export default class BruhCommand extends BotCommand {
             name: 'bruh',
             usage: 'g!bruh',
             description: 'yes',
-            hidden: true
+            hidden: false
         }
         super(options, client)
+    }
+
+    async runSlash (ctx) {
+        return 'Bruh.'
     }
 
     async run (msg) {

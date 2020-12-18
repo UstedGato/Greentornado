@@ -4,7 +4,7 @@ import Endpoints from 'eris/lib/rest/Endpoints';
 import winston from 'winston';
 import { promises as fs } from 'fs';
 import { join } from 'path';
-import Database from './db';
+import Database from './DB';
 
 export default class Bot extends CommandClient {
     constructor (opts) {
@@ -60,9 +60,9 @@ export default class Bot extends CommandClient {
         const command = await import(file)
         if (command.default) {
           try {
-          const instance = new command.default(() => this)
+          const instance = new command.default(this)
           this.commands[instance.options.label] = instance
-          this._slash.registerCommand(this.commands[instance.options.label]._slash)
+          if (instance.runSlash) this._slash.registerCommand(this.commands[instance.options.label]._slash)
           } catch(e) {
             this.logger.error(`Error loading command ${file}, \n\n${e.stack}`)
           }
