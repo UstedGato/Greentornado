@@ -21,7 +21,15 @@ export default class Bot extends CommandClient {
           )
         )
 
-        this._logger = winston.createLogger({
+        this.on('debug', msg => this.logger.debug(msg))
+        this.on('warn', msg => this.logger.warn(msg))
+        this.on('error', msg => this.logger.error(msg))
+
+        this._slash.on('debug', msg => this.logger.debug(msg))
+        this._slash.on('warn', msg => this.logger.warn(msg))
+        this._slash.on('error', msg => this.logger.error(msg))
+
+        this.logger = winston.createLogger({
           level: 'debug',
           format: winston.format.simple(),
           transports: [
@@ -29,7 +37,7 @@ export default class Bot extends CommandClient {
           ]
         });
 
-        this._db = new Database({ secret: process.env.FAUNA_KEY })
+        this.db = new Database({ secret: process.env.FAUNA_KEY })
 
         this.logger.info('Bot class created')
 
@@ -39,7 +47,6 @@ export default class Bot extends CommandClient {
         });        
     }
 
-    get logger() { return this._logger }
     
     /**
      * @description Registers commands in a directory. Optionally recrusive.
