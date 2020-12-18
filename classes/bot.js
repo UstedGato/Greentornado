@@ -1,4 +1,5 @@
 import Eris, { CommandClient } from 'eris';
+import { SlashCreator, GatewayServer } from 'slash-create';
 import Endpoints from 'eris/lib/rest/Endpoints';
 import winston from 'winston';
 import { promises as fs } from 'fs';
@@ -6,8 +7,19 @@ import { join } from 'path';
 import Database from './db';
 
 export default class Bot extends CommandClient {
-    constructor (...opts) {
-        super(...opts);
+    constructor (opts) {
+        console.log(opts)
+        super(opts.token, opts.erisOptions, opts);
+
+        this._slash = new SlashCreator(opts)
+        this._slash
+        .withServer(
+          new GatewayServer(
+            (handler) => this.on('rawWS', (event) => {
+              if (event.t === 'INTERACTION_CREATE') handler(event.d);
+            })
+          )
+        )
 
         this._logger = winston.createLogger({
           level: 'debug',
@@ -20,6 +32,11 @@ export default class Bot extends CommandClient {
         this._db = new Database({ secret: process.env.FAUNA_KEY })
 
         this.logger.info('Bot class created')
+
+        this.on("ready", async () => {
+          this.logger.info('Bot ready, registering slash commands.')
+          this._slash.syncCommands();
+        });        
     }
 
     get logger() { return this._logger }
@@ -45,6 +62,7 @@ export default class Bot extends CommandClient {
           try {
           const instance = new command.default(() => this)
           this.commands[instance.options.label] = instance
+          this._slash.registerCommand(this.commands[instance.options.label])
           } catch(e) {
             this.logger.error(`Error loading command ${file}, \n\n${e.stack}`)
           }

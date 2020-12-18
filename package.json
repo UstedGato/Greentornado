@@ -19,6 +19,7 @@
 		"erlpack": "abalabahaha/erlpack",
 		"faunadb": "^4.0.0",
 		"link-module-alias": "^1.2.0",
+		"slash-create": "^1.1.6",
 		"sodium-native": "^3.2.0",
 		"winston": "^3.3.3",
 		"zlib-sync": "^0.1.7"

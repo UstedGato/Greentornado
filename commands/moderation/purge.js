@@ -4,7 +4,7 @@ import BotCommand from '~/classes/command';
 export default class PurgeCommand extends BotCommand {
     constructor(client) {
         const options = {
-            label: 'purge',
+            name: 'purge',
             group: 'administration', // @todo: add group suppoer
             description: 'Purge Messages (only works for last 100 messages in channel)',
             usage: 'g!purge <amount> [user]',
