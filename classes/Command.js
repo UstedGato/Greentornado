@@ -15,7 +15,7 @@ export default class BotCommand extends Command {
                     super(client, _this.options)
                 }
                 run (ctx) {
-                    _this._execute(ctx, ctx.options, true)
+                    return _this._execute(ctx, ctx.options, true)
                 }
             }
             this._slash = new ExtendedClass(client._slash, options)
@@ -25,9 +25,8 @@ export default class BotCommand extends Command {
     /**
      * @private
      */
-    _execute (msg, rawArgs, isSlash) {
-        console.log(this.run)
-        if (isSlash && typeof this.runSlash !== 'function') this.runSlash(msg, rawArgs)
+    _execute (msg, rawArgs, isSlash = false) {
+        if (isSlash && this.runSlash) return this.runSlash(msg, rawArgs)
         if (typeof this.run !== 'function') return this.run
         if (this.options.isPureCommand) return this.run(msg, rawArgs)
         const args = {}
@@ -37,7 +36,6 @@ export default class BotCommand extends Command {
                 args[argDefs[i].key] = arg
             })
         }
-        console.log(rawArgs, args)
         return this.run(msg, args)
     }
 }

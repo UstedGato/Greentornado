@@ -7,13 +7,15 @@ export default class BruhCommand extends BotCommand {
             name: 'bruh',
             usage: 'g!bruh',
             description: 'yes',
+            guildID: process.env.AAPS_GUILD,
             hidden: false
         }
         super(options, client)
     }
 
     async runSlash (ctx) {
-        return 'Bruh.'
+        console.log('what')
+        await ctx.send('Bruh', { ephemeral: true })
     }
 
     async run (msg) {
