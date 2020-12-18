@@ -1,4 +1,4 @@
-import BotCommand from '~/classes/command';
+import BotCommand from '~/classes/Command';
 
 
 export default class EvalCommand extends BotCommand {
