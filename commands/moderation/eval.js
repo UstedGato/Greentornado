@@ -12,7 +12,7 @@ export default class EvalCommand extends BotCommand {
             invalidUsageMessage: () => `Invalid usage! Example: \`${options.usage}\``,
             requirements: {
                 permissions: {
-                    manageMessages: true
+                    administrator: true
                 }
             },
             args: [
