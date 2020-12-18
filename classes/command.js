@@ -8,7 +8,10 @@ export default class BotCommand extends Command {
         this._execute = this._execute.bind(this)
         this.options = options
         this._getClient = getClient
-        this._slash = new SlashCommand(getClient()._slash, options)
+        const ExtendedClass = class ExtendedClass extends SlashCommand {
+
+        }
+        this._slash = new ExtendedClass(getClient()._slash, options)
     }
 
     get client () { return this._getClient() }

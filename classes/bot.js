@@ -62,7 +62,7 @@ export default class Bot extends CommandClient {
           try {
           const instance = new command.default(() => this)
           this.commands[instance.options.label] = instance
-          this._slash.registerCommand(this.commands[instance.options.label])
+          this._slash.registerCommand(this.commands[instance.options.label]._slash)
           } catch(e) {
             this.logger.error(`Error loading command ${file}, \n\n${e.stack}`)
           }

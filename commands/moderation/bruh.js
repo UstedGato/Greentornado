@@ -6,6 +6,7 @@ export default class BruhCommand extends BotCommand {
         const options = {
             name: 'bruh',
             usage: 'g!bruh',
+            description: 'yes',
             hidden: true
         }
         super(options, client)

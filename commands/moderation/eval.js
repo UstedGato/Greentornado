@@ -5,6 +5,7 @@ export default class EvalCommand extends BotCommand {
     constructor(client) {
         const options = {
             name: 'eval',
+            description: 'yes',
             usage: 'g!eval <code>',
             hidden: true,
             isPureCommand: true,
