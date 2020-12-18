@@ -8,7 +8,6 @@ import Database from './DB';
 
 export default class Bot extends CommandClient {
     constructor (opts) {
-        console.log(opts)
         super(opts.token, opts.erisOptions, opts);
 
         this._slash = new SlashCreator(opts)
@@ -21,13 +20,13 @@ export default class Bot extends CommandClient {
           )
         )
 
-        this.on('debug', msg => this.logger.debug(msg))
-        this.on('warn', msg => this.logger.warn(msg))
-        this.on('error', msg => this.logger.error(msg))
+        this.on('debug', msg => this.logger.debug(`eris: ${msg}`))
+        this.on('warn', msg => this.logger.warn(`eris: ${msg}`))
+        this.on('error', msg => this.logger.error(`eris: ${msg}`))
 
-        this._slash.on('debug', msg => this.logger.debug(msg))
-        this._slash.on('warn', msg => this.logger.warn(msg))
-        this._slash.on('error', msg => this.logger.error(msg))
+        this._slash.on('debug', msg => this.logger.debug(`slash: ${msg}`))
+        this._slash.on('warn', msg => this.logger.warn(`slash: ${msg}`))
+        this._slash.on('error', msg => this.logger.error(`slash: ${msg}`))
 
         this.logger = winston.createLogger({
           level: 'debug',
