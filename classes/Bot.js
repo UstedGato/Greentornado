@@ -43,7 +43,11 @@ export default class Bot extends CommandClient {
 
         this.on("ready", async () => {
           this.logger.info('Bot ready, registering slash commands.')
-          this._slash.syncCommands();
+          this._slash.syncCommands({
+            deleteCommands: true,
+            skipGuildErrors: true,
+            syncGuilds: true
+          });
         });        
     }
 
