@@ -1,0 +1,8 @@
+[build]
+  functions = "api/"
+
+[[redirects]]
+  from = "/api/badge/:id"
+  to = "/api/badge"
+  status = 200
+  query = {id = ":id"}
