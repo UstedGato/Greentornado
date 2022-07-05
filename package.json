@@ -9,7 +9,7 @@
 	"author": "SilvershotsHQ",
 	"license": "GPL-3.0",
 	"dependencies": {
-		"@discordjs/opus": "^0.3.3",
+		"@discordjs/opus": "^0.8.0",
 		"audio-mixer": "^2.1.4",
 		"bufferutil": "^4.0.2",
 		"canvas": "^2.6.1",
